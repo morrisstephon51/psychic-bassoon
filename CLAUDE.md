@@ -52,3 +52,9 @@
 - **Simplicity First:** Make every change as simple as possible. Impact minimal code.
 - **No Laziness:** Find root causes. No temporary fixes. Senior developer standards.
 - **Minimal Impact:** Only touch what's necessary. No side effects with new bugs.
+
+## Deployments
+
+- **Live Website:** https://psychic-bassoon-bpkgxt6mu-cam6stef.vercel.app
+- **Vercel Project:** cam6stef team, repo `morrisstephon51/psychic-bassoon`
+- **Deploy Branch:** `claude/amazing-mccarthy-zZl3L`
