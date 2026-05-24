@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-surface-0 text-text-primary font-sans antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-surface-1;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-surface-3 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-accent;
+}
+
+.status-queued { @apply bg-surface-3 text-text-secondary; }
+.status-processing { @apply bg-accent/20 text-accent-light; }
+.status-done { @apply bg-success/15 text-success; }
+.status-failed { @apply bg-danger/15 text-red-400; }
+.status-pending { @apply bg-surface-3 text-text-muted; }
+.status-generating { @apply bg-warning/15 text-yellow-400; }
+.status-ready { @apply bg-success/15 text-success; }
+.status-scheduled { @apply bg-blue-500/15 text-blue-400; }
+.status-publishing { @apply bg-accent/20 text-accent-light; }
+.status-published { @apply bg-success/20 text-success; }
