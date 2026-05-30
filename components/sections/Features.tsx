@@ -22,7 +22,7 @@ const features = [
     title: 'Clarity',
     tagline: 'No jargon. No gatekeeping. Just real talk.',
     description:
-      "Forget the tech bro vocabulary. We explain AI in plain language — the way you&apos;d explain it to a friend over coffee. No prerequisites, no condescension. Just clear, honest, practical education.",
+      "Forget the tech bro vocabulary. We explain AI in plain language — the way you'd explain it to a friend over coffee. No prerequisites, no condescension. Just clear, honest, practical education.",
     highlight: 'Real talk only',
   },
   {

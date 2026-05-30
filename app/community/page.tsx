@@ -26,7 +26,7 @@ const channels = [
     color: 'text-indigo-400',
     bg: 'bg-indigo-500/10 border-indigo-500/20',
     glow: 'hover:border-indigo-600',
-    badge: '300+ members',
+    badge: '500+ members',
     badgeColor: 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30',
   },
   {
@@ -117,7 +117,7 @@ export default function CommunityPage() {
           >
             <div className="flex items-center gap-2">
               <Users size={15} className="text-green-400" />
-              300+ active members
+              500+ active members
             </div>
             <div className="flex items-center gap-2">
               <Star size={15} className="text-amber-400" />

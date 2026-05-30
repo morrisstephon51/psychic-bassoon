@@ -10,11 +10,17 @@ const trustedBy = [
   'Public Libraries',
   'Youth Centers',
   'Senior Services',
+  'Nonprofits',
+  'Workforce Centers',
+  'Community Colleges',
+  'Social Services',
+  'Job Training Programs',
+  'After-School Programs',
 ]
 
 export default function SocialProof() {
   return (
-    <section className="py-16 px-4 md:px-8 border-y border-[#1a1a1a] bg-[#0d0d0d] relative overflow-hidden">
+    <section className="py-16 border-y border-[#1a1a1a] bg-[#0d0d0d] relative overflow-hidden">
       {/* Subtle glow */}
       <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[600px] h-[200px] bg-purple-900/10 blur-[60px] pointer-events-none" />
 
@@ -25,33 +31,23 @@ export default function SocialProof() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center text-[#A3A3A3] text-sm font-medium tracking-wide uppercase mb-6"
+          className="text-center text-[#A3A3A3] text-sm font-medium tracking-wide uppercase mb-6 px-4"
         >
           Trusted by community orgs, churches, and workforce programs
         </motion.p>
 
-        {/* Scrolling trust logos / tags */}
-        <div className="overflow-hidden mb-12">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-wrap justify-center gap-3"
-          >
-            {trustedBy.map((org, i) => (
-              <motion.span
-                key={org}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.07, duration: 0.4 }}
-                className="px-4 py-2 rounded-full border border-[#222] text-[#A3A3A3] text-sm bg-[#111111]"
+        {/* Scrolling marquee */}
+        <div className="overflow-hidden mb-12 [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]">
+          <div className="flex gap-3 animate-marquee w-max">
+            {[...trustedBy, ...trustedBy].map((org, i) => (
+              <span
+                key={i}
+                className="flex-shrink-0 px-4 py-2 rounded-full border border-[#222] text-[#A3A3A3] text-sm bg-[#111111] whitespace-nowrap"
               >
                 {org}
-              </motion.span>
+              </span>
             ))}
-          </motion.div>
+          </div>
         </div>
 
         {/* Stats */}
@@ -60,7 +56,7 @@ export default function SocialProof() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-30px' }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12"
+          className="grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-4 px-4"
         >
           <div className="relative">
             <StatCounter value={500} suffix="+" label="People Trained" />
@@ -70,8 +66,12 @@ export default function SocialProof() {
             <StatCounter value={12} suffix="+" label="Live Workshops" />
             <div className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-[#1a1a1a]" />
           </div>
-          <div>
+          <div className="relative">
             <StatCounter value={6} label="Cities Reached" />
+            <div className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-[#1a1a1a]" />
+          </div>
+          <div>
+            <StatCounter value={100} suffix="%" label="Free to Start" />
           </div>
         </motion.div>
       </div>

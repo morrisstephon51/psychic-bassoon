@@ -105,11 +105,14 @@ export default function WorkshopsPage() {
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 className="bg-[#111111] border border-[#222] rounded-2xl p-6 space-y-4"
               >
-                {/* Photo placeholder */}
-                <div className="h-32 bg-[#1a1a1a] rounded-xl flex items-center justify-center">
-                  <div className="text-center">
-                    <Users size={28} className="text-[#333] mx-auto mb-2" />
-                    <p className="text-[#333] text-xs">Workshop Photo</p>
+                {/* Visual header */}
+                <div className="h-32 rounded-xl overflow-hidden relative bg-gradient-to-br from-purple-900/50 to-[#111111] flex items-center justify-center">
+                  <div className="absolute inset-0 grid-bg opacity-40" />
+                  <div className="relative z-10 text-center">
+                    <div className="w-12 h-12 rounded-full bg-purple-700/40 border border-purple-600/30 flex items-center justify-center mx-auto mb-1">
+                      <Building2 size={20} className="text-purple-300" />
+                    </div>
+                    <p className="text-purple-300 text-xs font-medium">{pw.location}</p>
                   </div>
                 </div>
                 <div>

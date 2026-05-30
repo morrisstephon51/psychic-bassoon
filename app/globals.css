@@ -96,6 +96,20 @@ h6 {
   }
 }
 
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
 /* Focus styles */
 :focus-visible {
   outline: 2px solid #6b21a8;

@@ -1,9 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Quote, Target, Eye, Zap, Users, ArrowRight, CheckCircle } from 'lucide-react'
+import { Quote, Target, Eye, Zap, Users, ArrowRight, CheckCircle, TrendingUp, MapPin, Star } from 'lucide-react'
 import SectionHeader from '@/components/SectionHeader'
 import EmailCapture from '@/components/shared/EmailCapture'
+import Link from 'next/link'
 
 const values = [
   {
@@ -63,8 +64,15 @@ const milestones = [
     year: '2026',
     title: 'Scaling Up',
     description:
-      '500+ people trained, 12+ workshops across 6 cities, partnerships with workforce centers and faith communities. Online lessons launch to reach people we can\'t reach in person — yet.',
+      "500+ people trained, 12+ workshops across 6 cities, partnerships with workforce centers and faith communities. Online lessons launch to reach people we can't reach in person — yet.",
   },
+]
+
+const achievements = [
+  { icon: Users, value: '500+', label: 'People Trained', color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20' },
+  { icon: MapPin, value: '6', label: 'Cities Reached', color: 'text-purple-400', bg: 'bg-purple-500/10 border-purple-500/20' },
+  { icon: TrendingUp, value: '12+', label: 'Live Workshops', color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
+  { icon: Star, value: '100%', label: 'Free to Attend', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
 ]
 
 export default function AboutPage() {
@@ -91,7 +99,7 @@ export default function AboutPage() {
       <section className="py-20 px-4 md:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Photo */}
+            {/* Visual side */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -99,17 +107,46 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               className="relative"
             >
-              <div className="aspect-square rounded-3xl bg-gradient-to-br from-purple-900/40 to-[#111111] border border-purple-800/30 overflow-hidden flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="w-24 h-24 rounded-full bg-purple-700 flex items-center justify-center text-4xl font-heading font-bold text-white mx-auto mb-4">
+              {/* Main card */}
+              <div className="rounded-3xl bg-gradient-to-br from-purple-900/40 via-[#111111] to-[#0d0d0d] border border-purple-800/30 p-8 space-y-6">
+                {/* Avatar */}
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-700 to-purple-900 flex items-center justify-center text-3xl font-heading font-bold text-white flex-shrink-0">
                     S
                   </div>
-                  <p className="text-[#A3A3A3] text-sm">Photo Coming Soon</p>
+                  <div>
+                    <h3 className="font-heading font-bold text-xl text-[#F5F5F5]">Stefan</h3>
+                    <p className="text-green-400 text-sm font-semibold">Founder, The Plug AI</p>
+                  </div>
+                </div>
+
+                {/* Mission statement */}
+                <blockquote className="border-l-2 border-green-500 pl-4">
+                  <p className="text-[#F5F5F5] font-semibold italic leading-relaxed">
+                    &ldquo;I got into rooms they said weren&apos;t for us.<br />Now I&apos;m holding the door open.&rdquo;
+                  </p>
+                </blockquote>
+
+                {/* Achievement grid */}
+                <div className="grid grid-cols-2 gap-3">
+                  {achievements.map((a) => {
+                    const Icon = a.icon
+                    return (
+                      <div key={a.label} className={`rounded-xl border p-3 flex items-center gap-3 ${a.bg}`}>
+                        <Icon size={16} className={a.color} />
+                        <div>
+                          <p className={`font-heading font-bold text-base ${a.color}`}>{a.value}</p>
+                          <p className="text-[#A3A3A3] text-xs">{a.label}</p>
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
+
               {/* Floating badge */}
               <div className="absolute -bottom-4 -right-4 bg-green-500 text-black font-bold px-4 py-2 rounded-2xl text-sm shadow-lg shadow-green-500/30">
-                Founded by Stefan
+                Founded 2024
               </div>
             </motion.div>
 
@@ -138,8 +175,8 @@ export default function AboutPage() {
                 </p>
                 <p>
                   When AI exploded into public consciousness, he saw the same pattern he&apos;d seen before.
-                  People in tech were celebrating. Everyone else was left wondering: <em>What does this mean for me?
-                  Is this going to take my job? Can I even use this?</em>
+                  People in tech were celebrating. Everyone else was left wondering:{' '}
+                  <em>What does this mean for me? Is this going to take my job? Can I even use this?</em>
                 </p>
                 <p>
                   The tech world wasn&apos;t answering those questions. They were too busy building products for
@@ -151,16 +188,13 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              {/* Pull Quote */}
-              <blockquote className="relative border-l-2 border-green-500 pl-5 py-2">
-                <div className="absolute -left-3 -top-2 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
-                  <Quote size={12} className="text-black" />
-                </div>
-                <p className="text-[#F5F5F5] font-semibold text-lg italic leading-relaxed">
-                  &ldquo;I got into rooms they said weren&apos;t for us. Now I&apos;m holding the door open.&rdquo;
-                </p>
-                <footer className="text-[#A3A3A3] text-sm mt-2">— Stefan, Founder of The Plug AI</footer>
-              </blockquote>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 font-semibold text-sm transition-colors group"
+              >
+                Get in touch with Stefan
+                <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -259,26 +293,6 @@ export default function AboutPage() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Press Placeholder */}
-      <section className="py-16 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="text-[#A3A3A3] text-sm font-semibold tracking-widest uppercase block mb-6">
-            Press & Features
-          </span>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {['Local News Feature', 'Community Blog', 'Podcast Guest', 'Newsletter Feature'].map((item) => (
-              <div
-                key={item}
-                className="bg-[#111111] border border-[#1a1a1a] rounded-xl p-4 h-16 flex items-center justify-center"
-              >
-                <p className="text-[#333] text-xs text-center">{item}</p>
-              </div>
-            ))}
-          </div>
-          <p className="text-[#555] text-xs mt-4">Press features coming soon</p>
         </div>
       </section>
 
