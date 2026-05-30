@@ -55,6 +55,6 @@
 
 ## Deployments
 
-- **Live Website:** https://psychic-bassoon-bpkgxt6mu-cam6stef.vercel.app
+- **Live Website:** https://psychic-bassoon-cam6stef.vercel.app
 - **Vercel Project:** cam6stef team, repo `morrisstephon51/psychic-bassoon`
 - **Deploy Branch:** `claude/amazing-mccarthy-zZl3L`
