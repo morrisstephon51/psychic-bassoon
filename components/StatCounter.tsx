@@ -13,14 +13,7 @@ interface StatCounterProps {
   className?: string
 }
 
-export default function StatCounter({
-  value,
-  suffix = '',
-  prefix = '',
-  label,
-  duration = 2000,
-  className,
-}: StatCounterProps) {
+export default function StatCounter({ value, suffix = '', prefix = '', label, duration = 2000, className }: StatCounterProps) {
   const [count, setCount] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-20px' })
@@ -29,21 +22,14 @@ export default function StatCounter({
   useEffect(() => {
     if (!isInView || hasAnimated.current) return
     hasAnimated.current = true
-
     const startTime = Date.now()
-    const startValue = 0
 
     const tick = () => {
       const elapsed = Date.now() - startTime
       const progress = Math.min(elapsed / duration, 1)
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3)
-      const current = Math.round(startValue + (value - startValue) * eased)
-      setCount(current)
-
-      if (progress < 1) {
-        requestAnimationFrame(tick)
-      }
+      setCount(Math.round(value * eased))
+      if (progress < 1) requestAnimationFrame(tick)
     }
 
     requestAnimationFrame(tick)
@@ -51,12 +37,12 @@ export default function StatCounter({
 
   return (
     <div ref={ref} className={cn('text-center', className)}>
-      <div className="font-heading font-bold text-4xl md:text-5xl text-white mb-1">
-        <span className="text-green-400">{prefix}</span>
+      <div className="font-heading font-bold text-4xl md:text-5xl text-[#1A0533] mb-1">
+        <span className="text-green-600">{prefix}</span>
         {count.toLocaleString()}
-        <span className="text-green-400">{suffix}</span>
+        <span className="text-green-600">{suffix}</span>
       </div>
-      <p className="text-[#A3A3A3] text-sm md:text-base font-medium">{label}</p>
+      <p className="text-[#6B5A8E] text-sm md:text-base font-medium">{label}</p>
     </div>
   )
 }

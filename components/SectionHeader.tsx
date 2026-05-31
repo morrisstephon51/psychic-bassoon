@@ -13,19 +13,8 @@ interface SectionHeaderProps {
   titleClassName?: string
 }
 
-export default function SectionHeader({
-  eyebrow,
-  title,
-  subtitle,
-  align = 'center',
-  className,
-  titleClassName,
-}: SectionHeaderProps) {
-  const alignClasses = {
-    left: 'text-left',
-    center: 'text-center',
-    right: 'text-right',
-  }
+export default function SectionHeader({ eyebrow, title, subtitle, align = 'center', className, titleClassName }: SectionHeaderProps) {
+  const alignClasses = { left: 'text-left', center: 'text-center', right: 'text-right' }
 
   return (
     <motion.div
@@ -36,20 +25,15 @@ export default function SectionHeader({
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       {eyebrow && (
-        <span className="inline-block text-green-400 text-sm font-semibold tracking-widest uppercase mb-3">
+        <span className="inline-block text-green-600 text-sm font-semibold tracking-widest uppercase mb-3">
           {eyebrow}
         </span>
       )}
-      <h2
-        className={cn(
-          'font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-[#F5F5F5] leading-tight',
-          titleClassName
-        )}
-      >
+      <h2 className={cn('font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-[#1A0533] leading-tight', titleClassName)}>
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-4 text-[#A3A3A3] text-base md:text-lg max-w-2xl leading-relaxed mx-auto">
+        <p className="mt-4 text-[#6B5A8E] text-base md:text-lg max-w-2xl leading-relaxed mx-auto">
           {subtitle}
         </p>
       )}

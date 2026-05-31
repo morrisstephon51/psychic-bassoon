@@ -79,7 +79,7 @@ export default function AboutPage() {
   return (
     <div className="pt-24">
       {/* Header */}
-      <section className="py-20 px-4 md:px-8 bg-[#0d0d0d] border-b border-[#1a1a1a] relative overflow-hidden">
+      <section className="py-20 px-4 md:px-8 bg-[#F5F3FF] border-b border-[#EDE9FE] relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-purple-900/15 blur-[100px] pointer-events-none" />
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <SectionHeader
@@ -108,21 +108,21 @@ export default function AboutPage() {
               className="relative"
             >
               {/* Main card */}
-              <div className="rounded-3xl bg-gradient-to-br from-purple-900/40 via-[#111111] to-[#0d0d0d] border border-purple-800/30 p-8 space-y-6">
+              <div className="rounded-3xl bg-gradient-to-br from-[#F5F3FF] via-white to-[#F0FFF4] border border-[#EDE9FE] p-8 space-y-6 shadow-[0_4px_24px_rgba(107,33,168,0.10)]">
                 {/* Avatar */}
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-700 to-purple-900 flex items-center justify-center text-3xl font-heading font-bold text-white flex-shrink-0">
                     S
                   </div>
                   <div>
-                    <h3 className="font-heading font-bold text-xl text-[#F5F5F5]">Stefan</h3>
-                    <p className="text-green-400 text-sm font-semibold">Founder, The Plug AI</p>
+                    <h3 className="font-heading font-bold text-xl text-[#1A0533]">Stefan</h3>
+                    <p className="text-green-600 text-sm font-semibold">Founder, The Plug AI</p>
                   </div>
                 </div>
 
                 {/* Mission statement */}
                 <blockquote className="border-l-2 border-green-500 pl-4">
-                  <p className="text-[#F5F5F5] font-semibold italic leading-relaxed">
+                  <p className="text-[#1A0533] font-semibold italic leading-relaxed">
                     &ldquo;I got into rooms they said weren&apos;t for us.<br />Now I&apos;m holding the door open.&rdquo;
                   </p>
                 </blockquote>
@@ -136,7 +136,7 @@ export default function AboutPage() {
                         <Icon size={16} className={a.color} />
                         <div>
                           <p className={`font-heading font-bold text-base ${a.color}`}>{a.value}</p>
-                          <p className="text-[#A3A3A3] text-xs">{a.label}</p>
+                          <p className="text-[#6B5A8E] text-xs">{a.label}</p>
                         </div>
                       </div>
                     )
@@ -159,15 +159,15 @@ export default function AboutPage() {
               className="space-y-6"
             >
               <div>
-                <span className="text-green-400 text-sm font-semibold tracking-widest uppercase">
+                <span className="text-green-600 text-sm font-semibold tracking-widest uppercase">
                   Meet The Founder
                 </span>
-                <h2 className="font-heading font-bold text-3xl md:text-4xl text-[#F5F5F5] mt-2 mb-4">
+                <h2 className="font-heading font-bold text-3xl md:text-4xl text-[#1A0533] mt-2 mb-4">
                   Stefan
                 </h2>
               </div>
 
-              <div className="space-y-4 text-[#A3A3A3] leading-relaxed">
+              <div className="space-y-4 text-[#6B5A8E] leading-relaxed">
                 <p>
                   Stefan started his career in healthcare training — teaching people skills that changed their
                   economic trajectories. He watched people go from nothing to careers, from unemployed to
@@ -183,7 +183,7 @@ export default function AboutPage() {
                   people who already had everything. Stefan decided to answer them — for everyone else.
                 </p>
                 <p>
-                  <span className="text-[#F5F5F5] font-semibold">The Plug AI</span> is the result. Not a startup.
+                  <span className="text-[#1A0533] font-semibold">The Plug AI</span> is the result. Not a startup.
                   Not a brand play. A mission.
                 </p>
               </div>
@@ -201,7 +201,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission */}
-      <section className="py-20 px-4 md:px-8 bg-[#0d0d0d] border-y border-[#1a1a1a] relative overflow-hidden">
+      <section className="py-20 px-4 md:px-8 bg-[#F5F3FF] border-y border-[#EDE9FE] relative overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-30" />
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <motion.div
@@ -210,14 +210,14 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-green-400 text-sm font-semibold tracking-widest uppercase block mb-4">
+            <span className="text-green-600 text-sm font-semibold tracking-widest uppercase block mb-4">
               Our Mission
             </span>
-            <blockquote className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-[#F5F5F5] leading-tight mb-6">
+            <blockquote className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-[#1A0533] leading-tight mb-6">
               &ldquo;I teach communities that have been left behind how to use AI —{' '}
               <span className="text-gradient">so they stop being left out.</span>&rdquo;
             </blockquote>
-            <p className="text-[#A3A3A3] text-lg max-w-2xl mx-auto">
+            <p className="text-[#6B5A8E] text-lg max-w-2xl mx-auto">
               This isn&apos;t corporate speak. It&apos;s a personal commitment to the communities we came from —
               and the communities still waiting for someone to show up.
             </p>
@@ -244,15 +244,15 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.5 }}
-                  className="bg-[#111111] border border-[#222] rounded-2xl p-6 text-center hover:border-purple-700 transition-colors duration-300"
+                  className="bg-white border border-[#EDE9FE] rounded-2xl p-6 text-center hover:border-purple-700 transition-colors duration-300"
                 >
                   <div
                     className={`w-12 h-12 rounded-xl border flex items-center justify-center mx-auto mb-4 ${value.bg}`}
                   >
                     <Icon size={22} className={value.color} />
                   </div>
-                  <h3 className="font-heading font-bold text-xl text-[#F5F5F5] mb-3">{value.title}</h3>
-                  <p className="text-[#A3A3A3] text-sm leading-relaxed">{value.description}</p>
+                  <h3 className="font-heading font-bold text-xl text-[#1A0533] mb-3">{value.title}</h3>
+                  <p className="text-[#6B5A8E] text-sm leading-relaxed">{value.description}</p>
                 </motion.div>
               )
             })}
@@ -261,7 +261,7 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section className="py-20 px-4 md:px-8 bg-[#0d0d0d] border-y border-[#1a1a1a]">
+      <section className="py-20 px-4 md:px-8 bg-[#F5F3FF] border-y border-[#EDE9FE]">
         <div className="max-w-3xl mx-auto">
           <SectionHeader
             eyebrow="Our Journey"
@@ -282,13 +282,13 @@ export default function AboutPage() {
                 transition={{ delay: i * 0.12, duration: 0.5 }}
                 className="flex items-start gap-6 pl-12 relative"
               >
-                <div className="absolute left-0 w-11 h-11 rounded-full bg-[#111111] border-2 border-purple-700 flex items-center justify-center flex-shrink-0">
-                  <CheckCircle size={18} className="text-green-400" />
+                <div className="absolute left-0 w-11 h-11 rounded-full bg-white border-2 border-purple-700 flex items-center justify-center flex-shrink-0">
+                  <CheckCircle size={18} className="text-green-600" />
                 </div>
                 <div>
-                  <span className="text-green-400 text-sm font-bold tracking-wide">{m.year}</span>
-                  <h3 className="font-heading font-bold text-xl text-[#F5F5F5] mt-1 mb-2">{m.title}</h3>
-                  <p className="text-[#A3A3A3] text-sm leading-relaxed">{m.description}</p>
+                  <span className="text-green-600 text-sm font-bold tracking-wide">{m.year}</span>
+                  <h3 className="font-heading font-bold text-xl text-[#1A0533] mt-1 mb-2">{m.title}</h3>
+                  <p className="text-[#6B5A8E] text-sm leading-relaxed">{m.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -297,12 +297,12 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 px-4 md:px-8 bg-[#0d0d0d] border-t border-[#1a1a1a]">
+      <section className="py-16 px-4 md:px-8 bg-[#F5F3FF] border-t border-[#EDE9FE]">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-heading font-bold text-3xl md:text-4xl text-[#F5F5F5] mb-4">
+          <h2 className="font-heading font-bold text-3xl md:text-4xl text-[#1A0533] mb-4">
             Join The Movement
           </h2>
-          <p className="text-[#A3A3A3] text-lg mb-8 max-w-xl mx-auto">
+          <p className="text-[#6B5A8E] text-lg mb-8 max-w-xl mx-auto">
             Get the free AI Starter Guide and become part of a community that&apos;s changing the game —
             together.
           </p>

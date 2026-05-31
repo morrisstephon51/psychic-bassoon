@@ -4,34 +4,23 @@ import { motion } from 'framer-motion'
 import StatCounter from '@/components/StatCounter'
 
 const trustedBy = [
-  'Community Organizations',
-  'Faith Communities',
-  'Workforce Programs',
-  'Public Libraries',
-  'Youth Centers',
-  'Senior Services',
-  'Nonprofits',
-  'Workforce Centers',
-  'Community Colleges',
-  'Social Services',
-  'Job Training Programs',
-  'After-School Programs',
+  'Community Organizations', 'Faith Communities', 'Workforce Programs', 'Public Libraries',
+  'Youth Centers', 'Senior Services', 'Nonprofits', 'Workforce Centers',
+  'Community Colleges', 'Social Services', 'Job Training Programs', 'After-School Programs',
 ]
 
 export default function SocialProof() {
   return (
-    <section className="py-16 border-y border-[#1a1a1a] bg-[#0d0d0d] relative overflow-hidden">
-      {/* Subtle glow */}
-      <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[600px] h-[200px] bg-purple-900/10 blur-[60px] pointer-events-none" />
+    <section className="py-16 border-y border-[#EDE9FE] bg-[#F5F3FF] relative overflow-hidden">
+      <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[600px] h-[200px] bg-purple-200/30 blur-[60px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Trust statement */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center text-[#A3A3A3] text-sm font-medium tracking-wide uppercase mb-6 px-4"
+          className="text-center text-[#9385B5] text-sm font-medium tracking-wide uppercase mb-6 px-4"
         >
           Trusted by community orgs, churches, and workforce programs
         </motion.p>
@@ -42,7 +31,7 @@ export default function SocialProof() {
             {[...trustedBy, ...trustedBy].map((org, i) => (
               <span
                 key={i}
-                className="flex-shrink-0 px-4 py-2 rounded-full border border-[#222] text-[#A3A3A3] text-sm bg-[#111111] whitespace-nowrap"
+                className="flex-shrink-0 px-4 py-2 rounded-full border border-[#EDE9FE] text-[#6B5A8E] text-sm bg-white whitespace-nowrap shadow-card"
               >
                 {org}
               </span>
@@ -60,15 +49,15 @@ export default function SocialProof() {
         >
           <div className="relative">
             <StatCounter value={500} suffix="+" label="People Trained" />
-            <div className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-[#1a1a1a]" />
+            <div className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-[#EDE9FE]" />
           </div>
           <div className="relative">
             <StatCounter value={12} suffix="+" label="Live Workshops" />
-            <div className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-[#1a1a1a]" />
+            <div className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-[#EDE9FE]" />
           </div>
           <div className="relative">
             <StatCounter value={6} label="Cities Reached" />
-            <div className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-[#1a1a1a]" />
+            <div className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-[#EDE9FE]" />
           </div>
           <div>
             <StatCounter value={100} suffix="%" label="Free to Start" />

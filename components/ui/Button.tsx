@@ -18,10 +18,10 @@ interface ButtonProps {
 }
 
 const variants = {
-  primary: 'bg-green-500 hover:bg-green-400 text-black font-bold shadow-lg hover:shadow-green-500/25',
-  secondary: 'bg-purple-700 hover:bg-purple-600 text-white font-semibold shadow-lg hover:shadow-purple-700/25',
-  outline: 'border-2 border-purple-600 text-purple-400 hover:bg-purple-600/10 font-semibold',
-  ghost: 'text-[#A3A3A3] hover:text-white hover:bg-white/5 font-medium',
+  primary: 'bg-green-500 hover:bg-green-400 text-black font-bold shadow-md hover:shadow-green-500/30',
+  secondary: 'bg-purple-700 hover:bg-purple-600 text-white font-semibold shadow-md hover:shadow-purple-700/25',
+  outline: 'border-2 border-purple-400 text-purple-700 hover:bg-purple-50 font-semibold',
+  ghost: 'text-[#6B5A8E] hover:text-purple-700 hover:bg-purple-50 font-medium',
 }
 
 const sizes = {
@@ -30,18 +30,7 @@ const sizes = {
   lg: 'px-8 py-4 text-lg rounded-xl',
 }
 
-export default function Button({
-  children,
-  variant = 'primary',
-  size = 'md',
-  pulse = false,
-  href,
-  onClick,
-  className,
-  type = 'button',
-  disabled = false,
-  fullWidth = false,
-}: ButtonProps) {
+export default function Button({ children, variant = 'primary', size = 'md', pulse = false, href, onClick, className, type = 'button', disabled = false, fullWidth = false }: ButtonProps) {
   const classes = cn(
     'inline-flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer',
     variants[variant],
@@ -52,10 +41,7 @@ export default function Button({
   )
 
   const motionProps = pulse
-    ? {
-        animate: { scale: [1, 1.03, 1] },
-        transition: { repeat: Infinity, duration: 2.5, ease: 'easeInOut' as const },
-      }
+    ? { animate: { scale: [1, 1.03, 1] }, transition: { repeat: Infinity, duration: 2.5, ease: 'easeInOut' as const } }
     : {}
 
   if (href) {
@@ -67,15 +53,7 @@ export default function Button({
   }
 
   return (
-    <motion.button
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      className={classes}
-      whileHover={{ scale: disabled ? 1 : 1.02 }}
-      whileTap={{ scale: disabled ? 1 : 0.98 }}
-      {...motionProps}
-    >
+    <motion.button type={type} onClick={onClick} disabled={disabled} className={classes} whileHover={{ scale: disabled ? 1 : 1.02 }} whileTap={{ scale: disabled ? 1 : 0.98 }} {...motionProps}>
       {children}
     </motion.button>
   )

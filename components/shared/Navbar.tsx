@@ -25,10 +25,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileOpen(false)
-  }, [pathname])
+  useEffect(() => { setMobileOpen(false) }, [pathname])
 
   return (
     <>
@@ -38,7 +35,7 @@ export default function Navbar() {
         transition={{ duration: 0.5, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-[#0A0A0A]/90 backdrop-blur-md border-b border-[#1a1a1a] shadow-2xl'
+            ? 'bg-white/90 backdrop-blur-md border-b border-[#EDE9FE] shadow-[0_2px_16px_rgba(107,33,168,0.06)]'
             : 'bg-transparent'
         }`}
       >
@@ -51,8 +48,8 @@ export default function Navbar() {
               </div>
               <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-green-400" />
             </div>
-            <span className="font-heading font-bold text-lg text-[#F5F5F5] group-hover:text-white transition-colors">
-              The Plug <span className="text-green-400">AI</span>
+            <span className="font-heading font-bold text-lg text-[#1A0533] group-hover:text-purple-700 transition-colors">
+              The Plug <span className="text-green-500">AI</span>
             </span>
           </Link>
 
@@ -66,8 +63,8 @@ export default function Navbar() {
                   href={link.href}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
                     isActive
-                      ? 'text-white bg-white/10'
-                      : 'text-[#A3A3A3] hover:text-white hover:bg-white/5'
+                      ? 'text-purple-700 bg-purple-50'
+                      : 'text-[#6B5A8E] hover:text-purple-700 hover:bg-purple-50'
                   }`}
                 >
                   {link.label}
@@ -80,15 +77,15 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/learn"
-              className="bg-green-500 hover:bg-green-400 text-black font-bold px-5 py-2 rounded-xl text-sm transition-colors duration-200"
+              className="bg-green-500 hover:bg-green-400 text-black font-bold px-5 py-2 rounded-xl text-sm transition-colors duration-200 shadow-sm"
             >
-              Get Started
+              Get Started Free
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden w-10 h-10 flex items-center justify-center text-[#A3A3A3] hover:text-white transition-colors"
+            className="md:hidden w-10 h-10 flex items-center justify-center text-[#6B5A8E] hover:text-purple-700 transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -105,10 +102,9 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="fixed inset-0 z-40 bg-[#0A0A0A] flex flex-col"
+            className="fixed inset-0 z-40 bg-white flex flex-col"
           >
-            {/* Mobile Header */}
-            <div className="h-16 flex items-center justify-between px-4 border-b border-[#1a1a1a]">
+            <div className="h-16 flex items-center justify-between px-4 border-b border-[#EDE9FE]">
               <Link href="/" className="flex items-center gap-2">
                 <div className="relative">
                   <div className="w-8 h-8 rounded-full bg-purple-700 flex items-center justify-center">
@@ -116,19 +112,18 @@ export default function Navbar() {
                   </div>
                   <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-green-400" />
                 </div>
-                <span className="font-heading font-bold text-lg text-[#F5F5F5]">
-                  The Plug <span className="text-green-400">AI</span>
+                <span className="font-heading font-bold text-lg text-[#1A0533]">
+                  The Plug <span className="text-green-500">AI</span>
                 </span>
               </Link>
               <button
-                className="w-10 h-10 flex items-center justify-center text-[#A3A3A3]"
+                className="w-10 h-10 flex items-center justify-center text-[#6B5A8E]"
                 onClick={() => setMobileOpen(false)}
               >
                 <X size={22} />
               </button>
             </div>
 
-            {/* Mobile Links */}
             <div className="flex-1 flex flex-col justify-center px-8 gap-2">
               {navLinks.map((link, i) => {
                 const isActive = pathname === link.href
@@ -141,8 +136,8 @@ export default function Navbar() {
                   >
                     <Link
                       href={link.href}
-                      className={`block py-4 text-2xl font-heading font-bold transition-colors duration-200 border-b border-[#1a1a1a] ${
-                        isActive ? 'text-green-400' : 'text-[#F5F5F5] hover:text-green-400'
+                      className={`block py-4 text-2xl font-heading font-bold transition-colors duration-200 border-b border-[#EDE9FE] ${
+                        isActive ? 'text-purple-700' : 'text-[#1A0533] hover:text-purple-700'
                       }`}
                     >
                       {link.label}
@@ -152,7 +147,6 @@ export default function Navbar() {
               })}
             </div>
 
-            {/* Mobile CTA */}
             <div className="px-8 pb-12">
               <Link
                 href="/learn"
@@ -160,7 +154,7 @@ export default function Navbar() {
               >
                 Get Started Free
               </Link>
-              <p className="text-center text-[#A3A3A3] text-sm mt-4">
+              <p className="text-center text-[#9385B5] text-sm mt-4">
                 &ldquo;Get Connected. Get Skilled. Get into AI.&rdquo;
               </p>
             </div>

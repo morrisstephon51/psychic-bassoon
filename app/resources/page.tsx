@@ -31,7 +31,7 @@ export default function ResourcesPage() {
   return (
     <div className="pt-24">
       {/* Header */}
-      <section className="py-20 px-4 md:px-8 bg-[#0d0d0d] border-b border-[#1a1a1a] relative overflow-hidden">
+      <section className="py-20 px-4 md:px-8 bg-[#F5F3FF] border-b border-[#EDE9FE] relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-green-900/10 blur-[80px] pointer-events-none" />
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <SectionHeader
@@ -57,7 +57,7 @@ export default function ResourcesPage() {
               align="left"
               className="max-w-lg"
             />
-            <span className="text-[#A3A3A3] text-sm hidden md:block">
+            <span className="text-[#6B5A8E] text-sm hidden md:block">
               {resources.length} resources available
             </span>
           </div>
@@ -70,7 +70,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Recommended Tools */}
-      <section className="py-16 px-4 md:px-8 bg-[#0d0d0d] border-y border-[#1a1a1a]">
+      <section className="py-16 px-4 md:px-8 bg-[#F5F3FF] border-y border-[#EDE9FE]">
         <div className="max-w-6xl mx-auto">
           <SectionHeader
             eyebrow="Recommended Tools"
@@ -108,11 +108,11 @@ export default function ResourcesPage() {
             {videoPlaceholders.map((video, i) => (
               <div
                 key={video.id}
-                className="bg-[#111111] border border-[#222] rounded-2xl overflow-hidden group cursor-pointer hover:border-purple-700 transition-colors duration-300"
+                className="bg-white border border-[#EDE9FE] rounded-2xl overflow-hidden group cursor-pointer hover:border-purple-700 transition-colors duration-300"
               >
                 {/* Thumbnail placeholder */}
-                <div className="relative h-44 bg-[#1a1a1a] flex items-center justify-center group-hover:bg-[#1f1f1f] transition-colors">
-                  <div className="w-14 h-14 rounded-full bg-black/60 border border-[#333] flex items-center justify-center group-hover:bg-purple-700/80 transition-colors duration-300">
+                <div className="relative h-44 bg-[#F0EEFF] flex items-center justify-center group-hover:bg-[#EDE9FE] transition-colors">
+                  <div className="w-14 h-14 rounded-full bg-black/60 border border-[#D8D0F7] flex items-center justify-center group-hover:bg-purple-700/80 transition-colors duration-300">
                     <Play size={22} className="text-white ml-1" fill="white" />
                   </div>
                   <div className="absolute top-3 right-3 bg-black/80 text-white text-xs px-2 py-1 rounded-lg">
@@ -120,10 +120,10 @@ export default function ResourcesPage() {
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-heading font-semibold text-[#F5F5F5] text-sm leading-snug mb-2 group-hover:text-purple-300 transition-colors">
+                  <h3 className="font-heading font-semibold text-[#1A0533] text-sm leading-snug mb-2 group-hover:text-purple-700 transition-colors">
                     {video.title}
                   </h3>
-                  <p className="text-[#A3A3A3] text-xs">{video.views}</p>
+                  <p className="text-[#6B5A8E] text-xs">{video.views}</p>
                 </div>
               </div>
             ))}
@@ -131,7 +131,7 @@ export default function ResourcesPage() {
           <div className="text-center">
             <a
               href="#"
-              className="inline-flex items-center gap-2 border border-[#333] hover:border-purple-600 text-[#A3A3A3] hover:text-white px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200"
+              className="inline-flex items-center gap-2 border border-[#D8D0F7] hover:border-purple-600 text-[#6B5A8E] hover:text-purple-700 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200"
             >
               <BookOpen size={16} />
               View Full Video Library on YouTube
@@ -141,7 +141,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Email Capture CTA */}
-      <section className="py-16 px-4 md:px-8 bg-[#0d0d0d] border-t border-[#1a1a1a]">
+      <section className="py-16 px-4 md:px-8 bg-[#F5F3FF] border-t border-[#EDE9FE]">
         <div className="max-w-4xl mx-auto">
           <EmailCapture
             headline="Get New Resources First"

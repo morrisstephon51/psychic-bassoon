@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable}`}>
-      <body className="bg-[#0A0A0A] text-[#F5F5F5] antialiased overflow-x-hidden">
+      <body className="bg-[#FAFAFA] text-[#1A0533] antialiased overflow-x-hidden">
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />

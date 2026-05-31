@@ -42,7 +42,7 @@ export default function ContactPage() {
   return (
     <div className="pt-24">
       {/* Header */}
-      <section className="py-20 px-4 md:px-8 bg-[#0d0d0d] border-b border-[#1a1a1a] relative overflow-hidden">
+      <section className="py-20 px-4 md:px-8 bg-[#F5F3FF] border-b border-[#EDE9FE] relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-purple-900/15 blur-[80px] pointer-events-none" />
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <SectionHeader
@@ -60,16 +60,16 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-[#111111] border border-[#222] rounded-3xl p-8 md:p-10"
+            className="bg-white border border-[#EDE9FE] rounded-3xl p-8 md:p-10"
           >
             {submitted ? (
               <div className="flex flex-col items-center text-center py-10 gap-4">
                 <div className="w-16 h-16 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center">
-                  <CheckCircle size={28} className="text-green-400" />
+                  <CheckCircle size={28} className="text-green-600" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-bold text-2xl text-[#F5F5F5] mb-2">Message Sent!</h3>
-                  <p className="text-[#A3A3A3] text-sm max-w-xs">
+                  <h3 className="font-heading font-bold text-2xl text-[#1A0533] mb-2">Message Sent!</h3>
+                  <p className="text-[#6B5A8E] text-sm max-w-xs">
                     We&apos;ll respond within 48 hours. Thanks for reaching out — it means a lot.
                   </p>
                 </div>
@@ -81,49 +81,49 @@ export default function ContactPage() {
                     setSubject('')
                     setMessageText('')
                   }}
-                  className="text-green-400 hover:text-green-300 text-sm font-semibold transition-colors"
+                  className="text-green-600 hover:text-green-700 text-sm font-semibold transition-colors"
                 >
                   Send Another Message
                 </button>
               </div>
             ) : (
               <>
-                <h2 className="font-heading font-bold text-2xl text-[#F5F5F5] mb-6">
+                <h2 className="font-heading font-bold text-2xl text-[#1A0533] mb-6">
                   Send a Message
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-sm font-medium text-[#A3A3A3] mb-2">Name *</label>
+                      <label className="block text-sm font-medium text-[#6B5A8E] mb-2">Name *</label>
                       <input
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
                         placeholder="Your full name"
-                        className="w-full bg-[#0A0A0A] border border-[#333] focus:border-purple-600 rounded-xl px-4 py-3 text-[#F5F5F5] text-sm placeholder:text-[#444] focus:outline-none transition-colors"
+                        className="w-full bg-[#FAFAFA] border border-[#D8D0F7] focus:border-purple-400 rounded-xl px-4 py-3 text-[#1A0533] text-sm placeholder:text-[#9385B5] focus:outline-none transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-[#A3A3A3] mb-2">Email *</label>
+                      <label className="block text-sm font-medium text-[#6B5A8E] mb-2">Email *</label>
                       <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                         placeholder="you@example.com"
-                        className="w-full bg-[#0A0A0A] border border-[#333] focus:border-purple-600 rounded-xl px-4 py-3 text-[#F5F5F5] text-sm placeholder:text-[#444] focus:outline-none transition-colors"
+                        className="w-full bg-[#FAFAFA] border border-[#D8D0F7] focus:border-purple-400 rounded-xl px-4 py-3 text-[#1A0533] text-sm placeholder:text-[#9385B5] focus:outline-none transition-colors"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#A3A3A3] mb-2">Subject *</label>
+                    <label className="block text-sm font-medium text-[#6B5A8E] mb-2">Subject *</label>
                     <select
                       value={subject}
                       onChange={(e) => setSubject(e.target.value as SubjectOption)}
                       required
-                      className="w-full bg-[#0A0A0A] border border-[#333] focus:border-purple-600 rounded-xl px-4 py-3 text-[#F5F5F5] text-sm focus:outline-none transition-colors"
+                      className="w-full bg-[#FAFAFA] border border-[#D8D0F7] focus:border-purple-400 rounded-xl px-4 py-3 text-[#1A0533] text-sm focus:outline-none transition-colors"
                     >
                       <option value="">Select a subject</option>
                       <option>Workshop Request</option>
@@ -134,14 +134,14 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#A3A3A3] mb-2">Message *</label>
+                    <label className="block text-sm font-medium text-[#6B5A8E] mb-2">Message *</label>
                     <textarea
                       value={messageText}
                       onChange={(e) => setMessageText(e.target.value)}
                       required
                       rows={5}
                       placeholder="Tell us what's on your mind..."
-                      className="w-full bg-[#0A0A0A] border border-[#333] focus:border-purple-600 rounded-xl px-4 py-3 text-[#F5F5F5] text-sm placeholder:text-[#444] focus:outline-none transition-colors resize-none"
+                      className="w-full bg-[#FAFAFA] border border-[#D8D0F7] focus:border-purple-400 rounded-xl px-4 py-3 text-[#1A0533] text-sm placeholder:text-[#9385B5] focus:outline-none transition-colors resize-none"
                     />
                   </div>
 
@@ -164,19 +164,19 @@ export default function ContactPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-[#111111] border border-[#222] rounded-2xl p-6 space-y-5"
+              className="bg-white border border-[#EDE9FE] rounded-2xl p-6 space-y-5"
             >
-              <h3 className="font-heading font-bold text-lg text-[#F5F5F5]">Contact Info</h3>
+              <h3 className="font-heading font-bold text-lg text-[#1A0533]">Contact Info</h3>
 
               <div className="flex items-start gap-3">
                 <div className="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Mail size={16} className="text-green-400" />
+                  <Mail size={16} className="text-green-600" />
                 </div>
                 <div>
-                  <p className="text-[#A3A3A3] text-xs mb-0.5">Email</p>
+                  <p className="text-[#6B5A8E] text-xs mb-0.5">Email</p>
                   <a
                     href="mailto:hello@theplugai.com"
-                    className="text-[#F5F5F5] text-sm font-medium hover:text-green-400 transition-colors"
+                    className="text-[#1A0533] text-sm font-medium hover:text-green-600 transition-colors"
                   >
                     hello@theplugai.com
                   </a>
@@ -185,12 +185,12 @@ export default function ContactPage() {
 
               <div className="flex items-start gap-3">
                 <div className="w-9 h-9 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Clock size={16} className="text-purple-400" />
+                  <Clock size={16} className="text-purple-600" />
                 </div>
                 <div>
-                  <p className="text-[#A3A3A3] text-xs mb-0.5">Response Time</p>
-                  <p className="text-[#F5F5F5] text-sm font-medium">Within 48 hours</p>
-                  <p className="text-[#A3A3A3] text-xs">We read every message.</p>
+                  <p className="text-[#6B5A8E] text-xs mb-0.5">Response Time</p>
+                  <p className="text-[#1A0533] text-sm font-medium">Within 48 hours</p>
+                  <p className="text-[#6B5A8E] text-xs">We read every message.</p>
                 </div>
               </div>
             </motion.div>
@@ -200,30 +200,30 @@ export default function ContactPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-[#111111] border border-[#222] rounded-2xl p-6 space-y-4"
+              className="bg-white border border-[#EDE9FE] rounded-2xl p-6 space-y-4"
             >
-              <h3 className="font-heading font-bold text-lg text-[#F5F5F5]">Follow Along</h3>
+              <h3 className="font-heading font-bold text-lg text-[#1A0533]">Follow Along</h3>
               <div className="space-y-3">
                 {socialLinks.map(({ label, handle, href, icon: Icon, color }) => (
                   <a
                     key={label}
                     href={href}
-                    className={`flex items-center gap-3 p-3 rounded-xl border border-[#222] text-[#A3A3A3] transition-all duration-200 ${color}`}
+                    className={`flex items-center gap-3 p-3 rounded-xl border border-[#EDE9FE] text-[#6B5A8E] transition-all duration-200 ${color}`}
                   >
                     <Icon size={18} />
                     <div>
-                      <p className="text-sm font-medium text-[#F5F5F5]">{label}</p>
+                      <p className="text-sm font-medium text-[#1A0533]">{label}</p>
                       <p className="text-xs">{handle}</p>
                     </div>
                   </a>
                 ))}
                 <a
                   href="#"
-                  className="flex items-center gap-3 p-3 rounded-xl border border-[#222] text-[#A3A3A3] hover:border-white/30 hover:text-white transition-all duration-200"
+                  className="flex items-center gap-3 p-3 rounded-xl border border-[#EDE9FE] text-[#6B5A8E] hover:border-purple-300 hover:text-purple-700 transition-all duration-200"
                 >
                   <TikTokIcon size={18} />
                   <div>
-                    <p className="text-sm font-medium text-[#F5F5F5]">TikTok</p>
+                    <p className="text-sm font-medium text-[#1A0533]">TikTok</p>
                     <p className="text-xs">@theplugai</p>
                   </div>
                 </a>
@@ -235,18 +235,18 @@ export default function ContactPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-gradient-to-br from-purple-900/30 to-[#111111] border border-purple-800/30 rounded-2xl p-6"
+              className="bg-gradient-to-br from-[#F5F3FF] to-[#F0EEFF] border border-[#EDE9FE] rounded-2xl p-6"
             >
-              <h3 className="font-heading font-bold text-base text-[#F5F5F5] mb-3">Quick Answers</h3>
+              <h3 className="font-heading font-bold text-base text-[#1A0533] mb-3">Quick Answers</h3>
               <div className="space-y-2 text-sm">
                 {[
                   ['Are workshops free?', 'Yes, always. 100% free.'],
                   ['Do I need experience?', 'Zero. We start from scratch.'],
                   ['Is this online or in-person?', 'Both — check the workshop page.'],
                 ].map(([q, a]) => (
-                  <div key={q} className="py-2 border-b border-[#1a1a1a] last:border-0">
-                    <p className="text-[#F5F5F5] font-medium text-xs">{q}</p>
-                    <p className="text-[#A3A3A3] text-xs mt-0.5">{a}</p>
+                  <div key={q} className="py-2 border-b border-[#EDE9FE] last:border-0">
+                    <p className="text-[#1A0533] font-medium text-xs">{q}</p>
+                    <p className="text-[#6B5A8E] text-xs mt-0.5">{a}</p>
                   </div>
                 ))}
               </div>

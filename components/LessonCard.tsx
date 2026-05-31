@@ -19,7 +19,7 @@ export default function LessonCard({ lesson, index = 0 }: LessonCardProps) {
       viewport={{ once: true, margin: '-30px' }}
       transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
       whileHover={{ y: -4, scale: 1.01 }}
-      className="group bg-[#111111] border border-[#222] hover:border-purple-700 rounded-2xl p-6 flex flex-col gap-4 cursor-pointer transition-colors duration-300"
+      className="group bg-white border border-[#EDE9FE] hover:border-purple-300 rounded-2xl p-6 flex flex-col gap-4 cursor-pointer transition-all duration-300 shadow-card hover:shadow-card-hover"
     >
       <div className="flex items-start justify-between gap-4">
         <span className="text-4xl leading-none" role="img" aria-label={lesson.title}>
@@ -29,20 +29,20 @@ export default function LessonCard({ lesson, index = 0 }: LessonCardProps) {
       </div>
 
       <div className="flex-1">
-        <h3 className="font-heading font-bold text-lg text-[#F5F5F5] group-hover:text-purple-300 transition-colors duration-200 leading-snug mb-2">
+        <h3 className="font-heading font-bold text-lg text-[#1A0533] group-hover:text-purple-700 transition-colors duration-200 leading-snug mb-2">
           {lesson.title}
         </h3>
-        <p className="text-[#A3A3A3] text-sm leading-relaxed line-clamp-3">{lesson.description}</p>
+        <p className="text-[#6B5A8E] text-sm leading-relaxed line-clamp-3">{lesson.description}</p>
       </div>
 
-      <div className="flex items-center justify-between pt-2 border-t border-[#1a1a1a]">
-        <div className="flex items-center gap-1.5 text-[#A3A3A3] text-xs">
+      <div className="flex items-center justify-between pt-2 border-t border-[#EDE9FE]">
+        <div className="flex items-center gap-1.5 text-[#9385B5] text-xs">
           <Clock size={13} />
           <span>{lesson.readTime}</span>
         </div>
         <Link
           href={`/learn/${lesson.slug}`}
-          className="inline-flex items-center gap-1.5 text-green-400 hover:text-green-300 text-sm font-semibold transition-colors duration-200 group/link"
+          className="inline-flex items-center gap-1.5 text-green-600 hover:text-green-500 text-sm font-semibold transition-colors duration-200 group/link"
         >
           Start Lesson
           <ArrowRight size={15} className="group-hover/link:translate-x-1 transition-transform duration-200" />

@@ -23,11 +23,11 @@ const channels = [
       "Join our free Discord server where 300+ members ask questions, share wins, and help each other learn. It's the most active AI community for everyday people you'll find.",
     cta: 'Join Free',
     href: '#',
-    color: 'text-indigo-400',
-    bg: 'bg-indigo-500/10 border-indigo-500/20',
+    color: 'text-indigo-600',
+    bg: 'bg-indigo-100 border-indigo-200',
     glow: 'hover:border-indigo-600',
     badge: '500+ members',
-    badgeColor: 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30',
+    badgeColor: 'bg-indigo-100 text-indigo-600 border-indigo-200',
   },
   {
     icon: Mail,
@@ -36,11 +36,11 @@ const channels = [
       'Every week: one AI tip you can use immediately, one free tool you might not know about, and one community win to keep you inspired. No fluff. Just plug.',
     cta: 'Subscribe Free',
     href: '#',
-    color: 'text-green-400',
-    bg: 'bg-green-500/10 border-green-500/20',
+    color: 'text-green-600',
+    bg: 'bg-green-100 border-green-200',
     glow: 'hover:border-green-600',
     badge: '1,200+ subscribers',
-    badgeColor: 'bg-green-500/15 text-green-400 border-green-500/30',
+    badgeColor: 'bg-green-100 text-green-600 border-green-200',
   },
   {
     icon: Instagram,
@@ -49,11 +49,11 @@ const channels = [
       'Quick AI tips, workshop recaps, community spotlights, and real talk about technology and opportunity. Follow along for daily doses of AI education.',
     cta: 'Follow Along',
     href: '#',
-    color: 'text-pink-400',
-    bg: 'bg-pink-500/10 border-pink-500/20',
+    color: 'text-pink-600',
+    bg: 'bg-pink-100 border-pink-200',
     glow: 'hover:border-pink-600',
     badge: 'Daily content',
-    badgeColor: 'bg-pink-500/15 text-pink-400 border-pink-500/30',
+    badgeColor: 'bg-pink-100 text-pink-600 border-pink-200',
   },
 ]
 
@@ -96,7 +96,7 @@ export default function CommunityPage() {
   return (
     <div className="pt-24">
       {/* Hero */}
-      <section className="py-20 px-4 md:px-8 bg-[#0d0d0d] border-b border-[#1a1a1a] relative overflow-hidden">
+      <section className="py-20 px-4 md:px-8 bg-[#F5F3FF] border-b border-[#EDE9FE] relative overflow-hidden">
         <div className="absolute top-0 right-1/4 w-[500px] h-[400px] bg-purple-900/15 blur-[100px] pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <SectionHeader
@@ -113,10 +113,10 @@ export default function CommunityPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="flex flex-wrap justify-center gap-4 mt-8 text-sm text-[#A3A3A3]"
+            className="flex flex-wrap justify-center gap-4 mt-8 text-sm text-[#6B5A8E]"
           >
             <div className="flex items-center gap-2">
-              <Users size={15} className="text-green-400" />
+              <Users size={15} className="text-green-600" />
               500+ active members
             </div>
             <div className="flex items-center gap-2">
@@ -124,7 +124,7 @@ export default function CommunityPage() {
               Free to join
             </div>
             <div className="flex items-center gap-2">
-              <Zap size={15} className="text-purple-400" />
+              <Zap size={15} className="text-purple-600" />
               Questions answered daily
             </div>
           </motion.div>
@@ -151,21 +151,21 @@ export default function CommunityPage() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.12, duration: 0.5 }}
                   whileHover={{ y: -6 }}
-                  className={`bg-[#111111] border border-[#222] ${channel.glow} rounded-2xl p-8 flex flex-col gap-5 transition-colors duration-300`}
+                  className={`bg-white border border-[#EDE9FE] ${channel.glow} rounded-2xl p-8 flex flex-col gap-5 transition-colors duration-300`}
                 >
                   <div className={`w-14 h-14 rounded-2xl border flex items-center justify-center ${channel.bg}`}>
                     <Icon size={26} className={channel.color} />
                   </div>
                   <div>
                     <div className="flex items-center gap-2 flex-wrap mb-2">
-                      <h3 className="font-heading font-bold text-xl text-[#F5F5F5]">{channel.name}</h3>
+                      <h3 className="font-heading font-bold text-xl text-[#1A0533]">{channel.name}</h3>
                       <span
                         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${channel.badgeColor}`}
                       >
                         {channel.badge}
                       </span>
                     </div>
-                    <p className="text-[#A3A3A3] text-sm leading-relaxed">{channel.description}</p>
+                    <p className="text-[#6B5A8E] text-sm leading-relaxed">{channel.description}</p>
                   </div>
                   <motion.a
                     href={channel.href}
@@ -184,7 +184,7 @@ export default function CommunityPage() {
       </section>
 
       {/* Community Spotlights */}
-      <section className="py-20 px-4 md:px-8 bg-[#0d0d0d] border-y border-[#1a1a1a]">
+      <section className="py-20 px-4 md:px-8 bg-[#F5F3FF] border-y border-[#EDE9FE]">
         <div className="max-w-6xl mx-auto">
           <SectionHeader
             eyebrow="Community Spotlight"
@@ -205,19 +205,19 @@ export default function CommunityPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="bg-[#111111] border border-[#222] rounded-2xl p-6 space-y-4"
+                className="bg-white border border-[#EDE9FE] rounded-2xl p-6 space-y-4"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-purple-700 flex items-center justify-center font-heading font-bold text-white text-lg">
                     {member.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="font-semibold text-[#F5F5F5] text-sm">{member.name}</p>
-                    <p className="text-[#A3A3A3] text-xs">{member.city}</p>
+                    <p className="font-semibold text-[#1A0533] text-sm">{member.name}</p>
+                    <p className="text-[#6B5A8E] text-xs">{member.city}</p>
                   </div>
                 </div>
-                <p className="text-[#A3A3A3] text-sm leading-relaxed italic">&ldquo;{member.story}&rdquo;</p>
-                <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/20 rounded-full px-3 py-1.5 text-green-400 text-xs font-semibold">
+                <p className="text-[#6B5A8E] text-sm leading-relaxed italic">&ldquo;{member.story}&rdquo;</p>
+                <div className="inline-flex items-center gap-2 bg-green-100 border border-green-200 rounded-full px-3 py-1.5 text-green-600 text-xs font-semibold">
                   <span>{member.emoji}</span>
                   {member.win}
                 </div>
@@ -235,7 +235,7 @@ export default function CommunityPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-[#111111] border border-amber-500/30 rounded-3xl p-8 md:p-10 relative overflow-hidden"
+            className="bg-white border border-amber-500/30 rounded-3xl p-8 md:p-10 relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/5 blur-2xl rounded-full pointer-events-none" />
             <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6">
@@ -249,10 +249,10 @@ export default function CommunityPage() {
                   </span>
                   <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
                 </div>
-                <h3 className="font-heading font-bold text-2xl text-[#F5F5F5] mb-2">
+                <h3 className="font-heading font-bold text-2xl text-[#1A0533] mb-2">
                   Use AI to Write One Email Today
                 </h3>
-                <p className="text-[#A3A3A3] text-sm leading-relaxed">
+                <p className="text-[#6B5A8E] text-sm leading-relaxed">
                   Open ChatGPT. Tell it: &ldquo;Help me write a professional email to [anyone] about [anything].&rdquo; Send it.
                   Share your win in the Discord. That&apos;s it. That&apos;s the challenge.
                 </p>
@@ -270,7 +270,7 @@ export default function CommunityPage() {
       </section>
 
       {/* Ambassador Program */}
-      <section className="py-20 px-4 md:px-8 bg-[#0d0d0d] border-t border-[#1a1a1a]">
+      <section className="py-20 px-4 md:px-8 bg-[#F5F3FF] border-t border-[#EDE9FE]">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -296,10 +296,10 @@ export default function CommunityPage() {
                 { icon: '📦', label: 'Resource Kit', desc: 'Full materials provided free' },
                 { icon: '🤝', label: 'Support Network', desc: 'Direct line to our team' },
               ].map((item) => (
-                <div key={item.label} className="bg-[#111111] border border-[#222] rounded-xl p-4 text-center">
+                <div key={item.label} className="bg-white border border-[#EDE9FE] rounded-xl p-4 text-center">
                   <span className="text-3xl block mb-2">{item.icon}</span>
-                  <p className="font-semibold text-[#F5F5F5] text-sm">{item.label}</p>
-                  <p className="text-[#A3A3A3] text-xs mt-1">{item.desc}</p>
+                  <p className="font-semibold text-[#1A0533] text-sm">{item.label}</p>
+                  <p className="text-[#6B5A8E] text-xs mt-1">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -310,19 +310,19 @@ export default function CommunityPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-[#111111] border border-[#222] rounded-2xl p-8"
+            className="bg-white border border-[#EDE9FE] rounded-2xl p-8"
           >
             {submitted ? (
               <div className="text-center py-4">
-                <CheckCircle size={40} className="text-green-400 mx-auto mb-3" />
-                <h3 className="font-heading font-bold text-xl text-[#F5F5F5] mb-2">Application Received!</h3>
-                <p className="text-[#A3A3A3] text-sm">
+                <CheckCircle size={40} className="text-green-600 mx-auto mb-3" />
+                <h3 className="font-heading font-bold text-xl text-[#1A0533] mb-2">Application Received!</h3>
+                <p className="text-[#6B5A8E] text-sm">
                   We&apos;ll review your application and reach out within 5 business days.
                 </p>
               </div>
             ) : (
               <>
-                <h3 className="font-heading font-bold text-xl text-[#F5F5F5] mb-5">Apply to Become an Ambassador</h3>
+                <h3 className="font-heading font-bold text-xl text-[#1A0533] mb-5">Apply to Become an Ambassador</h3>
                 <form onSubmit={handleAmbassador} className="space-y-4">
                   <input
                     type="email"
@@ -330,7 +330,7 @@ export default function CommunityPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     placeholder="Your email address"
-                    className="w-full bg-[#0A0A0A] border border-[#333] focus:border-purple-600 rounded-xl px-4 py-3 text-[#F5F5F5] text-sm placeholder:text-[#444] focus:outline-none transition-colors"
+                    className="w-full bg-[#FAFAFA] border border-[#D8D0F7] focus:border-purple-400 rounded-xl px-4 py-3 text-[#1A0533] text-sm placeholder:text-[#9385B5] focus:outline-none transition-colors"
                   />
                   <button
                     type="submit"

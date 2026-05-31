@@ -20,7 +20,6 @@ const socialLinks = [
   { label: 'LinkedIn', href: '#', icon: Linkedin },
 ]
 
-// TikTok icon (lucide doesn't have it, so we make a simple SVG one)
 function TikTokIcon({ size = 20 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -41,9 +40,8 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-[#0A0A0A] border-t border-[#1a1a1a] pt-16 pb-8">
+    <footer className="bg-[#F5F3FF] border-t border-[#EDE9FE] pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div className="space-y-4">
@@ -54,25 +52,24 @@ export default function Footer() {
                 </div>
                 <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-green-400" />
               </div>
-              <span className="font-heading font-bold text-lg text-[#F5F5F5]">
-                The Plug <span className="text-green-400">AI</span>
+              <span className="font-heading font-bold text-lg text-[#1A0533]">
+                The Plug <span className="text-green-500">AI</span>
               </span>
             </Link>
-            <p className="text-[#A3A3A3] text-sm leading-relaxed max-w-xs">
+            <p className="text-[#6B5A8E] text-sm leading-relaxed max-w-xs">
               Teaching communities that have been left behind how to use AI — so they stop being left out.
               Founded by Stefan.
             </p>
-            <p className="text-purple-400 text-sm font-semibold italic">
+            <p className="text-purple-600 text-sm font-semibold italic">
               &ldquo;Get Connected. Get Skilled. Get into AI.&rdquo;
             </p>
-            {/* Social Links */}
             <div className="flex items-center gap-3 pt-2">
               {socialLinks.map(({ label, href, icon: Icon }) => (
                 <Link
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-[#1a1a1a] border border-[#222] flex items-center justify-center text-[#A3A3A3] hover:text-white hover:border-purple-600 transition-colors duration-200"
+                  className="w-9 h-9 rounded-lg bg-white border border-[#EDE9FE] flex items-center justify-center text-[#6B5A8E] hover:text-purple-700 hover:border-purple-300 transition-colors duration-200 shadow-card"
                 >
                   <Icon size={16} />
                 </Link>
@@ -80,7 +77,7 @@ export default function Footer() {
               <Link
                 href="#"
                 aria-label="TikTok"
-                className="w-9 h-9 rounded-lg bg-[#1a1a1a] border border-[#222] flex items-center justify-center text-[#A3A3A3] hover:text-white hover:border-purple-600 transition-colors duration-200"
+                className="w-9 h-9 rounded-lg bg-white border border-[#EDE9FE] flex items-center justify-center text-[#6B5A8E] hover:text-purple-700 hover:border-purple-300 transition-colors duration-200 shadow-card"
               >
                 <TikTokIcon size={16} />
               </Link>
@@ -89,17 +86,17 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-heading font-bold text-[#F5F5F5] mb-5">Quick Links</h4>
+            <h4 className="font-heading font-bold text-[#1A0533] mb-5">Quick Links</h4>
             <ul className="space-y-2.5">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-[#A3A3A3] hover:text-green-400 text-sm transition-colors duration-200 flex items-center gap-2 group"
+                    className="text-[#6B5A8E] hover:text-purple-700 text-sm transition-colors duration-200 flex items-center gap-2 group"
                   >
                     <ArrowRight
                       size={12}
-                      className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-200 text-green-400"
+                      className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-200 text-green-500"
                     />
                     {link.label}
                   </Link>
@@ -110,18 +107,18 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h4 className="font-heading font-bold text-[#F5F5F5] mb-2">Stay Plugged In</h4>
-            <p className="text-[#A3A3A3] text-sm mb-4">
+            <h4 className="font-heading font-bold text-[#1A0533] mb-2">Stay Plugged In</h4>
+            <p className="text-[#6B5A8E] text-sm mb-4">
               Get free AI tips, workshop announcements, and community updates.
             </p>
             {submitted ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 text-center"
+                className="bg-green-50 border border-green-200 rounded-xl p-4 text-center"
               >
-                <p className="text-green-400 font-semibold text-sm">You&apos;re plugged in! 🔌</p>
-                <p className="text-[#A3A3A3] text-xs mt-1">Check your inbox for a welcome email.</p>
+                <p className="text-green-700 font-semibold text-sm">You&apos;re plugged in! 🔌</p>
+                <p className="text-green-600 text-xs mt-1">Check your inbox for a welcome email.</p>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-2">
@@ -130,7 +127,7 @@ export default function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
-                  className="w-full bg-[#1a1a1a] border border-[#333] rounded-xl px-4 py-2.5 text-sm text-[#F5F5F5] placeholder:text-[#555] focus:outline-none focus:border-purple-600 transition-colors"
+                  className="w-full bg-white border border-[#EDE9FE] rounded-xl px-4 py-2.5 text-sm text-[#1A0533] placeholder:text-[#9385B5] focus:outline-none focus:border-purple-400 transition-colors shadow-card"
                   required
                 />
                 <button
@@ -141,23 +138,16 @@ export default function Footer() {
                 </button>
               </form>
             )}
-            <p className="text-[#555] text-xs mt-2">No spam. Unsubscribe anytime.</p>
+            <p className="text-[#9385B5] text-xs mt-2">No spam. Unsubscribe anytime.</p>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-[#1a1a1a] pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-[#555]">
+        <div className="border-t border-[#EDE9FE] pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-[#9385B5]">
           <p>© 2026 The Plug AI. All Rights Reserved. Built with purpose by Stefan.</p>
           <div className="flex items-center gap-4">
-            <Link href="#" className="hover:text-[#A3A3A3] transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="hover:text-[#A3A3A3] transition-colors">
-              Terms of Service
-            </Link>
-            <Link href="/contact" className="hover:text-[#A3A3A3] transition-colors">
-              Contact
-            </Link>
+            <Link href="#" className="hover:text-[#6B5A8E] transition-colors">Privacy Policy</Link>
+            <Link href="#" className="hover:text-[#6B5A8E] transition-colors">Terms of Service</Link>
+            <Link href="/contact" className="hover:text-[#6B5A8E] transition-colors">Contact</Link>
           </div>
         </div>
       </div>

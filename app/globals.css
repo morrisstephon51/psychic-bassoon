@@ -5,6 +5,21 @@
 :root {
   --font-space-grotesk: 'Space Grotesk', sans-serif;
   --font-inter: 'Inter', sans-serif;
+
+  /* Brand Vault — light mode */
+  --bg-primary:   #FAFAFA;
+  --bg-surface:   #F5F3FF;
+  --bg-card:      #FFFFFF;
+  --border-light: #EDE9FE;
+  --border-md:    #D8D0F7;
+  --text-primary: #1A0533;
+  --text-2:       #6B5A8E;
+  --text-muted:   #9385B5;
+  --purple:       #6B21A8;
+  --purple-md:    #7C3AED;
+  --green:        #22C55E;
+  --green-dk:     #16A34A;
+  --gold:         #F59E0B;
 }
 
 * {
@@ -18,80 +33,80 @@ html {
 }
 
 body {
-  background-color: #0a0a0a;
-  color: #f5f5f5;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: var(--font-inter), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-space-grotesk), sans-serif;
 }
 
 /* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #111111;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #6b21a8;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #7c3aed;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F5F3FF; }
+::-webkit-scrollbar-thumb { background: #C4B5FD; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #7C3AED; }
 
 /* Text Selection */
 ::selection {
-  background-color: #6b21a8;
-  color: #f5f5f5;
+  background-color: #DDD6FE;
+  color: #3B0764;
 }
 
 @layer utilities {
+  /* Gradient text — pops brilliantly on light bg */
   .text-gradient {
-    @apply bg-gradient-to-r from-purple-400 to-green-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-purple-600 to-green-500 bg-clip-text text-transparent;
   }
 
   .text-gradient-gold {
-    @apply bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-amber-500 to-yellow-400 bg-clip-text text-transparent;
+  }
+
+  /* Light-mode card with soft shadow */
+  .card-light {
+    background: #FFFFFF;
+    border: 1px solid #EDE9FE;
+    box-shadow: 0 1px 3px rgba(107,33,168,0.07), 0 4px 16px rgba(107,33,168,0.04);
+    border-radius: 1rem;
+    transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+  }
+  .card-light:hover {
+    box-shadow: 0 4px 24px rgba(107,33,168,0.14), 0 1px 4px rgba(107,33,168,0.08);
+    border-color: #C4B5FD;
   }
 
   .glow-purple {
-    box-shadow: 0 0 40px rgba(107, 33, 168, 0.3);
+    box-shadow: 0 0 40px rgba(107,33,168,0.20);
   }
 
   .glow-green {
-    box-shadow: 0 0 40px rgba(34, 197, 94, 0.25);
+    box-shadow: 0 0 40px rgba(34,197,94,0.22);
   }
 
   .card-border {
-    @apply border border-[#222] hover:border-purple-700 transition-colors duration-300;
+    @apply border border-[#EDE9FE] hover:border-purple-400 transition-colors duration-300;
   }
 
   .section-padding {
     @apply py-20 px-4 md:px-8 lg:px-16;
   }
 
+  /* Light grid — very subtle purple grid on light background */
   .grid-bg {
-    background-image: linear-gradient(rgba(107, 33, 168, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(107, 33, 168, 0.06) 1px, transparent 1px);
+    background-image:
+      linear-gradient(rgba(107,33,168,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(107,33,168,0.04) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
   .grid-bg-green {
-    background-image: linear-gradient(rgba(34, 197, 94, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(34, 197, 94, 0.04) 1px, transparent 1px);
+    background-image:
+      linear-gradient(rgba(34,197,94,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34,197,94,0.04) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 }
@@ -99,20 +114,18 @@ h6 {
 /* Marquee */
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to   { transform: translateX(-50%); }
 }
-
 .animate-marquee {
   animation: marquee 28s linear infinite;
 }
-
 .animate-marquee:hover {
   animation-play-state: paused;
 }
 
 /* Focus styles */
 :focus-visible {
-  outline: 2px solid #6b21a8;
+  outline: 2px solid #7C3AED;
   outline-offset: 2px;
 }
 

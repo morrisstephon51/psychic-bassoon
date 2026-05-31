@@ -21,14 +21,14 @@ export default function LearnPage() {
   return (
     <div className="pt-24">
       {/* Header */}
-      <section className="py-16 px-4 md:px-8 bg-[#0d0d0d] border-b border-[#1a1a1a] relative overflow-hidden">
+      <section className="py-16 px-4 md:px-8 bg-[#F5F3FF] border-b border-[#EDE9FE] relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-purple-900/15 blur-[80px] pointer-events-none" />
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 rounded-full px-4 py-2 text-purple-400 text-sm font-semibold mb-6"
+            className="inline-flex items-center gap-2 bg-purple-100 border border-purple-200 rounded-full px-4 py-2 text-purple-700 text-sm font-semibold mb-6"
           >
             <BookOpen size={14} />
             Free Lessons — No Account Needed
@@ -42,7 +42,7 @@ export default function LearnPage() {
       </section>
 
       {/* Filter Tabs */}
-      <section className="sticky top-16 z-30 bg-[#0A0A0A]/95 backdrop-blur-sm border-b border-[#1a1a1a] px-4 md:px-8 py-4">
+      <section className="sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-[#EDE9FE] px-4 md:px-8 py-4">
         <div className="max-w-6xl mx-auto flex items-center gap-2 overflow-x-auto scrollbar-none">
           {categories.map((cat) => (
             <button
@@ -54,7 +54,7 @@ export default function LearnPage() {
               className={`flex-shrink-0 px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                 activeCategory === cat
                   ? 'bg-purple-700 text-white shadow-lg shadow-purple-700/30'
-                  : 'bg-[#111111] border border-[#222] text-[#A3A3A3] hover:text-white hover:border-purple-700'
+                  : 'bg-white border border-[#EDE9FE] text-[#6B5A8E] hover:text-purple-700 hover:border-purple-700'
               }`}
             >
               {cat}
@@ -67,7 +67,7 @@ export default function LearnPage() {
       <section className="py-12 px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
           {filtered.length === 0 ? (
-            <div className="text-center py-20 text-[#A3A3A3]">
+            <div className="text-center py-20 text-[#6B5A8E]">
               <p className="text-lg mb-2">No lessons in this category yet.</p>
               <p className="text-sm">Check back soon — we&apos;re adding new content weekly.</p>
             </div>
@@ -90,7 +90,7 @@ export default function LearnPage() {
                 >
                   <button
                     onClick={() => setVisibleCount((c) => c + 6)}
-                    className="inline-flex items-center gap-2 border border-[#333] hover:border-purple-600 text-[#A3A3A3] hover:text-white px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200"
+                    className="inline-flex items-center gap-2 border border-[#D8D0F7] hover:border-purple-600 text-[#6B5A8E] hover:text-purple-700 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200"
                   >
                     Load More Lessons
                     <ChevronDown size={16} />

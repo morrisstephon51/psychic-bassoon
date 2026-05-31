@@ -7,41 +7,51 @@ import SectionHeader from '@/components/SectionHeader'
 const features = [
   {
     icon: DollarSign,
-    iconColor: 'text-green-400',
-    iconBg: 'bg-green-500/10 border-green-500/20',
+    iconColor: 'text-green-600',
+    iconBg: 'bg-green-100 border-green-200',
     title: 'Access',
     tagline: "AI tools cost $0 to start. We show you how.",
     description:
       "The most powerful AI tools in the world are completely free. We cut through the noise and show you exactly which ones to use, how to access them, and how to get real results — starting today.",
     highlight: '$0 to start',
+    highlightColor: 'bg-green-50 border-green-200 text-green-700',
+    dotColor: 'bg-green-500',
+    accentBorder: 'hover:border-green-300',
+    accentGlow: 'group-hover:from-green-50/80',
   },
   {
     icon: MessageSquare,
-    iconColor: 'text-purple-400',
-    iconBg: 'bg-purple-500/10 border-purple-500/20',
+    iconColor: 'text-purple-600',
+    iconBg: 'bg-purple-100 border-purple-200',
     title: 'Clarity',
     tagline: 'No jargon. No gatekeeping. Just real talk.',
     description:
       "Forget the tech bro vocabulary. We explain AI in plain language — the way you'd explain it to a friend over coffee. No prerequisites, no condescension. Just clear, honest, practical education.",
     highlight: 'Real talk only',
+    highlightColor: 'bg-purple-50 border-purple-200 text-purple-700',
+    dotColor: 'bg-purple-500',
+    accentBorder: 'hover:border-purple-300',
+    accentGlow: 'group-hover:from-purple-50/80',
   },
   {
     icon: Heart,
-    iconColor: 'text-red-400',
-    iconBg: 'bg-red-500/10 border-red-500/20',
+    iconColor: 'text-red-500',
+    iconBg: 'bg-red-50 border-red-200',
     title: 'Community',
     tagline: "You don't go up alone. We go together.",
     description:
       "The Plug AI isn't just content — it's a community. Ask questions, share wins, help each other out. When one of us levels up, we bring others with us. That's the whole mission.",
     highlight: 'We go together',
+    highlightColor: 'bg-red-50 border-red-200 text-red-600',
+    dotColor: 'bg-red-400',
+    accentBorder: 'hover:border-red-200',
+    accentGlow: 'group-hover:from-red-50/60',
   },
 ]
 
 const containerVariants = {
   hidden: {},
-  show: {
-    transition: { staggerChildren: 0.15 },
-  },
+  show: { transition: { staggerChildren: 0.15 } },
 }
 
 const itemVariants = {
@@ -51,7 +61,7 @@ const itemVariants = {
 
 export default function Features() {
   return (
-    <section className="py-24 px-4 md:px-8">
+    <section className="py-24 px-4 md:px-8 bg-white">
       <div className="max-w-6xl mx-auto">
         <SectionHeader
           eyebrow="What Is The Plug AI?"
@@ -80,27 +90,21 @@ export default function Features() {
                 variants={itemVariants}
                 whileHover={{ y: -6, scale: 1.01 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                className="bg-[#111111] border border-[#222] hover:border-purple-700 rounded-2xl p-8 group cursor-default transition-colors duration-300 relative overflow-hidden"
+                className={`bg-white border border-[#EDE9FE] ${feature.accentBorder} rounded-2xl p-8 group cursor-default transition-all duration-300 relative overflow-hidden shadow-card hover:shadow-card-hover`}
               >
-                {/* Glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-b from-purple-900/0 to-purple-900/0 group-hover:from-purple-900/5 transition-all duration-500" />
+                <div className={`absolute inset-0 bg-gradient-to-b ${feature.accentGlow} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
                 <div className="relative z-10">
-                  {/* Icon */}
-                  <div
-                    className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-6 ${feature.iconBg}`}
-                  >
+                  <div className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-6 ${feature.iconBg}`}>
                     <Icon size={22} className={feature.iconColor} />
                   </div>
 
-                  {/* Content */}
-                  <h3 className="font-heading font-bold text-2xl text-[#F5F5F5] mb-2">{feature.title}</h3>
-                  <p className="text-green-400 text-sm font-semibold mb-3">{feature.tagline}</p>
-                  <p className="text-[#A3A3A3] text-sm leading-relaxed">{feature.description}</p>
+                  <h3 className="font-heading font-bold text-2xl text-[#1A0533] mb-2">{feature.title}</h3>
+                  <p className="text-green-600 text-sm font-semibold mb-3">{feature.tagline}</p>
+                  <p className="text-[#6B5A8E] text-sm leading-relaxed">{feature.description}</p>
 
-                  {/* Highlight pill */}
-                  <div className="mt-6 inline-flex items-center gap-1.5 bg-[#1a1a1a] border border-[#2a2a2a] rounded-full px-3 py-1.5 text-xs text-[#A3A3A3]">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                  <div className={`mt-6 inline-flex items-center gap-1.5 border rounded-full px-3 py-1.5 text-xs font-medium ${feature.highlightColor}`}>
+                    <div className={`w-1.5 h-1.5 rounded-full ${feature.dotColor}`} />
                     {feature.highlight}
                   </div>
                 </div>
