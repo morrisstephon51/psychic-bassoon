@@ -12,32 +12,32 @@ const values = [
     title: 'Access',
     description:
       'AI tools are free or nearly free. The barrier was never money — it was exposure and support. We remove both.',
-    color: 'text-green-400',
-    bg: 'bg-green-500/10 border-green-500/20',
+    color: 'text-green-600',
+    bg: 'bg-green-100 border-green-200',
   },
   {
     icon: Eye,
     title: 'Clarity',
     description:
       'We translate tech into English. No gatekeeping, no prerequisites, no condescension. Just clear, honest teaching.',
-    color: 'text-blue-400',
-    bg: 'bg-blue-500/10 border-blue-500/20',
+    color: 'text-blue-600',
+    bg: 'bg-blue-100 border-blue-200',
   },
   {
     icon: Target,
     title: 'Empowerment',
     description:
       'Skills create options. Options create freedom. We teach practical skills you can use tomorrow — not someday.',
-    color: 'text-amber-400',
-    bg: 'bg-amber-500/10 border-amber-500/20',
+    color: 'text-amber-600',
+    bg: 'bg-amber-100 border-amber-200',
   },
   {
     icon: Users,
     title: 'Community',
     description:
       "You don't level up alone here. We go together — sharing wins, answering questions, lifting each other up.",
-    color: 'text-purple-400',
-    bg: 'bg-purple-500/10 border-purple-500/20',
+    color: 'text-purple-600',
+    bg: 'bg-purple-100 border-purple-200',
   },
 ]
 
@@ -69,10 +69,10 @@ const milestones = [
 ]
 
 const achievements = [
-  { icon: Users, value: '500+', label: 'People Trained', color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20' },
-  { icon: MapPin, value: '6', label: 'Cities Reached', color: 'text-purple-400', bg: 'bg-purple-500/10 border-purple-500/20' },
-  { icon: TrendingUp, value: '12+', label: 'Live Workshops', color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
-  { icon: Star, value: '100%', label: 'Free to Attend', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
+  { icon: Users, value: '500+', label: 'People Trained', color: 'text-green-600', bg: 'bg-green-100 border-green-200' },
+  { icon: MapPin, value: '6', label: 'Cities Reached', color: 'text-purple-600', bg: 'bg-purple-100 border-purple-200' },
+  { icon: TrendingUp, value: '12+', label: 'Live Workshops', color: 'text-blue-600', bg: 'bg-blue-100 border-blue-200' },
+  { icon: Star, value: '100%', label: 'Free to Attend', color: 'text-amber-600', bg: 'bg-amber-100 border-amber-200' },
 ]
 
 export default function AboutPage() {
@@ -190,7 +190,7 @@ export default function AboutPage() {
 
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 font-semibold text-sm transition-colors group"
+                className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-semibold text-sm transition-colors group"
               >
                 Get in touch with Stefan
                 <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />

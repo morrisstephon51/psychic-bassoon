@@ -33,7 +33,7 @@ export default function TestimonialCard({ testimonial, index = 0 }: TestimonialC
 
       <div className="flex items-center gap-1">
         {Array.from({ length: testimonial.stars }).map((_, i) => (
-          <Star key={i} size={14} className="text-amber-400 fill-amber-400" />
+          <Star key={i} size={14} className="text-amber-500 fill-amber-500" />
         ))}
       </div>
 

@@ -120,7 +120,7 @@ export default function CommunityPage() {
               500+ active members
             </div>
             <div className="flex items-center gap-2">
-              <Star size={15} className="text-amber-400" />
+              <Star size={15} className="text-amber-600" />
               Free to join
             </div>
             <div className="flex items-center gap-2">
@@ -240,11 +240,11 @@ export default function CommunityPage() {
             <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/5 blur-2xl rounded-full pointer-events-none" />
             <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6">
               <div className="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center flex-shrink-0">
-                <Trophy size={26} className="text-amber-400" />
+                <Trophy size={26} className="text-amber-600" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-amber-400 text-sm font-semibold tracking-wide uppercase">
+                  <span className="text-amber-600 text-sm font-semibold tracking-wide uppercase">
                     Challenge of the Week
                   </span>
                   <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />

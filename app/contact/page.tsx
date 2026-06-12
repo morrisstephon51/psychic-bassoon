@@ -13,9 +13,9 @@ type SubjectOption =
   | 'General Question'
 
 const socialLinks = [
-  { label: 'Instagram', handle: '@theplugai', href: '#', icon: Instagram, color: 'hover:border-pink-600 hover:text-pink-400' },
-  { label: 'YouTube', handle: 'The Plug AI', href: '#', icon: Youtube, color: 'hover:border-red-600 hover:text-red-400' },
-  { label: 'LinkedIn', handle: 'The Plug AI', href: '#', icon: Linkedin, color: 'hover:border-blue-600 hover:text-blue-400' },
+  { label: 'Instagram', handle: '@theplugai', href: '#', icon: Instagram, color: 'hover:border-pink-600 hover:text-pink-600' },
+  { label: 'YouTube', handle: 'The Plug AI', href: '#', icon: Youtube, color: 'hover:border-red-600 hover:text-red-600' },
+  { label: 'LinkedIn', handle: 'The Plug AI', href: '#', icon: Linkedin, color: 'hover:border-blue-600 hover:text-blue-600' },
 ]
 
 // TikTok icon
