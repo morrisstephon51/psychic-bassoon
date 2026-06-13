@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { submitToFormspree, FORMSPREE_CONTACT_ID } from '@/lib/formspree'
 import { motion } from 'framer-motion'
 import { Calendar, Users, MapPin, Building2, ArrowRight, CheckCircle } from 'lucide-react'
 import WorkshopCard from '@/components/WorkshopCard'
@@ -16,9 +17,18 @@ export default function WorkshopsPage() {
   const [contactEmail, setContactEmail] = useState('')
   const [message, setMessage] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const handleRequest = (e: React.FormEvent) => {
+  const handleRequest = async (e: React.FormEvent) => {
     e.preventDefault()
+    setLoading(true)
+    await submitToFormspree(FORMSPREE_CONTACT_ID, {
+      name, org, eventType, attendance, datePref,
+      email: contactEmail,
+      message,
+      _subject: `Workshop Request: ${org} — The Plug AI`,
+    })
+    setLoading(false)
     setSubmitted(true)
   }
 
@@ -293,10 +303,11 @@ export default function WorkshopsPage() {
 
                   <button
                     type="submit"
-                    className="w-full bg-green-500 hover:bg-green-400 text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 text-base transition-colors duration-200"
+                    disabled={loading}
+                    className="w-full bg-green-500 hover:bg-green-400 disabled:opacity-60 text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 text-base transition-colors duration-200"
                   >
-                    Request a Workshop
-                    <ArrowRight size={18} />
+                    {loading ? 'Sending…' : 'Request a Workshop'}
+                    {!loading && <ArrowRight size={18} />}
                   </button>
                   <p className="text-center text-[#9385B5] text-xs">
                     We respond within 48 hours. All workshops are free.

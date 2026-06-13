@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Zap, Instagram, Youtube, Linkedin, ArrowRight } from 'lucide-react'
 import { useState } from 'react'
+import { submitToFormspree, FORMSPREE_NEWSLETTER_ID } from '@/lib/formspree'
 
 const quickLinks = [
   { label: 'Learn', href: '/learn' },
@@ -15,9 +16,9 @@ const quickLinks = [
 ]
 
 const socialLinks = [
-  { label: 'Instagram', href: '#', icon: Instagram },
-  { label: 'YouTube', href: '#', icon: Youtube },
-  { label: 'LinkedIn', href: '#', icon: Linkedin },
+  { label: 'Instagram', href: null, icon: Instagram },
+  { label: 'YouTube', href: null, icon: Youtube },
+  { label: 'LinkedIn', href: null, icon: Linkedin },
 ]
 
 function TikTokIcon({ size = 20 }: { size?: number }) {
@@ -31,10 +32,14 @@ function TikTokIcon({ size = 20 }: { size?: number }) {
 export default function Footer() {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email) return
+    setLoading(true)
+    await submitToFormspree(FORMSPREE_NEWSLETTER_ID, { email, _subject: 'New newsletter signup — The Plug AI' })
+    setLoading(false)
     setSubmitted(true)
     setEmail('')
   }
@@ -65,23 +70,22 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-3 pt-2">
               {socialLinks.map(({ label, href, icon: Icon }) => (
-                <Link
+                <span
                   key={label}
-                  href={href}
-                  aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-white border border-[#EDE9FE] flex items-center justify-center text-[#6B5A8E] hover:text-purple-700 hover:border-purple-300 transition-colors duration-200 shadow-card"
+                  title={`${label} — coming soon`}
+                  className="w-9 h-9 rounded-lg bg-white border border-[#EDE9FE] flex items-center justify-center text-[#9385B5] opacity-50 cursor-not-allowed shadow-card"
                 >
                   <Icon size={16} />
-                </Link>
+                </span>
               ))}
-              <Link
-                href="#"
-                aria-label="TikTok"
-                className="w-9 h-9 rounded-lg bg-white border border-[#EDE9FE] flex items-center justify-center text-[#6B5A8E] hover:text-purple-700 hover:border-purple-300 transition-colors duration-200 shadow-card"
+              <span
+                title="TikTok — coming soon"
+                className="w-9 h-9 rounded-lg bg-white border border-[#EDE9FE] flex items-center justify-center text-[#9385B5] opacity-50 cursor-not-allowed shadow-card"
               >
                 <TikTokIcon size={16} />
-              </Link>
+              </span>
             </div>
+            <p className="text-[#9385B5] text-xs">Social pages launching soon 🚀</p>
           </div>
 
           {/* Quick Links */}
@@ -132,9 +136,10 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="w-full bg-green-500 hover:bg-green-400 text-black font-bold py-2.5 rounded-xl text-sm transition-colors duration-200"
+                  disabled={loading}
+                  className="w-full bg-green-500 hover:bg-green-400 disabled:opacity-60 text-black font-bold py-2.5 rounded-xl text-sm transition-colors duration-200"
                 >
-                  Plug Me In
+                  {loading ? 'Sending…' : 'Plug Me In'}
                 </button>
               </form>
             )}
@@ -145,8 +150,8 @@ export default function Footer() {
         <div className="border-t border-[#EDE9FE] pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-[#9385B5]">
           <p>© 2026 The Plug AI. All Rights Reserved. Built with purpose by Stefan.</p>
           <div className="flex items-center gap-4">
-            <Link href="#" className="hover:text-[#6B5A8E] transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-[#6B5A8E] transition-colors">Terms of Service</Link>
+            <Link href="/privacy" className="hover:text-[#6B5A8E] transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-[#6B5A8E] transition-colors">Terms of Service</Link>
             <Link href="/contact" className="hover:text-[#6B5A8E] transition-colors">Contact</Link>
           </div>
         </div>

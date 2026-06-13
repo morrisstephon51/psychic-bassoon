@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Instagram, Youtube, Linkedin, CheckCircle, Clock, ArrowRight } from 'lucide-react'
 import SectionHeader from '@/components/SectionHeader'
+import { submitToFormspree, FORMSPREE_CONTACT_ID } from '@/lib/formspree'
 
 type SubjectOption =
   | ''
@@ -33,9 +34,17 @@ export default function ContactPage() {
   const [subject, setSubject] = useState<SubjectOption>('')
   const [messageText, setMessageText] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setLoading(true)
+    await submitToFormspree(FORMSPREE_CONTACT_ID, {
+      name, email, subject,
+      message: messageText,
+      _subject: `Contact: ${subject} — The Plug AI`,
+    })
+    setLoading(false)
     setSubmitted(true)
   }
 
@@ -147,10 +156,11 @@ export default function ContactPage() {
 
                   <button
                     type="submit"
-                    className="w-full bg-green-500 hover:bg-green-400 text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 text-base transition-colors duration-200"
+                    disabled={loading}
+                    className="w-full bg-green-500 hover:bg-green-400 disabled:opacity-60 text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 text-base transition-colors duration-200"
                   >
-                    Send Message
-                    <ArrowRight size={18} />
+                    {loading ? 'Sending…' : 'Send Message'}
+                    {!loading && <ArrowRight size={18} />}
                   </button>
                 </form>
               </>
@@ -203,30 +213,29 @@ export default function ContactPage() {
               className="bg-white border border-[#EDE9FE] rounded-2xl p-6 space-y-4"
             >
               <h3 className="font-heading font-bold text-lg text-[#1A0533]">Follow Along</h3>
-              <div className="space-y-3">
-                {socialLinks.map(({ label, handle, href, icon: Icon, color }) => (
-                  <a
+              <p className="text-[#9385B5] text-xs">Social pages launching soon — check back!</p>
+              <div className="space-y-3 opacity-50">
+                {socialLinks.map(({ label, handle, icon: Icon }) => (
+                  <div
                     key={label}
-                    href={href}
-                    className={`flex items-center gap-3 p-3 rounded-xl border border-[#EDE9FE] text-[#6B5A8E] transition-all duration-200 ${color}`}
+                    className="flex items-center gap-3 p-3 rounded-xl border border-[#EDE9FE] text-[#6B5A8E] cursor-not-allowed"
                   >
                     <Icon size={18} />
                     <div>
                       <p className="text-sm font-medium text-[#1A0533]">{label}</p>
                       <p className="text-xs">{handle}</p>
                     </div>
-                  </a>
+                  </div>
                 ))}
-                <a
-                  href="#"
-                  className="flex items-center gap-3 p-3 rounded-xl border border-[#EDE9FE] text-[#6B5A8E] hover:border-purple-300 hover:text-purple-700 transition-all duration-200"
+                <div
+                  className="flex items-center gap-3 p-3 rounded-xl border border-[#EDE9FE] text-[#6B5A8E] cursor-not-allowed"
                 >
                   <TikTokIcon size={18} />
                   <div>
                     <p className="text-sm font-medium text-[#1A0533]">TikTok</p>
                     <p className="text-xs">@theplugai</p>
                   </div>
-                </a>
+                </div>
               </div>
             </motion.div>
 

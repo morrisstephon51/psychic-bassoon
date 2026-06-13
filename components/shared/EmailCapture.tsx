@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, ArrowRight, CheckCircle } from 'lucide-react'
+import { submitToFormspree, FORMSPREE_NEWSLETTER_ID } from '@/lib/formspree'
 
 interface EmailCaptureProps {
   headline?: string
@@ -22,11 +23,15 @@ export default function EmailCapture({
 }: EmailCaptureProps) {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [focused, setFocused] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email || !email.includes('@')) return
+    setLoading(true)
+    await submitToFormspree(FORMSPREE_NEWSLETTER_ID, { email, _subject: 'New newsletter signup — The Plug AI' })
+    setLoading(false)
     setSubmitted(true)
     setEmail('')
   }
@@ -65,7 +70,7 @@ export default function EmailCapture({
         />
         <button
           type="submit"
-          className="bg-green-500 hover:bg-green-400 text-black font-bold px-5 py-3 rounded-xl text-sm transition-colors duration-200 flex items-center gap-2 whitespace-nowrap"
+          className="bg-green-500 hover:bg-green-400 disabled:opacity-60 text-black font-bold px-5 py-3 rounded-xl text-sm transition-colors duration-200 flex items-center gap-2 whitespace-nowrap" disabled={loading}
         >
           {buttonLabel}
           <ArrowRight size={16} />
@@ -111,10 +116,11 @@ export default function EmailCapture({
           </div>
           <button
             type="submit"
-            className="bg-green-500 hover:bg-green-400 text-black font-bold px-6 py-3.5 rounded-xl text-sm transition-colors duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
+            disabled={loading}
+            className="bg-green-500 hover:bg-green-400 disabled:opacity-60 text-black font-bold px-6 py-3.5 rounded-xl text-sm transition-colors duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
           >
-            {buttonLabel}
-            <ArrowRight size={16} />
+            {loading ? 'Sending…' : buttonLabel}
+            {!loading && <ArrowRight size={16} />}
           </button>
         </form>
       </div>
