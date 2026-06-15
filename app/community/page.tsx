@@ -15,6 +15,7 @@ import {
   Clock,
 } from 'lucide-react'
 import SectionHeader from '@/components/SectionHeader'
+import EmailCapture from '@/components/shared/EmailCapture'
 import { submitToFormspree, FORMSPREE_CONTACT_ID } from '@/lib/formspree'
 
 const channels = [
@@ -134,7 +135,7 @@ export default function CommunityPage() {
             </div>
             <div className="flex items-center gap-2">
               <Zap size={15} className="text-purple-600" />
-              Questions answered daily
+              Growing every week
             </div>
           </motion.div>
         </div>
@@ -360,6 +361,17 @@ export default function CommunityPage() {
               </>
             )}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section id="newsletter" className="py-16 px-4 md:px-8 bg-[#F5F3FF] border-t border-[#EDE9FE]">
+        <div className="max-w-4xl mx-auto">
+          <EmailCapture
+            headline="Stay in the Loop"
+            subtext="One email a week. One AI tip you can use immediately, one free tool, one community win. That's it. No spam, ever."
+            buttonLabel="Join the Newsletter"
+          />
         </div>
       </section>
     </div>

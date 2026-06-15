@@ -24,7 +24,7 @@ export default function TermsPage() {
             <div className="bg-white border border-[#EDE9FE] rounded-2xl p-8">
               <h2 className="font-heading font-bold text-lg text-[#1A0533] mb-3">1. Acceptance of Terms</h2>
               <p className="text-sm leading-relaxed">
-                By accessing or using The Plug AI website (theplugai.com), you agree to be bound by these
+                By accessing or using The Plug AI website (theplugai.net), you agree to be bound by these
                 Terms of Service. If you do not agree with any part of these terms, you may not use our
                 website. These terms apply to all visitors, subscribers, and others who access or use the
                 service.

@@ -185,10 +185,10 @@ export default function ContactPage() {
                 <div>
                   <p className="text-[#6B5A8E] text-xs mb-0.5">Email</p>
                   <a
-                    href="mailto:hello@theplugai.com"
+                    href="mailto:hello@theplugai.net"
                     className="text-[#1A0533] text-sm font-medium hover:text-green-600 transition-colors"
                   >
-                    hello@theplugai.com
+                    hello@theplugai.net
                   </a>
                 </div>
               </div>

@@ -44,12 +44,13 @@ Each item notes: what's there now → what's needed → who fills it.
 ### Resource Card Thumbnails
 All 6 thumbnail paths point to images that don't exist in `/public/images/resources/`.
 
-- [ ] **#11** `/images/resources/starter-kit.jpg` → Upload real image to `public/images/resources/` **| Designer / You**
-- [ ] **#12** `/images/resources/cheatsheet.jpg` → Same **| Designer / You**
-- [ ] **#13** `/images/resources/resume-prompts.jpg` → Same **| Designer / You**
-- [ ] **#14** `/images/resources/business-playbook.jpg` → Same **| Designer / You**
-- [ ] **#15** `/images/resources/challenge.jpg` → Same **| Designer / You**
-- [ ] **#16** `/images/resources/churches.jpg` → Same **| Designer / You**
+- [x] **#11** `/images/resources/starter-kit.jpg` → Created branded SVG thumbnail ✓
+- [x] **#12** `/images/resources/cheatsheet.jpg` → Created branded SVG thumbnail ✓
+- [x] **#13** `/images/resources/resume-prompts.jpg` → Created branded SVG thumbnail ✓
+- [x] **#14** `/images/resources/business-playbook.jpg` → Created branded SVG thumbnail ✓
+- [x] **#15** `/images/resources/challenge.jpg` → Created branded SVG thumbnail ✓
+- [x] **#16** `/images/resources/churches.jpg` → Created branded SVG thumbnail ✓
+- [ ] Replace SVG thumbnails with real photography/design assets when available **| Designer / You**
 
 ---
 
@@ -75,11 +76,11 @@ All 6 workshops have `registrationUrl: '#'` — "Register Free" button goes nowh
 
 ### Community Channels
 - [ ] **#25** Discord: disabled button, "Coming soon" badge, `href: null` → Add real Discord invite link once server is live **| You**
-- [ ] **#26** Newsletter: `href: '#newsletter'` — anchor doesn't exist on page → Add `id="newsletter"` to the email form section (1-line code fix) **| Dev**
+- [x] **#26** Newsletter: `href: '#newsletter'` — anchor didn't exist → Added newsletter section with `id="newsletter"` at bottom of community page ✓
 - [ ] **#27** Instagram & TikTok: disabled, "Launching soon" badge → Add real profile URLs once accounts are created **| You**
 - [ ] **#28** Newsletter badge shows "1,200+ subscribers" → Confirm actual count **| You**
 - [ ] **#29** Stat: "500+ active members" → Confirm actual count **| You**
-- [ ] **#30** "Questions answered daily" → Remove or change until Discord actually exists **| Dev**
+- [x] **#30** "Questions answered daily" → Changed to "Growing every week" ✓
 
 ### Member Spotlights
 - [ ] **#31** Tyrone B., Chicago — new job story → Confirm real person with consent, OR label clearly as "example story" **| You**
@@ -100,7 +101,7 @@ All 6 workshops have `registrationUrl: '#'` — "Register Free" button goes nowh
 - [ ] **#38** "Social pages launching soon — check back!" copy → Remove once accounts go live **| Dev**
 
 ### Contact Email
-- [ ] **#39** `hello@theplugai.com` shown as contact address → Confirm inbox is monitored and Formspree routes there correctly **| You**
+- [ ] **#39** `hello@theplugai.net` shown as contact address → Confirm inbox is monitored and Formspree routes there correctly **| You**
 
 ---
 
