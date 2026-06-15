@@ -39,7 +39,7 @@ export const resources: Resource[] = [
     emoji: '⚡',
     accent: '#6B21A8',
     emailGated: true,
-    thumbnail: '/images/resources/starter-kit.jpg',
+    thumbnail: '/images/resources/starter-kit.svg',
     content: {
       intro:
         "AI is not magic, and it's not going to take over the world. It's a tool — like a calculator or a search engine — and once you know how to use it, it can save you hours every week. This starter kit is your no-nonsense guide to getting started, whether you're 22 or 72, whether you've never touched a computer or you just feel lost when everyone starts talking about prompts and chatbots.",
@@ -88,7 +88,7 @@ export const resources: Resource[] = [
     emoji: '🛠️',
     accent: '#16A34A',
     emailGated: false,
-    thumbnail: '/images/resources/cheatsheet.jpg',
+    thumbnail: '/images/resources/cheatsheet.svg',
     content: {
       intro:
         "There are hundreds of AI tools out there, and most of them are either too expensive, too complicated, or both. This cheatsheet cuts through the noise and gives you the 10 tools that are actually free, actually useful, and actually work for everyday people. Bookmark this page or print it out — you'll come back to it.",
@@ -129,7 +129,7 @@ export const resources: Resource[] = [
     emoji: '📄',
     accent: '#D97706',
     emailGated: true,
-    thumbnail: '/images/resources/resume-prompts.jpg',
+    thumbnail: '/images/resources/resume-prompts.svg',
     content: {
       intro:
         "A resume is one of the hardest things to write about yourself — not because you're not qualified, but because most people aren't trained to sell themselves on paper. AI doesn't fix that problem, but it makes a great first draft you can actually work with. These prompts are designed to get you from a blank page to something real in under an hour.",
@@ -174,7 +174,7 @@ export const resources: Resource[] = [
     emoji: '🏪',
     accent: '#7C3AED',
     emailGated: true,
-    thumbnail: '/images/resources/business-playbook.jpg',
+    thumbnail: '/images/resources/business-playbook.svg',
     content: {
       intro:
         "Running a small business means doing the work of five people with the budget of one. AI won't replace your hustle or your relationships, but it will take a huge chunk of the administrative and creative work off your plate — things like responding to customer emails, writing social media posts, creating flyers, and drafting invoices. This playbook shows you exactly how, with real examples you can use today.",
@@ -227,7 +227,7 @@ export const resources: Resource[] = [
     emoji: '📅',
     accent: '#0EA5E9',
     emailGated: true,
-    thumbnail: '/images/resources/challenge.jpg',
+    thumbnail: '/images/resources/challenge.svg',
     content: {
       intro:
         "The biggest reason people don't learn AI isn't that it's too hard — it's that they never build the habit. This 30-day challenge fixes that by giving you one small, specific task every day that takes 10–15 minutes. By day 30, you won't just know about AI. You'll have actually used it to do dozens of real things that mattered in your life.",
@@ -276,7 +276,7 @@ export const resources: Resource[] = [
     emoji: '⛪',
     accent: '#DB2777',
     emailGated: false,
-    thumbnail: '/images/resources/churches.jpg',
+    thumbnail: '/images/resources/churches.svg',
     content: {
       intro:
         "Churches and nonprofits are doing some of the most important work in our communities — and they're almost always doing it with too few people and too little time. This guide was written specifically for faith communities and mission-driven organizations, because the people running these organizations deserve the same tools as anyone else, and those tools should be explained in a way that fits their context.",
