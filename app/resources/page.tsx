@@ -129,13 +129,10 @@ export default function ResourcesPage() {
             ))}
           </div>
           <div className="text-center">
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 border border-[#D8D0F7] hover:border-purple-600 text-[#6B5A8E] hover:text-purple-700 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200"
-            >
+            <div className="inline-flex items-center gap-2 border border-[#EDE9FE] text-[#9385B5] px-6 py-3 rounded-xl text-sm font-medium cursor-not-allowed">
               <BookOpen size={16} />
-              View Full Video Library on YouTube
-            </a>
+              Full Video Library — Coming Soon on YouTube
+            </div>
           </div>
         </div>
       </section>

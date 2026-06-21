@@ -54,9 +54,15 @@ export default function ToolCard({ tool, index = 0 }: ToolCardProps) {
           Learn How to Use It
           <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
         </Link>
-        <div className="w-7 h-7 rounded-lg bg-[#F5F3FF] border border-[#EDE9FE] flex items-center justify-center text-[#6B5A8E] hover:text-purple-600 transition-colors cursor-pointer">
+        <a
+          href={tool.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-7 h-7 rounded-lg bg-[#F5F3FF] border border-[#EDE9FE] flex items-center justify-center text-[#6B5A8E] hover:text-purple-600 hover:border-purple-300 transition-colors"
+          aria-label={`Open ${tool.name}`}
+        >
           <ExternalLink size={13} />
-        </div>
+        </a>
       </div>
     </motion.div>
   )

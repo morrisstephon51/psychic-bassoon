@@ -12,21 +12,24 @@ import {
   Users,
   Zap,
   CheckCircle,
+  Clock,
 } from 'lucide-react'
 import SectionHeader from '@/components/SectionHeader'
+import EmailCapture from '@/components/shared/EmailCapture'
+import { submitToFormspree, FORMSPREE_CONTACT_ID } from '@/lib/formspree'
 
 const channels = [
   {
     icon: MessageCircle,
     name: 'Discord Community',
     description:
-      "Join our free Discord server where 300+ members ask questions, share wins, and help each other learn. It's the most active AI community for everyday people you'll find.",
-    cta: 'Join Free',
-    href: '#',
+      "Our free Discord server is where members ask questions, share wins, and help each other learn. Coming soon — join the waitlist and we'll ping you the moment it opens.",
+    cta: 'Join Waitlist',
+    href: null,
     color: 'text-indigo-600',
     bg: 'bg-indigo-100 border-indigo-200',
-    glow: 'hover:border-indigo-600',
-    badge: '500+ members',
+    glow: 'hover:border-indigo-400',
+    badge: 'Coming soon',
     badgeColor: 'bg-indigo-100 text-indigo-600 border-indigo-200',
   },
   {
@@ -35,7 +38,7 @@ const channels = [
     description:
       'Every week: one AI tip you can use immediately, one free tool you might not know about, and one community win to keep you inspired. No fluff. Just plug.',
     cta: 'Subscribe Free',
-    href: '#',
+    href: '#newsletter',
     color: 'text-green-600',
     bg: 'bg-green-100 border-green-200',
     glow: 'hover:border-green-600',
@@ -46,13 +49,13 @@ const channels = [
     icon: Instagram,
     name: 'Instagram & TikTok',
     description:
-      'Quick AI tips, workshop recaps, community spotlights, and real talk about technology and opportunity. Follow along for daily doses of AI education.',
-    cta: 'Follow Along',
-    href: '#',
+      'Quick AI tips, workshop recaps, community spotlights, and real talk about technology and opportunity. Pages launching soon — follow along when we drop.',
+    cta: 'Coming Soon',
+    href: null,
     color: 'text-pink-600',
     bg: 'bg-pink-100 border-pink-200',
-    glow: 'hover:border-pink-600',
-    badge: 'Daily content',
+    glow: 'hover:border-pink-400',
+    badge: 'Launching soon',
     badgeColor: 'bg-pink-100 text-pink-600 border-pink-200',
   },
 ]
@@ -87,9 +90,16 @@ const memberSpotlights = [
 export default function CommunityPage() {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const handleAmbassador = (e: React.FormEvent) => {
+  const handleAmbassador = async (e: React.FormEvent) => {
     e.preventDefault()
+    setLoading(true)
+    await submitToFormspree(FORMSPREE_CONTACT_ID, {
+      email,
+      _subject: `Ambassador Application — The Plug AI`,
+    })
+    setLoading(false)
     setSubmitted(true)
   }
 
@@ -125,7 +135,7 @@ export default function CommunityPage() {
             </div>
             <div className="flex items-center gap-2">
               <Zap size={15} className="text-purple-600" />
-              Questions answered daily
+              Growing every week
             </div>
           </motion.div>
         </div>
@@ -167,15 +177,22 @@ export default function CommunityPage() {
                     </div>
                     <p className="text-[#6B5A8E] text-sm leading-relaxed">{channel.description}</p>
                   </div>
-                  <motion.a
-                    href={channel.href}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="mt-auto inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-400 text-black font-bold py-3 px-5 rounded-xl text-sm transition-colors duration-200"
-                  >
-                    {channel.cta}
-                    <ArrowRight size={16} />
-                  </motion.a>
+                  {channel.href ? (
+                    <motion.a
+                      href={channel.href}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="mt-auto inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-400 text-black font-bold py-3 px-5 rounded-xl text-sm transition-colors duration-200"
+                    >
+                      {channel.cta}
+                      <ArrowRight size={16} />
+                    </motion.a>
+                  ) : (
+                    <div className="mt-auto inline-flex items-center justify-center gap-2 bg-[#EDE9FE] text-[#6B5A8E] font-bold py-3 px-5 rounded-xl text-sm cursor-not-allowed">
+                      <Clock size={14} />
+                      {channel.cta}
+                    </div>
+                  )}
                 </motion.div>
               )
             })}
@@ -258,7 +275,7 @@ export default function CommunityPage() {
                 </p>
               </div>
               <a
-                href="#"
+                href="/learn/chatgpt-resume"
                 className="flex-shrink-0 bg-amber-500 hover:bg-amber-400 text-black font-bold px-5 py-3 rounded-xl text-sm transition-colors duration-200 flex items-center gap-2"
               >
                 Join Challenge
@@ -334,15 +351,27 @@ export default function CommunityPage() {
                   />
                   <button
                     type="submit"
-                    className="w-full bg-green-500 hover:bg-green-400 text-black font-bold py-3.5 rounded-xl text-sm transition-colors duration-200 flex items-center justify-center gap-2"
+                    disabled={loading}
+                    className="w-full bg-green-500 hover:bg-green-400 disabled:opacity-60 text-black font-bold py-3.5 rounded-xl text-sm transition-colors duration-200 flex items-center justify-center gap-2"
                   >
-                    Apply Now
+                    {loading ? 'Sending…' : 'Apply Now'}
                     <ArrowRight size={16} />
                   </button>
                 </form>
               </>
             )}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section id="newsletter" className="py-16 px-4 md:px-8 bg-[#F5F3FF] border-t border-[#EDE9FE]">
+        <div className="max-w-4xl mx-auto">
+          <EmailCapture
+            headline="Stay in the Loop"
+            subtext="One email a week. One AI tip you can use immediately, one free tool, one community win. That's it. No spam, ever."
+            buttonLabel="Join the Newsletter"
+          />
         </div>
       </section>
     </div>

@@ -12,6 +12,7 @@ export interface Tool {
   learnSlug: string
   logoUrl: string
   color: string
+  url: string
 }
 
 export const tools: Tool[] = [
@@ -27,6 +28,7 @@ export const tools: Tool[] = [
     learnSlug: 'chatgpt-resume',
     logoUrl: 'https://via.placeholder.com/60x60/10A37F/ffffff?text=GPT',
     color: '#10A37F',
+    url: 'https://chat.openai.com',
   },
   {
     id: '2',
@@ -40,6 +42,7 @@ export const tools: Tool[] = [
     learnSlug: 'what-is-ai',
     logoUrl: 'https://via.placeholder.com/60x60/D97706/ffffff?text=AI',
     color: '#D97706',
+    url: 'https://claude.ai',
   },
   {
     id: '3',
@@ -53,6 +56,7 @@ export const tools: Tool[] = [
     learnSlug: 'free-ai-tools',
     logoUrl: 'https://via.placeholder.com/60x60/4285F4/ffffff?text=G',
     color: '#4285F4',
+    url: 'https://gemini.google.com',
   },
   {
     id: '4',
@@ -66,6 +70,7 @@ export const tools: Tool[] = [
     learnSlug: 'free-ai-tools',
     logoUrl: 'https://via.placeholder.com/60x60/00C4CC/ffffff?text=CV',
     color: '#00C4CC',
+    url: 'https://canva.com',
   },
   {
     id: '5',
@@ -79,6 +84,7 @@ export const tools: Tool[] = [
     learnSlug: 'free-ai-tools',
     logoUrl: 'https://via.placeholder.com/60x60/20B2AA/ffffff?text=P',
     color: '#20B2AA',
+    url: 'https://perplexity.ai',
   },
   {
     id: '6',
@@ -92,5 +98,6 @@ export const tools: Tool[] = [
     learnSlug: 'ai-for-small-business',
     logoUrl: 'https://via.placeholder.com/60x60/000000/ffffff?text=N',
     color: '#000000',
+    url: 'https://notion.so',
   },
 ]
