@@ -17,6 +17,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://psychic-bassoon-cam6stef.vercel.app'),
   title: {
     default: 'The Plug AI — Get Connected. Get Skilled. Get into AI.',
     template: '%s | The Plug AI',
