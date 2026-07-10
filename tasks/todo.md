@@ -27,7 +27,7 @@
 - [x] 19. `app/sitemap.ts` — added all 10 lesson pages + privacy/terms
 - [x] 20. Generated 6 real PDFs into `public/downloads/` (headless Chromium from authored HTML)
 - [x] 21. Verified: `npm run build` passes (27 pages); swept for leftover `#` links/placeholders — clean
-- [ ] 22. Commit, push, draft PR
+- [x] 22. Committed, pushed, draft PR #4 open (Vercel preview verified green)
 
 ## Review
 - Supabase project `the-plug-ai` (dyoveisuiynyzurfjjhk) was **paused**; restored it and applied migrations.
