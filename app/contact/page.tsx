@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Instagram, Youtube, Linkedin, CheckCircle, Clock, ArrowRight, Loader2 } from 'lucide-react'
+import { Mail, CheckCircle, Clock, ArrowRight, Loader2 } from 'lucide-react'
 import SectionHeader from '@/components/SectionHeader'
 
 type SubjectOption =
@@ -11,20 +11,6 @@ type SubjectOption =
   | 'Partnership'
   | 'Media / Press'
   | 'General Question'
-
-const socialLinks = [
-  { label: 'Instagram', handle: '@theplugai', href: '#', icon: Instagram, color: 'hover:border-pink-600 hover:text-pink-600' },
-  { label: 'YouTube', handle: 'The Plug AI', href: '#', icon: Youtube, color: 'hover:border-red-600 hover:text-red-600' },
-  { label: 'LinkedIn', handle: 'The Plug AI', href: '#', icon: Linkedin, color: 'hover:border-blue-600 hover:text-blue-600' },
-]
-
-function TikTokIcon({ size = 20 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.98a8.19 8.19 0 004.79 1.54V7.07a4.85 4.85 0 01-1.02-.38z" />
-    </svg>
-  )
-}
 
 export default function ContactPage() {
   const [name, setName] = useState('')
@@ -200,26 +186,17 @@ export default function ContactPage() {
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="bg-white border border-[#EDE9FE] rounded-2xl p-6 space-y-4">
+            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="bg-white border border-[#EDE9FE] rounded-2xl p-6 space-y-3">
               <h3 className="font-heading font-bold text-lg text-[#1A0533]">Follow Along</h3>
-              <div className="space-y-3">
-                {socialLinks.map(({ label, handle, href, icon: Icon, color }) => (
-                  <a key={label} href={href} className={`flex items-center gap-3 p-3 rounded-xl border border-[#EDE9FE] text-[#6B5A8E] transition-all duration-200 ${color}`}>
-                    <Icon size={18} />
-                    <div>
-                      <p className="text-sm font-medium text-[#1A0533]">{label}</p>
-                      <p className="text-xs">{handle}</p>
-                    </div>
-                  </a>
-                ))}
-                <a href="#" className="flex items-center gap-3 p-3 rounded-xl border border-[#EDE9FE] text-[#6B5A8E] hover:border-purple-300 hover:text-purple-700 transition-all duration-200">
-                  <TikTokIcon size={18} />
-                  <div>
-                    <p className="text-sm font-medium text-[#1A0533]">TikTok</p>
-                    <p className="text-xs">@theplugai</p>
-                  </div>
-                </a>
-              </div>
+              <p className="text-[#6B5A8E] text-sm leading-relaxed">
+                Our Instagram, TikTok, and YouTube channels are launching soon. Until then, the
+                newsletter is the best way to keep up — every new lesson, guide, and workshop date
+                lands there first.
+              </p>
+              <a href="/community" className="inline-flex items-center gap-1.5 text-green-600 hover:text-green-700 text-sm font-semibold transition-colors">
+                Join the newsletter
+                <ArrowRight size={14} />
+              </a>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="bg-gradient-to-br from-[#F5F3FF] to-[#F0EEFF] border border-[#EDE9FE] rounded-2xl p-6">
