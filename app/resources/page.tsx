@@ -4,28 +4,8 @@ import ToolCard from '@/components/ToolCard'
 import EmailCapture from '@/components/shared/EmailCapture'
 import { resources } from '@/lib/data/resources'
 import { tools } from '@/lib/data/tools'
+import Link from 'next/link'
 import { Play, BookOpen } from 'lucide-react'
-
-const videoPlaceholders = [
-  {
-    id: 'v1',
-    title: 'ChatGPT From Zero: Your First 20 Minutes',
-    duration: '18 min',
-    views: '12K views',
-  },
-  {
-    id: 'v2',
-    title: 'How to Write a Resume Using AI (Full Walkthrough)',
-    duration: '24 min',
-    views: '8K views',
-  },
-  {
-    id: 'v3',
-    title: 'Canva AI Tutorial: Make a Flyer in 10 Minutes',
-    duration: '11 min',
-    views: '6K views',
-  },
-]
 
 export default function ResourcesPage() {
   return (
@@ -91,51 +71,27 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* Video Library */}
+      {/* Video Library — coming soon */}
       <section className="py-16 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader
-            eyebrow="Video Library"
-            title={
-              <>
-                Watch & Learn
-              </>
-            }
-            subtitle="Short, practical video tutorials. No 3-hour courses. Just the stuff you can actually use."
-            className="mb-12"
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-            {videoPlaceholders.map((video, i) => (
-              <div
-                key={video.id}
-                className="bg-white border border-[#EDE9FE] rounded-2xl overflow-hidden group cursor-pointer hover:border-purple-700 transition-colors duration-300"
-              >
-                {/* Thumbnail placeholder */}
-                <div className="relative h-44 bg-[#F0EEFF] flex items-center justify-center group-hover:bg-[#EDE9FE] transition-colors">
-                  <div className="w-14 h-14 rounded-full bg-black/60 border border-[#D8D0F7] flex items-center justify-center group-hover:bg-purple-700/80 transition-colors duration-300">
-                    <Play size={22} className="text-white ml-1" fill="white" />
-                  </div>
-                  <div className="absolute top-3 right-3 bg-black/80 text-white text-xs px-2 py-1 rounded-lg">
-                    {video.duration}
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-heading font-semibold text-[#1A0533] text-sm leading-snug mb-2 group-hover:text-purple-700 transition-colors">
-                    {video.title}
-                  </h3>
-                  <p className="text-[#6B5A8E] text-xs">{video.views}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="text-center">
-            <a
-              href="#"
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white border border-[#EDE9FE] rounded-3xl p-8 md:p-10 text-center">
+            <div className="w-14 h-14 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center mx-auto mb-4">
+              <Play size={24} className="text-purple-600 ml-0.5" fill="currentColor" />
+            </div>
+            <h2 className="font-heading font-bold text-2xl md:text-3xl text-[#1A0533] mb-3">
+              Video Tutorials Are Coming
+            </h2>
+            <p className="text-[#6B5A8E] max-w-xl mx-auto mb-6">
+              Short, practical video walkthroughs are in production. In the meantime, every topic is
+              covered in our written lessons — same plain English, ready right now.
+            </p>
+            <Link
+              href="/learn"
               className="inline-flex items-center gap-2 border border-[#D8D0F7] hover:border-purple-600 text-[#6B5A8E] hover:text-purple-700 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200"
             >
               <BookOpen size={16} />
-              View Full Video Library on YouTube
-            </a>
+              Browse the Free Lessons
+            </Link>
           </div>
         </div>
       </section>

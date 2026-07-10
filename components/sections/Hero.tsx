@@ -1,35 +1,27 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import Link from 'next/link'
-import { ArrowRight, Users, Zap, Play } from 'lucide-react'
+import { ArrowRight, Users, Zap, Play, BookOpen } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { lessons } from '@/lib/data/lessons'
 
-const activityFeed = [
-  { name: 'Deja W.', city: 'Chicago, IL', win: 'got her first callback after AI resume rewrite' },
-  { name: 'Marcus T.', city: 'Atlanta, GA', win: 'saved $400/mo on social media with Canva AI' },
-  { name: 'Aaliyah C.', city: 'Houston, TX', win: 'GPA went from 2.8 → 3.4 using AI study tools' },
-  { name: 'Pastor Kevin', city: 'Memphis, TN', win: 'ran a 40-person AI workshop at his church' },
-  { name: 'Sister Ruth', city: 'Detroit, MI', win: 'uses ChatGPT every day at 75 years old' },
-  { name: 'Keisha M.', city: 'Atlanta, GA', win: 'saved 10+ hours a week running her daycare' },
-  { name: 'Tyrone B.', city: 'Chicago, IL', win: 'landed first job with benefits in 4 years' },
-]
+const tickerItems = lessons.map((l) => ({ emoji: l.emoji, title: l.title }))
 
-function ActivityTicker() {
+function LessonTicker() {
   const [idx, setIdx] = useState(0)
 
   useEffect(() => {
-    const t = setInterval(() => setIdx((i) => (i + 1) % activityFeed.length), 3800)
+    const t = setInterval(() => setIdx((i) => (i + 1) % tickerItems.length), 3800)
     return () => clearInterval(t)
   }, [])
 
-  const item = activityFeed[idx]
+  const item = tickerItems[idx]
 
   return (
     <div className="inline-flex items-center gap-2 bg-white border border-[#EDE9FE] rounded-full pl-1 pr-4 py-1 shadow-card overflow-hidden max-w-full">
       <span className="flex-shrink-0 flex items-center gap-1.5 bg-green-100 border border-green-200 rounded-full px-2.5 py-1 text-green-700 text-xs font-semibold">
-        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-        Live
+        <BookOpen size={11} />
+        Free Lesson
       </span>
       <AnimatePresence mode="wait">
         <motion.p
@@ -40,11 +32,8 @@ function ActivityTicker() {
           transition={{ duration: 0.3 }}
           className="text-xs text-[#6B5A8E] truncate"
         >
-          <span className="text-[#1A0533] font-medium">{item.name}</span>
-          {' '}from{' '}
-          <span className="text-purple-600">{item.city}</span>
-          {' '}
-          {item.win}
+          <span>{item.emoji}</span>{' '}
+          <span className="text-[#1A0533] font-medium">{item.title}</span>
         </motion.p>
       </AnimatePresence>
     </div>
@@ -71,14 +60,14 @@ export default function Hero() {
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#FAFAFA] to-transparent" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center py-20">
-        {/* Live ticker */}
+        {/* Rotating free-lesson ticker */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="flex justify-center mb-5"
         >
-          <ActivityTicker />
+          <LessonTicker />
         </motion.div>
 
         {/* Floating badge */}
@@ -89,7 +78,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 bg-green-100 border border-green-200 rounded-full px-4 py-2 text-green-700 text-sm font-semibold mb-8"
         >
           <Users size={14} className="flex-shrink-0" />
-          <span>500+ community members trained</span>
+          <span>Free AI education for everyday people</span>
           <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
         </motion.div>
 
@@ -115,7 +104,7 @@ export default function Hero() {
           className="text-[#6B5A8E] text-lg md:text-xl lg:text-2xl max-w-2xl mx-auto leading-relaxed mb-10"
         >
           The Plug AI teaches real people in real communities how to use AI tools —
-          for <span className="text-[#1A0533] font-semibold">free jobs</span>,{' '}
+          for <span className="text-[#1A0533] font-semibold">better jobs</span>,{' '}
           <span className="text-[#1A0533] font-semibold">better pay</span>, and{' '}
           <span className="text-[#1A0533] font-semibold">bigger futures</span>.
         </motion.p>
@@ -140,41 +129,26 @@ export default function Hero() {
             <ArrowRight size={20} />
           </motion.a>
           <motion.a
-            href="/community"
+            href="/workshops"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             className="inline-flex items-center gap-2.5 border-2 border-[#D8D0F7] hover:border-purple-500 text-[#1A0533] font-semibold px-8 py-4 rounded-2xl text-lg transition-all duration-200 hover:bg-purple-50 bg-white shadow-card"
           >
             <Play size={18} className="fill-purple-600 text-purple-600" />
-            Join the Community
+            Bring Us to Your Community
           </motion.a>
         </motion.div>
 
-        {/* Social proof mini */}
+        {/* Honest value props */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-[#6B5A8E]"
         >
-          <div className="flex items-center gap-3">
-            <div className="flex -space-x-2">
-              {['D', 'M', 'T', 'R', 'J'].map((letter, i) => (
-                <div
-                  key={letter}
-                  className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-xs font-bold text-white shadow-sm"
-                  style={{
-                    backgroundColor: ['#6B21A8', '#7C3AED', '#8B5CF6', '#22C55E', '#16A34A'][i],
-                  }}
-                >
-                  {letter}
-                </div>
-              ))}
-            </div>
-            <span>
-              Join <span className="text-[#1A0533] font-semibold">500+</span> people already learning
-            </span>
-          </div>
+          <span>
+            <span className="text-[#1A0533] font-semibold">{lessons.length} free lessons</span> ready right now
+          </span>
           <div className="hidden sm:block w-1 h-1 rounded-full bg-[#D8D0F7]" />
           <span>100% Free to start</span>
           <div className="hidden sm:block w-1 h-1 rounded-full bg-[#D8D0F7]" />

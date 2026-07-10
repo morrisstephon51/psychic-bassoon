@@ -127,7 +127,7 @@ export const lessons: Lesson[] = [
       {
         heading: 'Tool 1: ChatGPT (chat.openai.com)',
         content:
-          "What it does: Everything. Writing, research, planning, coding, brainstorming, answering questions. Think of it as a brilliant assistant available 24/7. Free tier: Yes — the free version (GPT-3.5) handles most tasks beautifully. Best for: Writing emails, drafting documents, researching topics, creating outlines, answering questions, solving problems.",
+          "What it does: Everything. Writing, research, planning, coding, brainstorming, answering questions. Think of it as a brilliant assistant available 24/7. Free tier: Yes — the free plan handles most everyday tasks beautifully. Best for: Writing emails, drafting documents, researching topics, creating outlines, answering questions, solving problems.",
       },
       {
         heading: 'Tool 2: Canva AI (canva.com)',
@@ -267,6 +267,198 @@ export const lessons: Lesson[] = [
     nextSteps: [
       { title: 'What Is AI? (And Why It Matters For You)', slug: 'what-is-ai' },
       { title: '5 Free AI Tools You Can Use Today', slug: 'free-ai-tools' },
+    ],
+  },
+  {
+    id: '7',
+    slug: 'prompt-writing-101',
+    emoji: '💬',
+    title: 'Prompt Writing 101: How to Talk to AI',
+    difficulty: 'Beginner',
+    readTime: '7 min read',
+    category: 'Beginner',
+    description:
+      "The difference between a useless AI answer and a great one is almost always the question you asked. Learn the simple formula that makes ChatGPT, Claude, and Gemini actually work for you.",
+    keyTakeaways: [
+      'AI gives better answers when you give it a role, a task, and details',
+      'You can (and should) ask follow-up questions — the first answer is a draft',
+      'Telling AI who the answer is FOR changes everything',
+      'Save your best prompts — you will reuse them constantly',
+    ],
+    sections: [
+      {
+        heading: 'The Golden Rule: Be Specific',
+        content:
+          '"Write me a cover letter" gets you a generic template. "Write a cover letter for a medical assistant position at a community clinic. I have 3 years of experience in patient intake and I\'m great with nervous patients. Keep it warm and under 250 words" gets you something you can actually send. The AI isn\'t lazy — it just can\'t read your mind. Every detail you add makes the answer more yours.',
+      },
+      {
+        heading: 'The 3-Part Formula: Role + Task + Details',
+        content:
+          'The easiest prompt structure that works every time:\n\n1. Role — Tell the AI who to be: "Act as an experienced career coach..."\n\n2. Task — Tell it exactly what to do: "...help me prepare answers for a customer service job interview..."\n\n3. Details — Give it your specifics: "...I\'ve been out of work for a year, I\'m nervous about explaining the gap, and the interview is on Friday."\n\nPut those together and you get advice that actually fits your situation instead of generic tips you could have Googled.',
+      },
+      {
+        heading: 'Treat It Like a Conversation, Not a Search Box',
+        content:
+          "This is the biggest mindset shift. Google gives you one shot per search. AI remembers the conversation. If the first answer is too formal, say \"make it more casual.\" Too long? \"Cut it in half.\" Doesn't sound like you? \"Rewrite it like a real person talking, not a corporate memo.\" You can push back five times in a row and it never gets annoyed. The follow-up is where the magic happens.",
+      },
+      {
+        heading: 'Tell It Who the Answer Is For',
+        content:
+          'The same question gets wildly different answers depending on the audience. Try: "Explain how a 401(k) works — to a 19-year-old starting their first job." Or "...to a 60-year-old who is 5 years from retiring." Or "Explain this school permission slip in simple English — I speak Spanish at home." When you tell AI who the answer is for, it adjusts the words, the examples, and the tone automatically.',
+      },
+      {
+        heading: 'Build Your Personal Prompt Library',
+        content:
+          "When a prompt works, save it. Keep a note on your phone called \"My Prompts\" and paste in the ones that got great results. Over time you'll have your own toolkit: your resume prompt, your email prompt, your meal-planning prompt, your budget prompt. This is exactly how professionals use AI — they don't start from scratch every time, and neither should you.",
+      },
+    ],
+    nextSteps: [
+      { title: 'What Is AI? (And Why It Matters For You)', slug: 'what-is-ai' },
+      { title: 'How to Use ChatGPT to Write a Resume', slug: 'chatgpt-resume' },
+    ],
+  },
+  {
+    id: '8',
+    slug: 'ai-job-search',
+    emoji: '🎯',
+    title: 'The AI-Powered Job Search: Beyond the Resume',
+    difficulty: 'Intermediate',
+    readTime: '9 min read',
+    category: 'Job Skills',
+    description:
+      'Your resume is just the start. Learn how to use AI for every stage of the job hunt — finding the right openings, decoding job descriptions, prepping for interviews, and negotiating your pay.',
+    keyTakeaways: [
+      'AI can decode what a job posting is really asking for',
+      'Mock interviews with AI are free and available at 2am',
+      'Use AI to research a company before you walk in the door',
+      'AI can help you write a salary negotiation script — most people leave money on the table',
+    ],
+    sections: [
+      {
+        heading: 'Step 1: Decode the Job Description',
+        content:
+          'Job postings are written in HR language. Paste one into ChatGPT and ask: "What are the 5 most important skills this employer is really looking for? What keywords should my resume and cover letter include? What might the interview questions be?" In 30 seconds, you know exactly what to emphasize — and you\'re no longer guessing what they want.',
+      },
+      {
+        heading: 'Step 2: Practice Interviews With AI',
+        content:
+          'This is the most underused free tool in the job search. Tell ChatGPT: "Act as a hiring manager interviewing me for a [job title] position. Ask me one question at a time. After each answer I give, tell me what was strong and what I could improve." It will run a full mock interview with you — patiently, privately, as many times as you want. Nervous about a specific question, like explaining a gap in your work history? Practice exactly that until your answer feels natural.',
+      },
+      {
+        heading: 'Step 3: Research the Company Like a Pro',
+        content:
+          'Before an interview, use Perplexity (it cites sources) to ask: "What does [company] do, who are their customers, and what has been in the news about them this year?" Then ask ChatGPT: "Based on this, give me 3 smart questions to ask at the end of my interview." Candidates who ask informed questions stand out immediately — and now that takes 10 minutes instead of an evening.',
+      },
+      {
+        heading: 'Step 4: Follow Up and Negotiate',
+        content:
+          'After the interview: "Write a short, warm thank-you email to [name] for the [job title] interview. Mention that I enjoyed our conversation about [topic]." When the offer comes: "The offer is $X. Research says the typical range for this role in my city is higher. Write me a polite, confident script for asking for $Y." Most people never negotiate because they don\'t know what to say. Now you have the words.',
+      },
+      {
+        heading: 'A Word of Caution: Keep It Honest',
+        content:
+          "AI should sharpen your story, not invent one. Never let it add skills you don't have or experience you didn't earn — you will be asked about it in the interview, and it unravels fast. The goal is to present the real you at your absolute best. That's not cheating. That's what confident, prepared candidates have always done.",
+      },
+    ],
+    nextSteps: [
+      { title: 'How to Use ChatGPT to Write a Resume', slug: 'chatgpt-resume' },
+      { title: 'Prompt Writing 101: How to Talk to AI', slug: 'prompt-writing-101' },
+    ],
+  },
+  {
+    id: '9',
+    slug: 'spot-ai-scams',
+    emoji: '🛡️',
+    title: 'How to Spot AI Scams and Fake Content',
+    difficulty: 'Beginner',
+    readTime: '7 min read',
+    category: 'Daily Life',
+    description:
+      "The same AI that helps you can be used against you. Voice-clone phone scams, fake photos, phishing emails that sound human — learn the warning signs and the simple habits that keep you and your family safe.",
+    keyTakeaways: [
+      'Scammers can clone a voice from a few seconds of audio — verify before you send money',
+      'Urgency + secrecy + payment is the scam formula, with or without AI',
+      'Set a family code word for emergency calls',
+      'AI chatbots can be confidently wrong — verify important facts before acting on them',
+    ],
+    sections: [
+      {
+        heading: 'The Voice-Clone Phone Call',
+        content:
+          "The scam: your phone rings, and it sounds exactly like your grandchild, your sibling, your pastor — panicked, in trouble, needing money wired right now. AI can clone a voice from a short clip pulled off social media. The defense is simple: hang up and call the person back on the number you already have for them. Real emergencies survive a callback. Scams don't. And set a family code word — a question only the real person could answer.",
+      },
+      {
+        heading: 'The Scam Formula Never Changes',
+        content:
+          "AI makes scams more convincing, but the underlying formula is the same as it's always been: (1) Urgency — \"you must act right now\"; (2) Secrecy — \"don't tell anyone\"; (3) Unusual payment — gift cards, wire transfers, crypto, cash apps to strangers. Any message with two of those three is a scam until proven otherwise. No real bank, government agency, or family member operates that way.",
+      },
+      {
+        heading: 'Fake Photos and Videos',
+        content:
+          "AI can generate photos of events that never happened and videos of people saying things they never said. Before you share or believe a shocking image: check whether a real news outlet is reporting it. Look closely at hands, teeth, text on signs, and backgrounds — AI images still get details wrong. And ask the oldest question in the book: who benefits if I believe this? If something seems designed to make you furious or terrified, that's exactly when to slow down.",
+      },
+      {
+        heading: 'Phishing That Sounds Human',
+        content:
+          'The old advice was "look for bad grammar." AI killed that — scam emails now read perfectly. So judge the request, not the writing. Real companies don\'t email you asking for passwords, Social Security numbers, or gift cards. When an email claims to be your bank, don\'t click the link — go to your bank\'s website directly or call the number on the back of your card. Two minutes of checking beats months of cleanup.',
+      },
+      {
+        heading: 'When the AI Itself Is Wrong',
+        content:
+          "One more safety habit: AI chatbots sometimes state false things with total confidence — the industry calls these hallucinations. For anything that matters — medical decisions, legal questions, money — treat AI as a starting point, not a final answer. Ask it for sources, verify with a real professional, and use tools like Perplexity that show where their information comes from. Trust, but verify. Especially the confident ones.",
+      },
+    ],
+    nextSteps: [
+      { title: 'AI for Seniors: Simple Tools, Real Results', slug: 'ai-for-seniors' },
+      { title: 'What Is AI? (And Why It Matters For You)', slug: 'what-is-ai' },
+    ],
+  },
+  {
+    id: '10',
+    slug: 'ai-for-churches-nonprofits',
+    emoji: '⛪',
+    title: 'AI for Churches and Nonprofits: Do More With Less',
+    difficulty: 'Beginner',
+    readTime: '8 min read',
+    category: 'Business',
+    description:
+      "Small teams, big missions, no budget — that's church and nonprofit life. AI is the volunteer that never sleeps. Learn how to use free tools for bulletins, fundraising, outreach, and volunteer coordination.",
+    keyTakeaways: [
+      'AI can draft your bulletin, newsletter, and social posts in minutes — you edit, it types',
+      'Fundraising appeals get dramatically easier with the right prompts',
+      'Canva AI makes professional flyers with zero design skills',
+      'AI drafts, humans decide — keep people in charge of the message',
+    ],
+    sections: [
+      {
+        heading: 'The Weekly Communications Grind',
+        content:
+          'Every week: the bulletin, the announcements, the email blast, the social media posts. It\'s hours of work, usually done by one exhausted volunteer. Instead, give ChatGPT the raw facts: "Write 5 short announcements for our church bulletin: youth group moves to Thursday 6pm, food pantry needs canned goods, women\'s Bible study starts a new book on Ruth, and we\'re collecting school supplies through August." Thirty seconds later you have a clean draft. Edit for your voice, done.',
+      },
+      {
+        heading: 'Fundraising Appeals That Connect',
+        content:
+          'Try this prompt: "Write a warm, heartfelt donation letter for our nonprofit\'s food pantry. Last year we served 2,400 families. We need $5,000 to get through the holidays. Include one story-style paragraph about what a $50 gift provides. Keep it under 300 words." Then make it real: swap in a true story from your organization (with permission). AI provides the structure and polish — your community provides the heart. That combination raises money.',
+      },
+      {
+        heading: 'Flyers and Graphics Without a Designer',
+        content:
+          "Canva's free plan is a gift to community organizations. Search its templates for \"church event\" or \"fundraiser,\" pick one, and use Canva's AI text tools to write the headline. Describe what you want — \"a warm, welcoming flyer for a community Thanksgiving dinner\" — and iterate. Nonprofits can also apply for Canva's free premium tier for registered charities. Professional-looking materials, zero design experience.",
+      },
+      {
+        heading: 'Volunteer Coordination and Grant Writing',
+        content:
+          'AI shines at the unglamorous work. Volunteer scheduling emails: "Write a friendly email asking our 12 volunteers to sign up for December shifts, link included." Thank-you notes: "Write a heartfelt thank-you to a volunteer who has run our sound booth for 10 years." Grant applications: paste the grant questions and your organization\'s facts, and ask AI for a first draft — then refine it with your board. First drafts used to take weeks. Now they take an afternoon.',
+      },
+      {
+        heading: 'Keep People in Charge of the Message',
+        content:
+          "A ground rule for mission-driven organizations: AI drafts, humans decide. Never let AI invent statistics about your impact, and always review anything that goes out under your organization's name — your credibility is your most valuable asset. Used this way, AI doesn't replace the personal touch that makes your organization matter. It frees up the hours so you have more time for it.",
+      },
+    ],
+    nextSteps: [
+      { title: 'How AI Can Help You Run Your Small Business', slug: 'ai-for-small-business' },
+      { title: 'Prompt Writing 101: How to Talk to AI', slug: 'prompt-writing-101' },
     ],
   },
 ]

@@ -5,6 +5,9 @@ import { Quote, Target, Eye, Zap, Users, ArrowRight, CheckCircle, TrendingUp, Ma
 import SectionHeader from '@/components/SectionHeader'
 import EmailCapture from '@/components/shared/EmailCapture'
 import Link from 'next/link'
+import { lessons } from '@/lib/data/lessons'
+import { resources } from '@/lib/data/resources'
+import { workshopTracks } from '@/lib/data/workshops'
 
 const values = [
   {
@@ -43,35 +46,35 @@ const values = [
 
 const milestones = [
   {
-    year: '2024',
-    title: 'The Idea',
+    year: 'The Spark',
+    title: 'A Gap Nobody Was Filling',
     description:
       "Stefan sits in a workforce development training and realizes: nobody's teaching AI to the people who need it most. The communities. The overlooked ones. He decides to change that.",
   },
   {
-    year: 'Early 2025',
-    title: 'First Workshop',
+    year: 'Now',
+    title: 'Building the Library',
     description:
-      'First community workshop. 12 people show up. 11 leave with a working ChatGPT account and a rewritten resume draft. One attendee gets a job interview 6 days later.',
+      `${lessons.length} free plain-English lessons and ${resources.length} downloadable guides are live on this site — covering job hunting, small business, senior-friendly basics, AI safety, and more. All free, no account needed.`,
   },
   {
-    year: 'Mid 2025',
-    title: 'Growing the Community',
+    year: 'Next',
+    title: 'Launching Live Workshops',
     description:
-      'Newsletter launches. Discord community opens. Churches and nonprofits start reaching out asking for workshops. The Plug AI starts traveling.',
+      `${workshopTracks.length} workshop tracks are ready to run — from AI 101 to a full-day youth camp. First public dates are being finalized now and will be announced to the newsletter first.`,
   },
   {
-    year: '2026',
-    title: 'Scaling Up',
+    year: 'The Vision',
+    title: 'Every Community, Plugged In',
     description:
-      "500+ people trained, 12+ workshops across 6 cities, partnerships with workforce centers and faith communities. Online lessons launch to reach people we can't reach in person — yet.",
+      'Partnerships with churches, workforce centers, libraries, and schools — so anyone, anywhere, can learn to use AI regardless of income, age, or background.',
   },
 ]
 
 const achievements = [
-  { icon: Users, value: '500+', label: 'People Trained', color: 'text-green-600', bg: 'bg-green-100 border-green-200' },
-  { icon: MapPin, value: '6', label: 'Cities Reached', color: 'text-purple-600', bg: 'bg-purple-100 border-purple-200' },
-  { icon: TrendingUp, value: '12+', label: 'Live Workshops', color: 'text-blue-600', bg: 'bg-blue-100 border-blue-200' },
+  { icon: Users, value: `${lessons.length}`, label: 'Free Lessons Live', color: 'text-green-600', bg: 'bg-green-100 border-green-200' },
+  { icon: MapPin, value: `${resources.length}`, label: 'Downloadable Guides', color: 'text-purple-600', bg: 'bg-purple-100 border-purple-200' },
+  { icon: TrendingUp, value: `${workshopTracks.length}`, label: 'Workshop Tracks', color: 'text-blue-600', bg: 'bg-blue-100 border-blue-200' },
   { icon: Star, value: '100%', label: 'Free to Attend', color: 'text-amber-600', bg: 'bg-amber-100 border-amber-200' },
 ]
 
@@ -146,7 +149,7 @@ export default function AboutPage() {
 
               {/* Floating badge */}
               <div className="absolute -bottom-4 -right-4 bg-green-500 text-black font-bold px-4 py-2 rounded-2xl text-sm shadow-lg shadow-green-500/30">
-                Founded 2024
+                100% Free. Always.
               </div>
             </motion.div>
 
@@ -265,7 +268,7 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto">
           <SectionHeader
             eyebrow="Our Journey"
-            title="How We Got Here"
+            title="Where We Are & Where We're Going"
             align="left"
             className="mb-12"
           />

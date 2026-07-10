@@ -1,13 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Calendar, MapPin, ArrowRight, Zap } from 'lucide-react'
-import { upcomingWorkshops } from '@/lib/data/workshops'
-import { formatShortDate } from '@/lib/utils'
+import { Calendar, MapPin, ArrowRight, Users } from 'lucide-react'
+import { workshopTracks } from '@/lib/data/workshops'
+import EmailCapture from '@/components/shared/EmailCapture'
 
 export default function FeaturedWorkshop() {
-  const featured = upcomingWorkshops[0]
-
   return (
     <section className="py-16 px-4 md:px-8 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -30,66 +28,52 @@ export default function FeaturedWorkshop() {
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 <span className="text-green-600 text-sm font-semibold tracking-wide uppercase">
-                  Featured Upcoming Workshop
+                  Live Workshops — Launching Soon
                 </span>
               </div>
               <h2 className="font-heading font-bold text-2xl md:text-3xl lg:text-4xl text-[#1A0533] mb-4 leading-tight">
-                {featured.title}
+                Hands-On AI Workshops for Your Community
               </h2>
               <p className="text-[#6B5A8E] text-base leading-relaxed mb-6 max-w-xl">
-                {featured.description}
+                We&apos;re building free, in-person and virtual workshops — {workshopTracks.length} tracks covering
+                everything from AI basics to job hunting to running your small business.
+                Public dates will be announced to the newsletter first.
               </p>
 
               <div className="flex flex-wrap gap-4 mb-6 text-sm text-[#6B5A8E]">
                 <div className="flex items-center gap-1.5">
                   <Calendar size={15} className="text-green-600" />
-                  <span>{formatShortDate(featured.date)} · {featured.time}</span>
+                  <span>Dates announced by email</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <MapPin size={15} className="text-green-600" />
-                  <span>{featured.city}</span>
+                  <span>In-person &amp; virtual</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <Zap size={15} className="text-amber-500 fill-amber-500" />
-                  <span className="text-amber-600 font-semibold">Only {featured.spotsRemaining} spots left!</span>
+                  <Users size={15} className="text-green-600" />
+                  <span>Always free to attend</span>
                 </div>
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {featured.topics.map((topic) => (
-                  <span key={topic} className="px-3 py-1 bg-white border border-[#EDE9FE] rounded-full text-xs text-[#6B5A8E] shadow-card">
-                    {topic}
+                {workshopTracks.slice(0, 4).map((track) => (
+                  <span key={track.id} className="px-3 py-1 bg-white border border-[#EDE9FE] rounded-full text-xs text-[#6B5A8E] shadow-card">
+                    {track.emoji} {track.title.split(':')[0]}
                   </span>
                 ))}
               </div>
             </div>
 
             {/* Right: CTA */}
-            <div className="flex flex-col items-center gap-4 lg:min-w-[220px]">
-              <div className="bg-white border border-[#EDE9FE] rounded-2xl p-6 text-center w-full shadow-card">
-                <p className="text-[#9385B5] text-xs mb-2">Spots remaining</p>
-                <div className="font-heading font-bold text-5xl text-[#1A0533] mb-1">{featured.spotsRemaining}</div>
-                <p className="text-[#9385B5] text-xs">of {featured.totalSpots} total</p>
-                <div className="mt-3 h-2 bg-[#EDE9FE] rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-green-500 rounded-full"
-                    style={{ width: `${Math.round((featured.spotsRemaining / featured.totalSpots) * 100)}%` }}
-                  />
-                </div>
+            <div className="flex flex-col items-stretch gap-4 lg:min-w-[300px]">
+              <div className="bg-white border border-[#EDE9FE] rounded-2xl p-6 w-full shadow-card">
+                <p className="font-heading font-bold text-[#1A0533] text-base mb-1">Be first to know</p>
+                <p className="text-[#9385B5] text-xs mb-4">Join the waitlist — workshop dates hit inboxes before anywhere else.</p>
+                <EmailCapture compact source="workshop-waitlist" buttonLabel="Join Waitlist" />
               </div>
 
-              <motion.a
-                href="/workshops"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="w-full bg-green-500 hover:bg-green-400 text-black font-bold py-4 rounded-2xl text-center transition-colors duration-200 flex items-center justify-center gap-2 text-base shadow-green"
-              >
-                Reserve Your Spot
-                <ArrowRight size={18} />
-              </motion.a>
-
-              <a href="/workshops" className="text-[#9385B5] hover:text-[#6B5A8E] text-sm transition-colors flex items-center gap-1">
-                View all workshops <ArrowRight size={14} />
+              <a href="/workshops#request" className="text-center text-[#9385B5] hover:text-[#6B5A8E] text-sm transition-colors flex items-center justify-center gap-1">
+                Or request a workshop for your organization <ArrowRight size={14} />
               </a>
             </div>
           </div>

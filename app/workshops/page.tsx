@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Calendar, Users, MapPin, Building2, ArrowRight, CheckCircle } from 'lucide-react'
-import WorkshopCard from '@/components/WorkshopCard'
+import { Clock, Users, ArrowRight, CheckCircle, Monitor, MapPin } from 'lucide-react'
 import SectionHeader from '@/components/SectionHeader'
-import { upcomingWorkshops, pastWorkshops } from '@/lib/data/workshops'
+import EmailCapture from '@/components/shared/EmailCapture'
+import { workshopTracks } from '@/lib/data/workshops'
 
 export default function WorkshopsPage() {
   const [name, setName] = useState('')
@@ -15,11 +15,31 @@ export default function WorkshopsPage() {
   const [datePref, setDatePref] = useState('')
   const [contactEmail, setContactEmail] = useState('')
   const [message, setMessage] = useState('')
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
 
-  const handleRequest = (e: React.FormEvent) => {
+  const handleRequest = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSubmitted(true)
+    if (status === 'sending') return
+    setStatus('sending')
+    try {
+      const res = await fetch('/api/workshop-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          organization: org,
+          event_type: eventType,
+          attendance,
+          date_preference: datePref,
+          email: contactEmail,
+          message,
+        }),
+      })
+      if (!res.ok) throw new Error('request failed')
+      setStatus('done')
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -65,73 +85,81 @@ export default function WorkshopsPage() {
         </div>
       </section>
 
-      {/* Upcoming Workshops */}
+      {/* Launching soon + waitlist */}
       <section className="py-16 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-10">
-            <h2 className="font-heading font-bold text-2xl md:text-3xl text-[#1A0533]">
-              Upcoming Events
-            </h2>
-            <div className="flex items-center gap-2 text-sm text-[#6B5A8E]">
-              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              {upcomingWorkshops.length} events scheduled
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="bg-white border border-[#EDE9FE] rounded-3xl p-8 md:p-10 text-center"
+          >
+            <div className="inline-flex items-center gap-2 bg-green-100 border border-green-200 rounded-full px-4 py-2 text-green-700 text-sm font-semibold mb-5">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              First public sessions launching soon
             </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {upcomingWorkshops.map((workshop, i) => (
-              <WorkshopCard key={workshop.id} workshop={workshop} index={i} />
-            ))}
-          </div>
+            <h2 className="font-heading font-bold text-2xl md:text-3xl text-[#1A0533] mb-3">
+              We&apos;re Finalizing Our First Public Dates
+            </h2>
+            <p className="text-[#6B5A8E] max-w-xl mx-auto mb-8">
+              We only announce a workshop once it&apos;s real — confirmed venue, confirmed date, confirmed
+              seats. Join the waitlist and you&apos;ll get every date before it&apos;s posted anywhere else.
+            </p>
+            <div className="flex justify-center">
+              <EmailCapture compact source="workshop-waitlist" buttonLabel="Join the Waitlist" />
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Past Workshops */}
+      {/* Workshop Tracks */}
       <section className="py-16 px-4 md:px-8 bg-[#F5F3FF] border-y border-[#EDE9FE]">
         <div className="max-w-6xl mx-auto">
           <SectionHeader
-            eyebrow="Past Workshops"
-            title="What We've Built Together"
-            subtitle="Real workshops, real communities, real impact. Here's a look at where The Plug AI has been."
+            eyebrow="Workshop Tracks"
+            title="What We Teach"
+            subtitle="Six ready-to-run curricula, each built for a specific community. Every track is hands-on — you leave with working accounts and real skills, not just notes."
             align="left"
             className="mb-10"
           />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {pastWorkshops.map((pw, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {workshopTracks.map((track, i) => (
               <motion.div
-                key={pw.id}
+                key={track.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="bg-white border border-[#EDE9FE] rounded-2xl p-6 space-y-4"
+                transition={{ delay: i * 0.08, duration: 0.5 }}
+                className="bg-white border border-[#EDE9FE] hover:border-purple-400 rounded-2xl p-6 flex flex-col gap-4 transition-colors duration-300"
               >
-                {/* Visual header */}
-                <div className="h-32 rounded-xl overflow-hidden relative bg-gradient-to-br from-purple-700 to-purple-900 flex items-center justify-center">
-                  <div className="absolute inset-0 grid-bg opacity-40" />
-                  <div className="relative z-10 text-center">
-                    <div className="w-12 h-12 rounded-full bg-purple-700/40 border border-purple-600/30 flex items-center justify-center mx-auto mb-1">
-                      <Building2 size={20} className="text-purple-300" />
-                    </div>
-                    <p className="text-purple-300 text-xs font-medium">{pw.location}</p>
-                  </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-4xl">{track.emoji}</span>
+                  <span className="inline-flex items-center gap-1.5 text-xs text-[#6B5A8E] bg-[#F5F3FF] border border-[#EDE9FE] rounded-full px-3 py-1">
+                    {track.format === 'Virtual' ? <Monitor size={11} /> : <MapPin size={11} />}
+                    {track.format}
+                  </span>
                 </div>
                 <div>
-                  <h3 className="font-heading font-bold text-[#1A0533] text-base mb-2">{pw.title}</h3>
+                  <h3 className="font-heading font-bold text-[#1A0533] text-base mb-2 leading-snug">{track.title}</h3>
                   <div className="flex items-center gap-3 text-xs text-[#6B5A8E] mb-3">
                     <span className="flex items-center gap-1">
-                      <Calendar size={11} />
-                      {pw.date}
+                      <Clock size={11} />
+                      {track.duration}
                     </span>
                     <span className="flex items-center gap-1">
-                      <MapPin size={11} />
-                      {pw.location}
+                      <Users size={11} />
+                      {track.audience}
                     </span>
                   </div>
-                  <div className="inline-flex items-center gap-1.5 bg-green-500/10 border border-green-500/20 rounded-full px-3 py-1 text-green-600 text-xs font-semibold mb-3">
-                    <Users size={11} />
-                    {pw.attendees} attendees
-                  </div>
-                  <p className="text-[#6B5A8E] text-sm leading-relaxed">{pw.recap}</p>
+                  <p className="text-[#6B5A8E] text-sm leading-relaxed">{track.description}</p>
+                </div>
+                <div className="flex flex-wrap gap-1.5 mt-auto">
+                  {track.topics.map((topic) => (
+                    <span key={topic} className="px-2.5 py-1 bg-[#F5F3FF] border border-[#EDE9FE] rounded-full text-xs text-[#6B5A8E]">
+                      {topic}
+                    </span>
+                  ))}
                 </div>
               </motion.div>
             ))}
@@ -182,7 +210,7 @@ export default function WorkshopsPage() {
             transition={{ duration: 0.6 }}
             className="bg-white border border-[#EDE9FE] rounded-3xl p-8 md:p-10"
           >
-            {submitted ? (
+            {status === 'done' ? (
               <div className="text-center py-8">
                 <div className="w-16 h-16 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center mx-auto mb-4">
                   <CheckCircle size={28} className="text-green-600" />
@@ -263,7 +291,7 @@ export default function WorkshopsPage() {
                         type="text"
                         value={datePref}
                         onChange={(e) => setDatePref(e.target.value)}
-                        placeholder="e.g. July 2026, flexible"
+                        placeholder="e.g. September 2026, flexible"
                         className="w-full bg-[#FAFAFA] border border-[#D8D0F7] focus:border-purple-400 rounded-xl px-4 py-3 text-[#1A0533] text-sm placeholder:text-[#9385B5] focus:outline-none transition-colors"
                       />
                     </div>
@@ -293,11 +321,17 @@ export default function WorkshopsPage() {
 
                   <button
                     type="submit"
-                    className="w-full bg-green-500 hover:bg-green-400 text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 text-base transition-colors duration-200"
+                    disabled={status === 'sending'}
+                    className="w-full bg-green-500 hover:bg-green-400 disabled:opacity-60 text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 text-base transition-colors duration-200"
                   >
-                    Request a Workshop
+                    {status === 'sending' ? 'Sending…' : 'Request a Workshop'}
                     <ArrowRight size={18} />
                   </button>
+                  {status === 'error' && (
+                    <p className="text-center text-red-500 text-sm">
+                      Something went wrong — please try again, or reach us through the contact page.
+                    </p>
+                  )}
                   <p className="text-center text-[#9385B5] text-xs">
                     We respond within 48 hours. All workshops are free.
                   </p>

@@ -10,7 +10,6 @@ export interface Tool {
   difficulty: DifficultyLevel
   category: string
   learnSlug: string
-  logoUrl: string
   color: string
 }
 
@@ -25,7 +24,6 @@ export const tools: Tool[] = [
     difficulty: 'Beginner',
     category: 'Writing & Research',
     learnSlug: 'chatgpt-resume',
-    logoUrl: 'https://via.placeholder.com/60x60/10A37F/ffffff?text=GPT',
     color: '#10A37F',
   },
   {
@@ -38,7 +36,6 @@ export const tools: Tool[] = [
     difficulty: 'Beginner',
     category: 'Writing & Research',
     learnSlug: 'what-is-ai',
-    logoUrl: 'https://via.placeholder.com/60x60/D97706/ffffff?text=AI',
     color: '#D97706',
   },
   {
@@ -51,7 +48,6 @@ export const tools: Tool[] = [
     difficulty: 'Beginner',
     category: 'Productivity',
     learnSlug: 'free-ai-tools',
-    logoUrl: 'https://via.placeholder.com/60x60/4285F4/ffffff?text=G',
     color: '#4285F4',
   },
   {
@@ -64,7 +60,6 @@ export const tools: Tool[] = [
     difficulty: 'Beginner',
     category: 'Design',
     learnSlug: 'free-ai-tools',
-    logoUrl: 'https://via.placeholder.com/60x60/00C4CC/ffffff?text=CV',
     color: '#00C4CC',
   },
   {
@@ -77,7 +72,6 @@ export const tools: Tool[] = [
     difficulty: 'Beginner',
     category: 'Research',
     learnSlug: 'free-ai-tools',
-    logoUrl: 'https://via.placeholder.com/60x60/20B2AA/ffffff?text=P',
     color: '#20B2AA',
   },
   {
@@ -90,7 +84,6 @@ export const tools: Tool[] = [
     difficulty: 'Intermediate',
     category: 'Productivity',
     learnSlug: 'ai-for-small-business',
-    logoUrl: 'https://via.placeholder.com/60x60/000000/ffffff?text=N',
     color: '#000000',
   },
 ]
