@@ -75,4 +75,5 @@ Done when:  [specific measurable finish line]
 
 - **Live Website:** https://psychic-bassoon-cam6stef.vercel.app
 - **Vercel Project:** cam6stef team, repo `morrisstephon51/psychic-bassoon`
-- **Deploy Branch:** `claude/amazing-mccarthy-zZl3L`
+- **Production Branch:** `main` (Vercel deploys production on every merge to main)
+- **Keep-Awake:** Vercel Cron hits `/api/health` daily (09:00 UTC) so the Supabase free-tier project never pauses from inactivity
