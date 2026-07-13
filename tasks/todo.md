@@ -19,5 +19,5 @@ Hardened the lesson pages — the highest-traffic SEO surface.
 - Rendered HTML confirmed: JSON-LD Article present, og:type=article, per-lesson og:url,
   canonical link, Share button, CTA → /resources. Client chunk loads (share is interactive).
 
-## Next
-- [ ] 7. Commit, push, draft PR
+## Done
+- [x] 7. Committed, pushed, draft PR #6 opened; watching for preview + CI
