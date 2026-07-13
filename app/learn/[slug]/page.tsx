@@ -1,8 +1,11 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { Clock, ArrowLeft, ArrowRight, Share2, CheckCircle, BookOpen } from 'lucide-react'
+import { Clock, ArrowLeft, ArrowRight, CheckCircle, BookOpen } from 'lucide-react'
 import { lessons } from '@/lib/data/lessons'
 import Badge from '@/components/ui/Badge'
+import ShareButton from '@/components/ShareButton'
+
+const SITE_URL = 'https://psychic-bassoon-cam6stef.vercel.app'
 
 interface LessonPageProps {
   params: { slug: string }
@@ -15,9 +18,23 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: LessonPageProps) {
   const lesson = lessons.find((l) => l.slug === params.slug)
   if (!lesson) return {}
+  const url = `${SITE_URL}/learn/${lesson.slug}`
   return {
     title: lesson.title,
     description: lesson.description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${lesson.title} | The Plug AI`,
+      description: lesson.description,
+      type: 'article',
+      url,
+      siteName: 'The Plug AI',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: lesson.title,
+      description: lesson.description,
+    },
   }
 }
 
@@ -29,8 +46,25 @@ export default function LessonPage({ params }: LessonPageProps) {
   const nextLesson = lessons[currentIndex + 1] ?? null
   const prevLesson = lessons[currentIndex - 1] ?? null
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: lesson.title,
+    description: lesson.description,
+    articleSection: lesson.category,
+    inLanguage: 'en',
+    url: `${SITE_URL}/learn/${lesson.slug}`,
+    author: { '@type': 'Organization', name: 'The Plug AI' },
+    publisher: { '@type': 'Organization', name: 'The Plug AI' },
+    isAccessibleForFree: true,
+  }
+
   return (
     <div className="pt-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       {/* Top bar */}
       <div className="border-b border-[#EDE9FE] bg-[#F5F3FF] sticky top-16 z-20">
         <div className="max-w-4xl mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
@@ -141,10 +175,11 @@ export default function LessonPage({ params }: LessonPageProps) {
               <p className="text-[#6B5A8E] text-sm mb-4">
                 Found this helpful? Share it with someone who needs it.
               </p>
-              <button className="inline-flex items-center gap-2 border border-[#D8D0F7] hover:border-purple-600 text-[#6B5A8E] hover:text-purple-700 px-5 py-2.5 rounded-xl text-sm transition-all duration-200">
-                <Share2 size={15} />
-                Share This Lesson
-              </button>
+              <ShareButton
+                title={lesson.title}
+                text={lesson.description}
+                path={`/learn/${lesson.slug}`}
+              />
             </div>
           </article>
 
@@ -174,8 +209,8 @@ export default function LessonPage({ params }: LessonPageProps) {
                 Tools, prompts, and a 30-day plan — all free.
               </p>
               <Link
-                href="/#email-capture"
-                className="block w-full bg-green-500 hover:bg-green-500 text-black font-bold py-2.5 rounded-xl text-sm transition-colors duration-200 text-center"
+                href="/resources"
+                className="block w-full bg-green-500 hover:bg-green-400 text-black font-bold py-2.5 rounded-xl text-sm transition-colors duration-200 text-center"
               >
                 Get Free Guide
               </Link>
