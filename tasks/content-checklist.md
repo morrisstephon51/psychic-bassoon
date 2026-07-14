@@ -1,152 +1,46 @@
-# The Plug AI — Content Checklist
+# The Plug AI — Content Punch-List
 
-Audit of all placeholder content, dummy data, and missing assets across every page.
-Each item notes: what's there now → what's needed → who fills it.
+Everything fabricated has been removed and every dead-end CTA now captures an email
+instead. What's left is real-world information only Stefan can supply.
 
----
+## Ship-blockers
 
-## Priority Summary
+- [ ] **Formspree account** — create one, then add to Vercel env vars:
+  - `NEXT_PUBLIC_FORMSPREE_CONTACT_ID`
+  - `NEXT_PUBLIC_FORMSPREE_NEWSLETTER_ID`
+  Until these are set, every form on the site shows an honest error message
+  ("Something went wrong — email us directly") instead of a fake success.
 
-| Priority | Items | What Blocks It |
-|----------|-------|----------------|
-| **Ship-blocker** | #51–52 (Formspree env vars), #17–22 (workshop registration links) | Forms don't work; workshop registrations go nowhere |
-| **Legal / trust risk** | #6 (testimonials), #31–33 (member spotlights), #3–5 (stats) | Fabricated social proof is a legal and credibility risk |
-| **Broken UI** | #11–16 (resource images), #43–48 (tool logos), #26 (newsletter anchor) | Broken images and dead anchors look unfinished |
-| **Coming soon → live** | #25, #27, #35–38, #50 (social accounts), #7–10 (video library) | Depends on creating the accounts/channels |
-| **Polish** | #40–41 (founder photo/links), #34 (challenge rotation) | Improves credibility but doesn't block launch |
+## Real facts to supply when available
 
----
+- [ ] Real stats (people trained, workshops run, cities reached) — currently removed
+      from the Hero, SocialProof bar, Community page, and About page rather than
+      shown as invented numbers.
+- [ ] Real testimonials, with explicit consent from each person to publish their
+      name/city/quote — currently replaced with a generic outcomes section on the
+      homepage.
+- [ ] Workshop dates, venues, and format for each of the 6 topics on `/workshops` —
+      currently shown as topic previews with a "Notify Me" button instead of fake
+      dates/venues/spot-counts.
+- [ ] Any completed past workshops (date, location, attendee count, with permission
+      to publish specifics) — the "Past Workshops" section was removed entirely
+      rather than left with unverifiable claims.
+- [ ] Social account URLs once live: Discord, Instagram, TikTok, YouTube, LinkedIn —
+      every icon/button referencing these currently opens an email-capture modal
+      tagged by platform (e.g. `source: 'footer-instagram'`) so you'll have a
+      pre-built waitlist to announce to when each launches.
+- [ ] Founder photo + LinkedIn URL for the About page (currently a purple circle
+      with "S").
+- [ ] Confirm or correct the specific numbers in the About page milestone
+      timeline ("12 people show up... one attendee gets a job interview 6 days
+      later" in Early 2025; general growth language in 2026 — the invented
+      "500+/12+/6" figures were removed from that entry).
+- [ ] Real video content for `/resources` — the video library section is now a
+      single honest "Notify Me" card instead of 3 fake videos with invented view
+      counts.
 
-## Homepage (`/`)
+## How to use this
 
-### Hero Section
-- [ ] **#1** Activity ticker shows 7 hardcoded names (Deja W., Marcus T., Tyrone B., etc.) cycling every 3.8s → Confirm these are real members OR wire to live data **| You / Dev**
-- [ ] **#2** Stat: "500+ community members trained" → Verify actual count and update **| You**
-
-### Social Proof Bar
-- [ ] **#3** "500+ People Trained" → Confirm real number **| You**
-- [ ] **#4** "12+ Live Workshops" → Confirm real number **| You**
-- [ ] **#5** "6 Cities Reached" → Confirm real number **| You**
-
-### Testimonials Section
-- [ ] **#6** 5 hardcoded testimonials (Deja Williams / Chicago, Marcus Thompson / Atlanta, Ruth Jenkins / Detroit, Pastor Kevin Moore / Memphis, Aaliyah Carter / Houston) → Confirm each person is real and gave consent to be quoted, OR replace with verified testimonials **| You**
-
----
-
-## Resources Page (`/resources`)
-
-### Video Library Section
-- [ ] **#7** "ChatGPT From Zero: Your First 20 Minutes" — "12K views" (fake) → Replace with real YouTube video + real view count, OR remove section until channel exists **| You**
-- [ ] **#8** "How to Write a Resume Using AI (Full Walkthrough)" — "8K views" (fake) → Same **| You**
-- [ ] **#9** "Canva AI Tutorial: Make a Flyer in 10 Minutes" — "6K views" (fake) → Same **| You**
-- [ ] **#10** "Full Video Library — Coming Soon on YouTube" button → Link to real YouTube channel once created **| You**
-
-### Resource Card Thumbnails
-All 6 thumbnail paths point to images that don't exist in `/public/images/resources/`.
-
-- [x] **#11** `/images/resources/starter-kit.jpg` → Created branded SVG thumbnail ✓
-- [x] **#12** `/images/resources/cheatsheet.jpg` → Created branded SVG thumbnail ✓
-- [x] **#13** `/images/resources/resume-prompts.jpg` → Created branded SVG thumbnail ✓
-- [x] **#14** `/images/resources/business-playbook.jpg` → Created branded SVG thumbnail ✓
-- [x] **#15** `/images/resources/challenge.jpg` → Created branded SVG thumbnail ✓
-- [x] **#16** `/images/resources/churches.jpg` → Created branded SVG thumbnail ✓
-- [ ] Replace SVG thumbnails with real photography/design assets when available **| Designer / You**
-
----
-
-## Workshops Page (`/workshops`)
-
-### Upcoming Events — Registration Links
-All 6 workshops have `registrationUrl: '#'` — "Register Free" button goes nowhere.
-
-- [ ] **#17** AI 101: Your First Steps → Add real Eventbrite / Zoom / Google Form URL **| You**
-- [ ] **#18** AI for Job Seekers → Same **| You**
-- [ ] **#19** AI for Small Business Owners → Same **| You**
-- [ ] **#20** AI Basics for Seniors → Same **| You**
-- [ ] **#21** Church & Nonprofit Leaders → Same **| You**
-- [ ] **#22** Youth AI Camp → Same **| You**
-
-### Workshop Dates & Locations
-- [ ] **#23** Dates (e.g. "July 15, 2026") → Confirm against actual schedule; mark tentative dates clearly **| You**
-- [ ] **#24** Venues (e.g. "Chicago Cultural Center") → Confirm bookings; update or mark "Location TBD" if not locked **| You**
-
----
-
-## Community Page (`/community`)
-
-### Community Channels
-- [ ] **#25** Discord: disabled button, "Coming soon" badge, `href: null` → Add real Discord invite link once server is live **| You**
-- [x] **#26** Newsletter: `href: '#newsletter'` — anchor didn't exist → Added newsletter section with `id="newsletter"` at bottom of community page ✓
-- [ ] **#27** Instagram & TikTok: disabled, "Launching soon" badge → Add real profile URLs once accounts are created **| You**
-- [ ] **#28** Newsletter badge shows "1,200+ subscribers" → Confirm actual count **| You**
-- [ ] **#29** Stat: "500+ active members" → Confirm actual count **| You**
-- [x] **#30** "Questions answered daily" → Changed to "Growing every week" ✓
-
-### Member Spotlights
-- [ ] **#31** Tyrone B., Chicago — new job story → Confirm real person with consent, OR label clearly as "example story" **| You**
-- [ ] **#32** Sister Gloria, Memphis — Medicare story → Same **| You**
-- [ ] **#33** Keisha M., Atlanta — daycare story → Same **| You**
-
-### Challenge of the Week
-- [ ] **#34** Static: "Use AI to Write One Email Today" — never rotates → Update manually each week, OR build simple CMS/rotation logic **| You / Dev**
-
----
-
-## Contact Page (`/contact`)
-
-### Social Links Sidebar
-- [ ] **#35** Instagram: disabled, opacity-50 → Replace with real `@theplugai` URL **| You**
-- [ ] **#36** YouTube: disabled, opacity-50 → Replace with real channel URL **| You**
-- [ ] **#37** TikTok: disabled, opacity-50 → Replace with real profile URL **| You**
-- [ ] **#38** "Social pages launching soon — check back!" copy → Remove once accounts go live **| Dev**
-
-### Contact Email
-- [ ] **#39** `hello@theplugai.net` shown as contact address → Confirm inbox is monitored and Formspree routes there correctly **| You**
-
----
-
-## About Page (`/about`)
-
-### Founder Section
-- [ ] **#40** Avatar: purple circle with "S" initial → Upload real headshot of Stefan **| Photographer / You**
-- [ ] **#41** No social links for Stefan → Add LinkedIn URL (and Twitter/Instagram if applicable) **| You**
-- [ ] **#42** Achievements: "500+ People Trained", "12+ Workshops", "6 Cities" → Same verification needed as homepage stats (#3–5) **| You**
-
----
-
-## Recommended Tools Section
-
-### Tool Card Logos
-All 6 logos use `via.placeholder.com` URLs — these are temp colored squares, not real logos.
-
-- [ ] **#43** ChatGPT logo → Replace with real OpenAI/ChatGPT logo SVG or PNG **| Dev**
-- [ ] **#44** Claude logo → Replace with real Anthropic logo **| Dev**
-- [ ] **#45** Google Gemini logo → Replace with real Gemini logo **| Dev**
-- [ ] **#46** Canva AI logo → Replace with real Canva logo **| Dev**
-- [ ] **#47** Perplexity AI logo → Replace with real Perplexity logo **| Dev**
-- [ ] **#48** Notion AI logo → Replace with real Notion logo **| Dev**
-
-### Tool URLs
-- [ ] **#49** Verify all tool `href` values link to current, correct product pages **| Dev**
-
----
-
-## Footer (global)
-
-- [ ] **#50** All 4 social icons: `href: null`, opacity-50, "Social pages launching soon 🚀" → Replace with real URLs; remove coming-soon copy **| You**
-
----
-
-## Formspree Integration (affects ALL forms)
-
-- [ ] **#51** `NEXT_PUBLIC_FORMSPREE_CONTACT_ID` not set in Vercel → Create Formspree account → create a form → add ID to Vercel Environment Variables **| You**
-- [ ] **#52** `NEXT_PUBLIC_FORMSPREE_NEWSLETTER_ID` not set in Vercel → Same; gates all resource downloads + newsletter signups **| You**
-
----
-
-## How to Use This Checklist
-
-1. Check off each item `[x]` as it's completed
-2. Start with ship-blockers (#51–52, #17–22) — these make key features non-functional
-3. Address legal/trust items (#6, #31–33) before any press or public launch
-4. Items marked **Dev** can be fixed in code; items marked **You** need real-world content from Stefan
+Nothing above is code work — it's information only you have. Once you have an
+item, hand it over and it gets wired in directly (real dates back into
+`lib/data/workshops.ts`, real testimonials into `TestimonialsSection.tsx`, etc.).
