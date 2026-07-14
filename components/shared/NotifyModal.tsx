@@ -51,6 +51,7 @@ export default function NotifyModal({ trigger, title, description, source }: Not
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email || !email.includes('@')) return
+    if (status === 'loading') return
     setStatus('loading')
     const result = await submitToFormspree(FORMSPREE_NEWSLETTER_ID, {
       email,
