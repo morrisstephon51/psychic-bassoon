@@ -1,0 +1,50 @@
+{
+  "instagram": {
+    "image_max_mb": 8,
+    "video_max_mb": 100,
+    "min_width": 320,
+    "min_height": 320,
+    "max_width": 1440,
+    "supported_aspect_ratios": ["1:1", "4:5", "9:16", "1.91:1"],
+    "video_max_duration_s": 90,
+    "supported_formats": ["jpg", "png", "mp4", "mov"]
+  },
+  "tiktok": {
+    "video_max_mb": 287,
+    "min_width": 540,
+    "min_height": 960,
+    "supported_aspect_ratios": ["9:16", "1:1", "16:9"],
+    "video_max_duration_s": 600,
+    "supported_formats": ["mp4", "mov", "webm"]
+  },
+  "facebook": {
+    "image_max_mb": 4,
+    "video_max_mb": 4000,
+    "min_width": 400,
+    "supported_aspect_ratios": ["1.91:1", "1:1", "4:5", "9:16"],
+    "video_max_duration_s": 14400,
+    "supported_formats": ["jpg", "png", "mp4", "mov"]
+  },
+  "youtube": {
+    "video_max_mb": 128000,
+    "min_resolution": "720p",
+    "recommended_resolution": "1080p",
+    "supported_aspect_ratios": ["16:9", "9:16"],
+    "video_max_duration_s": 43200,
+    "supported_formats": ["mp4", "mov", "avi", "wmv", "flv", "webm"]
+  },
+  "twitter": {
+    "image_max_mb": 5,
+    "video_max_mb": 512,
+    "supported_aspect_ratios": ["16:9", "1:1"],
+    "video_max_duration_s": 140,
+    "supported_formats": ["jpg", "png", "gif", "mp4", "mov"]
+  },
+  "linkedin": {
+    "image_max_mb": 8,
+    "video_max_mb": 200,
+    "supported_aspect_ratios": ["1.91:1", "1:1"],
+    "video_max_duration_s": 600,
+    "supported_formats": ["jpg", "png", "mp4", "mov"]
+  }
+}
