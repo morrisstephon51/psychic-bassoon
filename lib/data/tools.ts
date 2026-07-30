@@ -11,6 +11,7 @@ export interface Tool {
   category: string
   learnSlug: string
   color: string
+  url: string
 }
 
 export const tools: Tool[] = [
@@ -25,6 +26,7 @@ export const tools: Tool[] = [
     category: 'Writing & Research',
     learnSlug: 'chatgpt-resume',
     color: '#10A37F',
+    url: 'https://chat.openai.com',
   },
   {
     id: '2',
@@ -37,6 +39,7 @@ export const tools: Tool[] = [
     category: 'Writing & Research',
     learnSlug: 'what-is-ai',
     color: '#D97706',
+    url: 'https://claude.ai',
   },
   {
     id: '3',
@@ -49,6 +52,7 @@ export const tools: Tool[] = [
     category: 'Productivity',
     learnSlug: 'free-ai-tools',
     color: '#4285F4',
+    url: 'https://gemini.google.com',
   },
   {
     id: '4',
@@ -61,6 +65,7 @@ export const tools: Tool[] = [
     category: 'Design',
     learnSlug: 'free-ai-tools',
     color: '#00C4CC',
+    url: 'https://canva.com',
   },
   {
     id: '5',
@@ -73,6 +78,7 @@ export const tools: Tool[] = [
     category: 'Research',
     learnSlug: 'free-ai-tools',
     color: '#20B2AA',
+    url: 'https://perplexity.ai',
   },
   {
     id: '6',
@@ -85,5 +91,6 @@ export const tools: Tool[] = [
     category: 'Productivity',
     learnSlug: 'ai-for-small-business',
     color: '#000000',
+    url: 'https://notion.so',
   },
 ]
