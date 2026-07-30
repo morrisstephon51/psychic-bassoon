@@ -16,11 +16,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'A valid email address is required' }, { status: 400 })
   }
 
-  const safeEmail = email.trim().toLowerCase().slice(0, 254)
-  const safeName  = String(name).slice(0, 200)
-  const safeOrg   = String(organization).slice(0, 200)
-  const safeType  = String(event_type).slice(0, 100)
-  const safeMsg   = message ? String(message).slice(0, 2000) : null
+  const safeEmail    = email.trim().toLowerCase().slice(0, 254)
+  const safeName     = String(name).slice(0, 200)
+  const safeOrg      = String(organization).slice(0, 200)
+  const safeType     = String(event_type).slice(0, 100)
+  const safeAttend   = attendance ? String(attendance).slice(0, 100) : null
+  const safeDatePref = date_preference ? String(date_preference).slice(0, 200) : null
+  const safeMsg      = message ? String(message).slice(0, 2000) : null
 
   try {
     const db = createServiceClient()
@@ -28,8 +30,8 @@ export async function POST(req: NextRequest) {
       name:            safeName,
       organization:    safeOrg,
       event_type:      safeType,
-      attendance:      attendance || null,
-      date_preference: date_preference || null,
+      attendance:      safeAttend,
+      date_preference: safeDatePref,
       email:           safeEmail,
       message:         safeMsg,
     })
@@ -42,7 +44,7 @@ export async function POST(req: NextRequest) {
       phone:    'n/a',
       zip_code: 'n/a',
       subject:  `Workshop request from ${safeOrg}`,
-      message:  `Event type: ${safeType}\nAttendance: ${attendance || 'n/a'}\nPreferred dates: ${date_preference || 'n/a'}\n\n${safeMsg || ''}`,
+      message:  `Event type: ${safeType}\nAttendance: ${safeAttend || 'n/a'}\nPreferred dates: ${safeDatePref || 'n/a'}\n\n${safeMsg || ''}`,
     }).catch((err) => console.error('[mailer]', err))
 
     return NextResponse.json({ ok: true })
