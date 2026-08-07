@@ -6,6 +6,11 @@ export const dynamic = 'force-dynamic'
 const VALID_STATUSES = ['identified','researching','drafting','submitted','awarded','rejected','watching']
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+  const secret = process.env.MUTATION_SECRET
+  if (secret && req.headers.get('authorization') !== `Bearer ${secret}`) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   try {
     const { status } = await req.json()
     if (!VALID_STATUSES.includes(status)) {

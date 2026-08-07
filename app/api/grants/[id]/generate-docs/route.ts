@@ -13,10 +13,15 @@ Proof of impact: Live 4-church deployment — MOFEC, All Nations, Faith Mission,
 Technical depth: Built and deployed autonomous AI agent systems (MUNDI multi-agent dashboard, content pipeline, intake routing agents) — rare for a community-stage nonprofit founder.
 Stage: Pre-501(c)(3), pursuing fiscal sponsorship through a church partner (Kenneth Vasser's congregation). Deployed proof of concept exists. Zero paid staff. Operating entirely on free-tier services.
 Differentiator: Not an outsider studying underserved communities — worked inside healthcare ops (Mount Sinai Hospital), education technology (Apollo After Schools), and Chicago's south suburban church networks. This is personal and proven, not parachuted-in.
-Website: https://psychic-bassoon-cam6stef.vercel.app
+Website: ${process.env.NEXT_PUBLIC_SITE_URL || 'https://psychic-bassoon-cam6stef.vercel.app'}
 `.trim()
 
-export async function POST(_req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+  const secret = process.env.MUTATION_SECRET
+  if (secret && req.headers.get('authorization') !== `Bearer ${secret}`) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   try {
     const db = createServiceClient()
 
@@ -121,6 +126,6 @@ NARRATIVE (Full Application) rules:
     return NextResponse.json({ ok: true, documents: saved })
   } catch (err) {
     console.error('[generate-docs]', err)
-    return NextResponse.json({ error: String(err) }, { status: 500 })
+    return NextResponse.json({ error: 'Document generation failed' }, { status: 500 })
   }
 }

@@ -49,11 +49,9 @@ export async function GET(req: NextRequest) {
   try {
     const db = createServiceClient()
 
-    // Get existing slugs so we can detect new grants
-    const { data: existing } = await db.from('grants').select('slug, deadline, status, name, funder, amount_max')
-    const existingSlugs = new Set((existing || []).map((g) => g.slug).filter(Boolean))
+    const { data: existing } = await db.from('grants').select('deadline, status, name, funder, amount_max')
 
-    // Approach: re-score and flag urgency for all grants, detect approaching deadlines
+    // Re-score and flag urgency for all grants, detect approaching deadlines
     const today = new Date()
     const urgentGrants = (existing || []).filter((g) => {
       if (!g.deadline) return false
@@ -65,8 +63,6 @@ export async function GET(req: NextRequest) {
     // Update last_checked_at for all grants
     await db.from('grants').update({ last_checked_at: new Date().toISOString() }).neq('id', '00000000-0000-0000-0000-000000000000')
 
-    // Build alert summary
-    const newCount = 0 // Granted MCP not available server-side in cron; new grants added via the tracker UI
     const totalGrants = existing?.length ?? 0
 
     // Draft Gmail alert if there are urgent deadlines
@@ -84,7 +80,7 @@ ${urgentList}
 
 Total grants tracked: ${totalGrants}
 
-View your full tracker: https://psychic-bassoon-cam6stef.vercel.app/grants
+View your full tracker: ${process.env.NEXT_PUBLIC_SITE_URL || 'https://psychic-bassoon-cam6stef.vercel.app'}/grants
 
 — The Plug AI Grant System`
 
@@ -114,10 +110,9 @@ View your full tracker: https://psychic-bassoon-cam6stef.vercel.app/grants
       ok: true,
       checked: totalGrants,
       urgent: urgentGrants.length,
-      newGrantsAdded: newCount,
     })
   } catch (err) {
     console.error('[scan-grants]', err)
-    return NextResponse.json({ error: String(err) }, { status: 500 })
+    return NextResponse.json({ error: 'Scan failed' }, { status: 500 })
   }
 }

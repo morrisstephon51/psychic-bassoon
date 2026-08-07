@@ -111,11 +111,18 @@ export default function GrantsPage() {
 
   useEffect(() => { fetchGrants() }, [fetchGrants])
 
+  const mutationHeaders = (): HeadersInit => {
+    const secret = process.env.NEXT_PUBLIC_MUTATION_SECRET
+    return secret
+      ? { 'Content-Type': 'application/json', Authorization: `Bearer ${secret}` }
+      : { 'Content-Type': 'application/json' }
+  }
+
   const updateStatus = async (id: string, status: string) => {
     setGrants((prev) => prev.map((g) => g.id === id ? { ...g, status } : g))
     await fetch(`/api/grants/${id}/status`, {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
+      headers: mutationHeaders(),
       body: JSON.stringify({ status }),
     })
   }
@@ -123,7 +130,10 @@ export default function GrantsPage() {
   const generateDocs = async (id: string) => {
     setGenerating(id)
     try {
-      const res = await fetch(`/api/grants/${id}/generate-docs`, { method: 'POST' })
+      const res = await fetch(`/api/grants/${id}/generate-docs`, {
+        method: 'POST',
+        headers: mutationHeaders(),
+      })
       if (!res.ok) throw new Error(await res.text())
       await fetchGrants()
       setExpanded(id)
