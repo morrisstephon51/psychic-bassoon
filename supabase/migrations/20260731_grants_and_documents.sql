@@ -1,5 +1,9 @@
 -- Grant matching tracker: grants + application documents
--- All DB ops go through server-side API routes (service role only)
+-- All DB ops go through server-side API routes using the service role, which
+-- bypasses RLS. RLS is enabled with NO permissive policies below, so the anon
+-- and authenticated roles (i.e. anything reaching Supabase with the public
+-- publishable key) are denied by default. This is intentional: the client
+-- never touches these tables directly.
 
 CREATE TABLE IF NOT EXISTS public.grants (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -22,6 +26,9 @@ CREATE TABLE IF NOT EXISTS public.grants (
 );
 
 ALTER TABLE public.grants ENABLE ROW LEVEL SECURITY;
+-- Explicit deny-all for the public roles (documents the intent that only the
+-- service role may read/write). REVOKE is belt-and-suspenders alongside RLS.
+REVOKE ALL ON public.grants FROM anon, authenticated;
 
 CREATE TABLE IF NOT EXISTS public.grant_documents (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -32,3 +39,4 @@ CREATE TABLE IF NOT EXISTS public.grant_documents (
 );
 
 ALTER TABLE public.grant_documents ENABLE ROW LEVEL SECURITY;
+REVOKE ALL ON public.grant_documents FROM anon, authenticated;

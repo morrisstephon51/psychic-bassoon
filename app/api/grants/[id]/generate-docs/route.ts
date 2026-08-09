@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
+import { requireMutationAuth } from '@/lib/mutation-auth'
 
 export const dynamic = 'force-dynamic'
 
@@ -17,9 +18,14 @@ Website: ${process.env.NEXT_PUBLIC_SITE_URL || 'https://psychic-bassoon-cam6stef
 `.trim()
 
 export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
-  const secret = process.env.MUTATION_SECRET
-  if (secret && req.headers.get('authorization') !== `Bearer ${secret}`) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  const denied = requireMutationAuth(req)
+  if (denied) return denied
+
+  if (!process.env.GROQ_API_KEY) {
+    return NextResponse.json(
+      { error: 'Document generation is not configured (missing GROQ_API_KEY)' },
+      { status: 503 }
+    )
   }
 
   try {
