@@ -58,8 +58,8 @@ export default function ToolCard({ tool, index = 0 }: ToolCardProps) {
           href={tool.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-7 h-7 rounded-lg bg-[#F5F3FF] border border-[#EDE9FE] flex items-center justify-center text-[#6B5A8E] hover:text-purple-600 hover:border-purple-300 transition-colors"
           aria-label={`Open ${tool.name}`}
+          className="w-7 h-7 rounded-lg bg-[#F5F3FF] border border-[#EDE9FE] flex items-center justify-center text-[#6B5A8E] hover:text-purple-600 hover:border-purple-300 transition-colors"
         >
           <ExternalLink size={13} />
         </a>
