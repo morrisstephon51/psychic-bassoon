@@ -317,7 +317,7 @@ export default function CommunityPage() {
             className="bg-white border border-[#EDE9FE] rounded-2xl p-8"
           >
             {status === 'done' ? (
-              <div className="text-center py-4">
+              <div role="status" className="text-center py-4">
                 <CheckCircle size={40} className="text-green-600 mx-auto mb-3" />
                 <h3 className="font-heading font-bold text-xl text-[#1A0533] mb-2">You&apos;re on the List!</h3>
                 <p className="text-[#6B5A8E] text-sm">
@@ -345,7 +345,7 @@ export default function CommunityPage() {
                     <ArrowRight size={16} />
                   </button>
                   {status === 'error' && (
-                    <p className="text-center text-red-500 text-xs">
+                    <p role="alert" className="text-center text-red-500 text-xs">
                       Something went wrong — please try again in a moment.
                     </p>
                   )}
