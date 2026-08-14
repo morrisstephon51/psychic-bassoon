@@ -83,7 +83,7 @@ export default function ContactPage() {
             className="bg-white border border-[#EDE9FE] rounded-3xl p-8 md:p-10"
           >
             {submitted ? (
-              <div className="flex flex-col items-center text-center py-10 gap-4">
+              <div role="status" className="flex flex-col items-center text-center py-10 gap-4">
                 <div className="w-16 h-16 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center">
                   <CheckCircle size={28} className="text-green-600" />
                 </div>
@@ -143,7 +143,7 @@ export default function ContactPage() {
                   </div>
 
                   {error && (
-                    <p className="text-sm text-red-500 bg-red-50 border border-red-100 rounded-xl px-4 py-3">{error}</p>
+                    <p role="alert" className="text-sm text-red-500 bg-red-50 border border-red-100 rounded-xl px-4 py-3">{error}</p>
                   )}
 
                   <button

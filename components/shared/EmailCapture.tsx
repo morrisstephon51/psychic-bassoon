@@ -46,6 +46,7 @@ export default function EmailCapture({
   if (status === 'done') {
     return (
       <motion.div
+        role="status"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4 }}
@@ -65,7 +66,7 @@ export default function EmailCapture({
   }
 
   const errorNote = status === 'error' && (
-    <p className="text-red-500 text-xs mt-2">
+    <p role="alert" className="text-red-500 text-xs mt-2">
       Something went wrong — please try again in a moment.
     </p>
   )
