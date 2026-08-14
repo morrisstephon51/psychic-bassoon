@@ -27,6 +27,22 @@ export default function Navbar() {
 
   useEffect(() => { setMobileOpen(false) }, [pathname])
 
+  // While the full-screen mobile menu is open, lock background scroll and let
+  // Escape close it. Standard modal behavior; only runs while the menu is open.
+  useEffect(() => {
+    if (!mobileOpen) return
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.style.overflow = prevOverflow
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [mobileOpen])
+
   return (
     <>
       <motion.nav
@@ -87,7 +103,9 @@ export default function Navbar() {
           <button
             className="md:hidden w-10 h-10 flex items-center justify-center text-[#6B5A8E] hover:text-purple-700 transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -98,6 +116,10 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site menu"
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
@@ -119,6 +141,7 @@ export default function Navbar() {
               <button
                 className="w-10 h-10 flex items-center justify-center text-[#6B5A8E]"
                 onClick={() => setMobileOpen(false)}
+                aria-label="Close menu"
               >
                 <X size={22} />
               </button>
