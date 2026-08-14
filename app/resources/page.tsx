@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import SectionHeader from '@/components/SectionHeader'
 import ResourceCard from '@/components/ResourceCard'
 import ToolCard from '@/components/ToolCard'
@@ -6,6 +7,21 @@ import { resources } from '@/lib/data/resources'
 import { tools } from '@/lib/data/tools'
 import Link from 'next/link'
 import { Play, BookOpen } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'Free AI Resources & Tools',
+  description:
+    'Downloads, guides, tools, and videos — a free library to support your AI learning journey. No paywalls, no credit cards. Just plug in.',
+  alternates: { canonical: '/resources' },
+  openGraph: {
+    title: 'Free AI Resources & Tools | The Plug AI',
+    description:
+      'A free library of AI downloads, guides, tools, and videos. No paywalls, no credit cards — just plug in.',
+    type: 'website',
+    url: '/resources',
+    siteName: 'The Plug AI',
+  },
+}
 
 export default function ResourcesPage() {
   return (
