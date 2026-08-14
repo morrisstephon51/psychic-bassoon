@@ -3,6 +3,7 @@ import { Space_Grotesk, Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/shared/Navbar'
 import Footer from '@/components/shared/Footer'
+import { SITE_URL } from '@/lib/site'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -17,7 +18,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://psychic-bassoon-cam6stef.vercel.app'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'The Plug AI — Get Connected. Get Skilled. Get into AI.',
     template: '%s | The Plug AI',
