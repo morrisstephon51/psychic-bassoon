@@ -2,47 +2,43 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useInView } from 'framer-motion'
-import { cn } from '@/lib/utils'
 
 interface StatCounterProps {
   value: number
-  suffix?: string
-  prefix?: string
   label: string
-  duration?: number
-  className?: string
+  suffix?: string
 }
 
-export default function StatCounter({ value, suffix = '', prefix = '', label, duration = 2000, className }: StatCounterProps) {
+export default function StatCounter({ value, label, suffix = '' }: StatCounterProps) {
   const [count, setCount] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-20px' })
-  const hasAnimated = useRef(false)
+  const isInView = useInView(ref, { once: true, margin: '-30px' })
 
   useEffect(() => {
-    if (!isInView || hasAnimated.current) return
-    hasAnimated.current = true
-    const startTime = Date.now()
-
-    const tick = () => {
-      const elapsed = Date.now() - startTime
-      const progress = Math.min(elapsed / duration, 1)
-      const eased = 1 - Math.pow(1 - progress, 3)
-      setCount(Math.round(value * eased))
-      if (progress < 1) requestAnimationFrame(tick)
-    }
-
-    requestAnimationFrame(tick)
-  }, [isInView, value, duration])
+    if (!isInView) return
+    let start = 0
+    const duration = 1200
+    const step = 16
+    const increment = value / (duration / step)
+    const timer = setInterval(() => {
+      start += increment
+      if (start >= value) {
+        setCount(value)
+        clearInterval(timer)
+      } else {
+        setCount(Math.floor(start))
+      }
+    }, step)
+    return () => clearInterval(timer)
+  }, [isInView, value])
 
   return (
-    <div ref={ref} className={cn('text-center', className)}>
-      <div className="font-heading font-bold text-4xl md:text-5xl text-[#1A0533] mb-1">
-        <span className="text-green-600">{prefix}</span>
-        {count.toLocaleString()}
-        <span className="text-green-600">{suffix}</span>
-      </div>
-      <p className="text-[#6B5A8E] text-sm md:text-base font-medium">{label}</p>
+    <div ref={ref} className="text-center">
+      <p className="font-heading font-bold text-4xl text-[#1A0533]">
+        {count}
+        {suffix}
+      </p>
+      <p className="text-[#9385B5] text-sm mt-1">{label}</p>
     </div>
   )
 }

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4C1D95"/>
+      <stop offset="100%" style="stop-color:#6D28D9"/>
+    </linearGradient>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="300" fill="url(#bg)"/>
+  <rect width="600" height="300" fill="url(#grid)"/>
+  <circle cx="520" cy="60" r="120" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="80" cy="240" r="80" fill="rgba(255,255,255,0.04)"/>
+  <rect x="40" y="80" width="48" height="48" rx="12" fill="rgba(255,255,255,0.15)"/>
+  <text x="64" y="112" font-family="sans-serif" font-size="26" fill="white" text-anchor="middle">🚀</text>
+  <text x="40" y="168" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="white">AI Starter Kit</text>
+  <text x="40" y="196" font-family="sans-serif" font-size="14" fill="rgba(255,255,255,0.7)">Your first 20 minutes with AI</text>
+  <rect x="40" y="220" width="60" height="24" rx="12" fill="rgba(255,255,255,0.15)"/>
+  <text x="70" y="236" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle" font-weight="600">PDF · 18 pages</text>
+</svg>
