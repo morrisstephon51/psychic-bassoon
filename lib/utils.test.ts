@@ -20,6 +20,14 @@ test('formatDate keeps the calendar day for date-only strings (issue #21)', () =
   assert.match(formatDate('2026-08-30'), /August 30, 2026/)
 })
 
+test('formatDate renders the correct weekday for date-only strings', () => {
+  // Local-midnight parsing must keep the weekday intact too — a UTC-parse
+  // off-by-one would shift these back to the prior day (Monday / Friday).
+  // (Folded in from the previously-unrun tests/utils.date.test.ts.)
+  assert.equal(formatDate('2026-09-15'), 'Tuesday, September 15, 2026')
+  assert.equal(formatDate('2026-07-04'), 'Saturday, July 4, 2026')
+})
+
 test('formatShortDate keeps the calendar day for date-only strings (issue #21)', () => {
   // Before the fix this rendered "Aug 29, 2026" in Chicago time.
   assert.equal(formatShortDate('2026-08-30'), 'Aug 30, 2026')
