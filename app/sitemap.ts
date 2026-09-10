@@ -1,7 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { lessons } from '@/lib/data/lessons'
-
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://psychic-bassoon-cam6stef.vercel.app'
+import { SITE_URL as BASE_URL } from '@/lib/site'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()

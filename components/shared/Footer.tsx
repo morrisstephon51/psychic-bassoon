@@ -101,6 +101,7 @@ export default function Footer() {
             </p>
             {status === 'done' ? (
               <motion.div
+                role="status"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="bg-green-50 border border-green-200 rounded-xl p-4 text-center"
@@ -126,7 +127,7 @@ export default function Footer() {
                   {status === 'sending' ? 'Sending…' : 'Plug Me In'}
                 </button>
                 {status === 'error' && (
-                  <p className="text-red-500 text-xs">Something went wrong — please try again.</p>
+                  <p role="alert" className="text-red-500 text-xs">Something went wrong — please try again.</p>
                 )}
               </form>
             )}

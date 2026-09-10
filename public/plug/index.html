@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Plug AI · AI literacy for the community</title>
+<meta name="description" content="The Plug AI teaches real AI skills to faith communities and first-generation students in south suburban Cook County, Chicago.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23FAFAFA'/><rect x='9' y='13' width='14' height='6' rx='2' fill='%2316A34A'/></svg>">
+<link rel="stylesheet" href="/plug/scrollcraft.css">
+<style>
+  /* Self-hosted fonts (latin subsets, from Google Fonts). Space Grotesk is the
+     live site's heading face; Geist carries body. */
+  @font-face {
+    font-family: "Space Grotesk";
+    src: url("/plug/assets/fonts/spacegrotesk-var.woff2") format("woff2");
+    font-weight: 700; font-display: swap;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+2013-2019, U+2212;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("/plug/assets/fonts/geist-var.woff2") format("woff2");
+    font-weight: 100 900; font-display: swap;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+2013-2019, U+2212;
+  }
+
+  /* ── Brand: the live site's Light Brand Vault palette ──────────── */
+  :root {
+    --sc-canvas:     #FAFAFA;
+    --sc-surface:    #FFFFFF;
+    --sc-ink:        #1A0533;
+    --sc-ink-soft:   #6B5A8E;
+    --sc-accent:     #16A34A;   /* the green. Owns energy: cord, plug, flood  */
+    --sc-accent-ink: #08200F;
+    --sc-font-display: "Space Grotesk", system-ui, sans-serif;
+    --sc-font-text:    "Geist", system-ui, sans-serif;
+
+    --tp-purple:      #7C3AED;  /* brand rule colour. Hairlines, never text   */
+    --tp-green-deep:  #15803D;  /* the green at small-text size (4.8:1)       */
+    --tp-flood:       #22C55E;  /* the brighter green the page floods to      */
+
+    /* Light-canvas corrections: shadows halved and purple-tinted (the live
+       site's card shadows), edge light inverted to white. */
+    --sc-shadow-color: 271 66% 39%;
+    --sc-e1: 0 1px 3px hsl(var(--sc-shadow-color) / 0.07), 0 4px 16px hsl(var(--sc-shadow-color) / 0.04);
+    --sc-e2: 0 2px 6px hsl(var(--sc-shadow-color) / 0.09), 0 8px 24px hsl(var(--sc-shadow-color) / 0.06);
+    --sc-e3: 0 4px 12px hsl(var(--sc-shadow-color) / 0.12), 0 16px 40px hsl(var(--sc-shadow-color) / 0.08);
+    --sc-edge: inset 0 1px 0 #FFFFFF;
+  }
+
+  /* ── Chapter grounds: hard cuts, painted per section ───────────── */
+  .ch--cover  { background: #FAFAFA; }
+  .ch--lie    { background: #F5F3FF; }
+  .ch--gap    { background: #F0EEFF; }
+  .ch--strip  { background: #FAFAFA; }
+  .ch--in {
+    background: var(--tp-flood);
+    --sc-ink: #1A0533; --sc-ink-soft: #1A0533;
+    --sc-hairline: color-mix(in oklab, #1A0533 28%, transparent);
+    color: var(--sc-ink);
+  }
+
+  /* ── Folio: the chapter marker in the margin ───────────────────── */
+  .folio {
+    position: fixed; left: var(--sc-gutter); top: 50%;
+    rotate: 180deg; writing-mode: vertical-rl;
+    translate: 0 50%;
+    z-index: var(--sc-z-chrome);
+    font-family: var(--sc-font-display);
+    font-size: var(--sc-t-xs); font-weight: 700;
+    letter-spacing: var(--sc-track-wide); text-transform: uppercase;
+    color: var(--tp-green-deep);
+    opacity: 0; transition: opacity var(--sc-d-base) var(--sc-ease-out);
+    pointer-events: none;
+  }
+  .folio.is-on { opacity: 1; }
+  .folio.is-dark { color: #1A0533; }
+  @media (max-width: 860px) { .folio { display: none; } }
+
+  /* ── Cover: the album-cover title page ─────────────────────────── */
+  .cover { display: grid; align-content: center; min-height: 100vh; position: relative; }
+  .cover .sc-wrap { display: grid; gap: var(--sc-6); }
+  .tp-mark {
+    font-family: var(--sc-font-display);
+    font-weight: 700;
+    font-size: clamp(3.2rem, 1.2rem + 12.5vw, 11.5rem);
+    line-height: var(--sc-leading-none);
+    letter-spacing: var(--sc-track-tight);
+    text-wrap: balance;
+    margin: 0;
+  }
+  .tp-mark b { color: var(--sc-accent); font-weight: 700; }
+  .cover-line {
+    font-size: var(--sc-t-lg); color: var(--sc-ink-soft);
+    max-width: 34ch; line-height: 1.5; margin: 0;
+  }
+  .cover-rule { width: clamp(4rem, 10vw, 9rem); height: 4px; background: var(--tp-purple); border: 0; margin: 0; }
+  /* The cord: draws downward as the cover scrolls away */
+  .cover-cord {
+    position: absolute; left: 50%; bottom: 0; translate: -50% 0;
+    height: 38vh; width: 4px; overflow: visible; pointer-events: none;
+  }
+  .cover-cord line {
+    stroke: var(--sc-accent); stroke-width: 4; stroke-linecap: round;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: calc(1000 - var(--sc-p, 0) * 1000);
+  }
+
+  /* A flow chapter directly after a pinned act: the stage needs a viewport to
+     slide off, so full top padding there doubles the empty screen. */
+  .tight-top { padding-block-start: var(--sc-6); }
+
+  /* ── Chapter spreads ───────────────────────────────────────────── */
+  .spread { display: grid; gap: var(--sc-7); }
+  .pull {
+    font-family: var(--sc-font-display); font-weight: 700;
+    font-size: var(--sc-t-3xl); line-height: var(--sc-leading-tight);
+    letter-spacing: var(--sc-track-tight); text-wrap: balance; margin: 0;
+  }
+  /* Space Grotesk ships no italic; emphasis goes to the accent instead of a
+     synthetic slant. */
+  .pull em { font-style: normal; color: var(--tp-green-deep); }
+  .pull-answer {
+    font-family: var(--sc-font-display); font-weight: 700;
+    font-size: var(--sc-t-xl); color: var(--tp-green-deep); margin: 0;
+  }
+
+  /* Gap chapter: the two panels */
+  .gap-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--sc-5);
+    position: relative;
+  }
+  .gap-panel {
+    border-radius: var(--sc-r-md);
+    padding: var(--sc-7) var(--sc-6);
+    min-height: clamp(16rem, 38vh, 24rem);
+    display: grid; align-content: end; gap: var(--sc-3);
+    box-shadow: var(--sc-e2), var(--sc-edge);
+  }
+  .gap-panel h3 {
+    font-family: var(--sc-font-display); font-weight: 700;
+    font-size: var(--sc-t-xl); margin: 0; letter-spacing: var(--sc-track-snug);
+  }
+  .gap-panel p { margin: 0; font-size: var(--sc-t-base); }
+  .gap-panel--has {
+    background:
+      radial-gradient(120% 90% at 85% 0%, color-mix(in oklab, var(--tp-purple) 14%, transparent), transparent 55%),
+      var(--sc-surface);
+    border: 1px solid #EDE9FE;
+  }
+  .gap-panel--needs {
+    background:
+      radial-gradient(120% 90% at 15% 100%, color-mix(in oklab, var(--sc-accent) 30%, transparent), transparent 60%),
+      #1A0533;
+    --sc-ink: #F4F1FF; --sc-ink-soft: #BCAFDC;
+    color: var(--sc-ink);
+  }
+  .gap-glow {
+    position: absolute; inset: -18% -8%; z-index: -1; pointer-events: none;
+    background: radial-gradient(45% 40% at 50% 50%, color-mix(in oklab, var(--tp-purple) 8%, transparent), transparent 70%);
+  }
+  @media (max-width: 860px) { .gap-grid { grid-template-columns: 1fr; } }
+
+  /* ── The strip: signature act ──────────────────────────────────── */
+  /* NB: no position on this class. The engine's .sc-stage is sticky, and
+     overriding it un-pins the act (sticky still contains the absolute flood). */
+  .strip-stage {
+    display: grid; grid-template-rows: auto 1fr auto; gap: var(--sc-6);
+    padding: calc(var(--sc-8) + env(safe-area-inset-top)) var(--sc-gutter) var(--sc-8);
+    overflow: hidden;
+  }
+  .strip-intro { max-width: var(--sc-maxw); margin-inline: auto; width: 100%; }
+  .strip-intro h2 { margin: 0; }
+
+  /* the card carousel: one card lit at a time */
+  .strip-cards { position: relative; max-width: 46rem; margin-inline: auto; width: 100%; align-self: center; }
+  .strip-card {
+    position: absolute; inset: 0;
+    display: grid; align-content: center; gap: var(--sc-4);
+    opacity: 0; transform: translateY(14px) scale(0.98);
+    transition: opacity 300ms var(--sc-ease-out), transform 300ms var(--sc-ease-out);
+    text-align: center;
+  }
+  .strip-card.is-active { opacity: 1; transform: none; }
+  .strip-card h3 {
+    font-family: var(--sc-font-display); font-weight: 700;
+    font-size: var(--sc-t-2xl); margin: 0; letter-spacing: var(--sc-track-snug);
+  }
+  .strip-card p { margin: 0 auto; max-width: 38ch; font-size: var(--sc-t-lg); color: var(--sc-ink-soft); }
+
+  /* the strip itself: a white card on the light ground */
+  .strip-rail { max-width: 52rem; margin-inline: auto; width: 100%; position: relative; }
+  .strip-bar {
+    height: 4.5rem; border-radius: var(--sc-r-lg);
+    background: var(--sc-surface);
+    border: 1px solid #EDE9FE;
+    box-shadow: var(--sc-e3), var(--sc-edge);
+    display: flex; align-items: center; justify-content: space-evenly;
+    position: relative;
+  }
+  .socket {
+    width: 2.6rem; height: 2.6rem; border-radius: var(--sc-r-sm);
+    background: #F0EEFF;
+    border: 1px solid #D8D0F7;
+    display: grid; place-items: center;
+    transition: box-shadow 260ms var(--sc-ease-out), border-color 260ms var(--sc-ease-out), background 260ms var(--sc-ease-out);
+  }
+  .socket::before {
+    content: ""; width: 0.9rem; height: 0.32rem;
+    background: #C4B5FD; border-radius: 2px;
+    box-shadow: 0 0.55rem 0 #C4B5FD;
+    translate: 0 -0.28rem;
+    transition: background 260ms, box-shadow 260ms;
+  }
+  .socket.is-lit {
+    background: #FFFFFF; border-color: var(--sc-accent);
+    box-shadow: 0 2px 18px -2px color-mix(in oklab, var(--sc-accent) 55%, transparent), var(--sc-edge);
+  }
+  .socket.is-lit::before { background: var(--sc-accent); box-shadow: 0 0.55rem 0 var(--sc-accent); }
+  .plug {
+    position: absolute; top: -2.4rem; left: 0;
+    width: 2.6rem; translate: -50% 0;
+    will-change: transform; pointer-events: none;
+  }
+  .plug svg { display: block; width: 100%; height: auto; }
+  .strip-cord {
+    position: absolute; top: -2.35rem; left: 0; translate: -50% 0;
+    width: 4px; height: 60vh; bottom: 100%;
+    background: linear-gradient(to top, var(--sc-accent), color-mix(in oklab, var(--sc-accent) 25%, transparent));
+    transform-origin: bottom; pointer-events: none;
+  }
+
+  /* the flood */
+  .flood {
+    position: absolute; inset: 0; z-index: 3; pointer-events: none;
+    background: var(--tp-flood);
+    clip-path: circle(0% at 50% 78%);
+    display: grid; place-items: center;
+  }
+  /* Clip radius and copy are driven from scroll in JS: the ignition is
+     scrubbed by the hand, not fired as a one-shot animation. */
+  .flood p {
+    font-family: var(--sc-font-display); font-weight: 700;
+    font-size: var(--sc-t-3xl); letter-spacing: var(--sc-track-tight);
+    color: #1A0533; margin: 0; text-align: center; padding-inline: var(--sc-gutter);
+    opacity: 0; transform: translateY(10px);
+  }
+
+  /* ── Close: the masthead plate on the flooded green ────────────── */
+  .close-plate { display: grid; gap: var(--sc-6); }
+  .close-plate .tp-mark { font-size: var(--sc-t-4xl); }
+  .close-tag { font-size: var(--sc-t-lg); font-weight: 600; color: var(--sc-ink); margin: 0; }
+  .plugin-link {
+    justify-self: start;
+    font-family: var(--sc-font-display); font-weight: 700;
+    font-size: var(--sc-t-2xl); letter-spacing: var(--sc-track-snug);
+    color: var(--sc-ink); text-decoration-line: underline;
+    text-decoration-thickness: 0.09em; text-underline-offset: 0.14em;
+    transition: opacity 140ms var(--sc-ease-out);
+  }
+  .plugin-link:hover { opacity: 0.72; }
+  .plugin-link:active { translate: 0 1px; }
+  .plugin-link:focus-visible { outline: 3px solid #1A0533; outline-offset: 6px; border-radius: 2px; }
+  .colophon {
+    display: flex; flex-wrap: wrap; gap: var(--sc-2) var(--sc-5);
+    font-size: var(--sc-t-sm); color: var(--sc-ink);
+    border-top: 1px solid var(--sc-hairline); padding-top: var(--sc-5); margin-top: var(--sc-7);
+  }
+  .colophon a { color: inherit; }
+  .colophon a:focus-visible { outline: 2px solid #1A0533; outline-offset: 3px; }
+
+  /* ── Phones: step the display down, tighten air ────────────────── */
+  @media (max-width: 700px) {
+    .pull { font-size: var(--sc-t-2xl); }
+    .close-plate .tp-mark { font-size: var(--sc-t-3xl); }
+    .strip-cards { min-height: 11rem; }
+  }
+
+  /* ── Reduced motion: everything legible at rest ────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .strip-card { position: static; opacity: 1; transform: none; margin-top: var(--sc-6); }
+    .strip-cards { display: block; }
+    .flood { display: none; }
+    .cover-cord line { stroke-dashoffset: 0; }
+  }
+</style>
+</head>
+<body>
+
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<p class="folio" aria-hidden="true"></p>
+
+<main id="top">
+
+  <!-- COVER · Arrival. The album-cover title page, in normal flow like a real
+       magazine cover: nothing cued, so it can never slide off empty. The cord
+       draws from the act's own progress as the reader scrolls past. -->
+  <section class="ch--cover cover" data-sc-act="flow" data-chapter="The Plug AI">
+    <div class="sc-wrap">
+      <h1 class="tp-mark">The Plug <b>AI</b></h1>
+      <hr class="cover-rule" aria-hidden="true">
+      <p class="cover-line">AI literacy for faith communities and first&#8209;generation students. South suburban Cook County, Chicago.</p>
+    </div>
+    <svg class="cover-cord" viewBox="0 0 4 1000" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="2" y1="0" x2="2" y2="1000"/>
+    </svg>
+  </section>
+
+  <!-- CHAPTER · The lie. Being spoken to: the line assembles as it arrives. -->
+  <section class="ch--lie sc-section tight-top" data-sc-act="flow" data-chapter="The Lie">
+    <div class="sc-wrap spread">
+      <h2 class="pull" data-sc-cue="0.04 0.96 0.14" data-sc-kinetic="lines">Nobody told me AI was for people like&nbsp;me.</h2>
+      <div class="sc-stack" data-sc-in data-sc-stagger="80">
+        <p class="pull-answer">So I'm telling you.</p>
+        <p class="sc-body">The Plug AI teaches real AI skills in plain language: what the tools do, what they cost (usually nothing), and how to put them to work on your actual life. No gatekeeping, no jargon, no pretending you need a computer science degree.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTER · The gap. Trust: the argument, named plainly. -->
+  <section class="ch--gap sc-section" data-sc-act="flow" data-chapter="The Gap">
+    <div class="sc-wrap spread">
+      <div class="sc-stack" data-sc-in data-sc-stagger="70">
+        <p class="sc-label">The gap</p>
+        <h2 class="pull">Closing the gap between who <em>has</em> AI access and who <em>needs</em>&nbsp;it.</h2>
+      </div>
+      <div class="gap-grid">
+        <div class="gap-glow" data-sc-parallax="-0.6" aria-hidden="true"></div>
+        <div class="gap-panel gap-panel--has" data-sc-reveal="left" data-sc-reveal-at="0.1 0.55">
+          <h3>Who has it</h3>
+          <p class="sc-body">Downtown offices. Venture money. A tutor in every pocket, already paid for.</p>
+        </div>
+        <div class="gap-panel gap-panel--needs" data-sc-reveal="right" data-sc-reveal-at="0.18 0.63">
+          <h3>Who needs it</h3>
+          <p class="sc-body">Our block. Our churches. Our first&#8209;gen students, told this wasn't built for them.</p>
+        </div>
+      </div>
+      <p class="sc-body" data-sc-in>Access isn't a device. It's somebody who shows you what the tool can do for your life, in your language, on your schedule. That somebody is us.</p>
+    </div>
+  </section>
+
+  <!-- CHAPTER · The current. The signature act: scroll seats the plug,
+       socket by socket; the last one ignites the page. The stillness between
+       the last socket and the flood is authored (see BRIEF.md). -->
+  <section class="ch--strip" data-sc-act="pin" data-sc-span="4.5" data-chapter="The Current" id="strip-act">
+    <div data-sc-stage class="strip-stage">
+      <div class="strip-intro">
+        <h2 class="pull" data-sc-cue="0 0.16 0">What you learn when you plug&nbsp;in.</h2>
+      </div>
+
+      <div class="strip-cards" id="strip-cards" aria-live="polite">
+        <div class="strip-card" data-card="0">
+          <h3>Prompting</h3>
+          <p>Say what you need so the tool actually helps.</p>
+        </div>
+        <div class="strip-card" data-card="1">
+          <h3>Everyday tools</h3>
+          <p>The free AI worth your time, and the hype that isn't.</p>
+        </div>
+        <div class="strip-card" data-card="2">
+          <h3>Your busiest day</h3>
+          <p>Put AI on the schedule, the budget, the newsletter.</p>
+        </div>
+        <div class="strip-card" data-card="3">
+          <h3>Make it real</h3>
+          <p>Build something your community can use next week.</p>
+        </div>
+      </div>
+
+      <div class="strip-rail">
+        <div class="strip-bar">
+          <div class="socket" data-socket="0"></div>
+          <div class="socket" data-socket="1"></div>
+          <div class="socket" data-socket="2"></div>
+          <div class="socket" data-socket="3"></div>
+        </div>
+        <div class="plug" id="plug" aria-hidden="true">
+          <div class="strip-cord"></div>
+          <svg viewBox="0 0 40 34">
+            <rect x="14" y="0" width="12" height="10" rx="3" fill="#16A34A"/>
+            <rect x="6" y="8" width="28" height="22" rx="6" fill="#16A34A"/>
+            <rect x="14" y="24" width="4" height="8" rx="2" fill="#F0FDF4"/>
+            <rect x="22" y="24" width="4" height="8" rx="2" fill="#F0FDF4"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="flood" id="flood" aria-hidden="true">
+        <p>This is what access feels&nbsp;like.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSE · Resolve. The page stays powered: the masthead plate on green. -->
+  <section class="ch--in sc-section" data-chapter="" id="join">
+    <div class="sc-wrap close-plate" data-sc-in data-sc-stagger="70">
+      <h2 class="tp-mark">The plug is&nbsp;in.</h2>
+      <p class="close-tag">Get Connected. Get Skilled. Get into&nbsp;AI.</p>
+      <a class="plugin-link" href="/contact">Plug In</a>
+      <div class="colophon">
+        <a href="/learn">Learn</a>
+        <a href="/workshops">Workshops</a>
+        <a href="/community">Community</a>
+        <a href="/about">About</a>
+        <a href="/resources">Resources</a>
+        <a href="mailto:founder@theplugai.info">founder@theplugai.info</a>
+      </div>
+      <div class="colophon" style="border-top: 0; padding-top: 0; margin-top: 0;">
+        <span>The Plug AI</span>
+        <span>Founded by Stef</span>
+        <span>South suburban Cook County, Chicago</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="/plug/scrollcraft.js"></script>
+<script>
+ScrollCraft.mount(document.body);
+
+(() => {
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ── Folio: chapter marker in the margin ── */
+  const folio = document.querySelector(".folio");
+  const chapters = [...document.querySelectorAll("[data-chapter]")];
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      const name = e.target.dataset.chapter;
+      folio.textContent = name;
+      folio.classList.toggle("is-on", Boolean(name));
+      folio.classList.toggle("is-dark", e.target.classList.contains("ch--in"));
+    }
+  }, { rootMargin: "-45% 0px -45% 0px" });
+  chapters.forEach((c) => io.observe(c));
+
+  /* ── The strip ── */
+  const act    = document.getElementById("strip-act");
+  const plug   = document.getElementById("plug");
+  const cord   = plug.querySelector(".strip-cord");
+  const flood  = document.getElementById("flood");
+  const sockets = [...document.querySelectorAll(".socket")];
+  const cards   = [...document.querySelectorAll(".strip-card")];
+  const bar     = document.querySelector(".strip-bar");
+
+  const SEATS = [0.14, 0.29, 0.44, 0.59]; // socket lights; card swaps
+  const FLOOD_FROM = 0.70, FLOOD_FULL = 0.86; // 0.59 → 0.70 is the authored silence
+  const floodText = flood.querySelector("p");
+  const clamp01 = (v) => Math.max(0, Math.min(1, v));
+
+  if (reduced) {
+    sockets.forEach((s) => s.classList.add("is-lit"));
+    plug.style.display = "none";
+    return;
+  }
+
+  function frame() {
+    const p = parseFloat(getComputedStyle(act).getPropertyValue("--sc-p")) || 0;
+
+    // plug x: one continuous glide through the socket centres, so scroll
+    // always moves something and no stretch of the act is pixel-frozen
+    const rect = bar.getBoundingClientRect();
+    if (rect.width > 0) {
+      const xs = sockets.map((s) => {
+        const r = s.getBoundingClientRect();
+        return r.left - rect.left + r.width / 2;
+      });
+      const pts = [xs[0] * 0.2, xs[0], xs[1], xs[2], xs[3]];
+      const t = clamp01(p / SEATS[3]) * (pts.length - 1);
+      const seg = Math.min(Math.floor(t), pts.length - 2);
+      const x = pts[seg] + (pts[seg + 1] - pts[seg]) * (t - seg);
+      plug.style.transform = `translateX(${x}px)`;
+      cord.style.height = `${Math.max(window.innerHeight * 0.6 - p * 40, 120)}px`;
+    }
+
+    let active = -1;
+    SEATS.forEach((at, i) => {
+      const lit = p >= at;
+      sockets[i].classList.toggle("is-lit", lit);
+      if (lit) active = i;
+    });
+    cards.forEach((c, i) => c.classList.toggle("is-active", i === active));
+
+    // the ignition, scrubbed: radius follows the hand
+    const f = clamp01((p - FLOOD_FROM) / (FLOOD_FULL - FLOOD_FROM));
+    flood.style.clipPath = `circle(${(f * 150).toFixed(2)}% at 50% 78%)`;
+    const ft = clamp01((f - 0.5) / 0.4);
+    floodText.style.opacity = ft;
+    floodText.style.transform = `translateY(${((1 - ft) * 10).toFixed(2)}px)`;
+    // release before the un-pin so the flood never slides over the close
+    flood.style.opacity = p >= 0.995 ? "0" : "1";
+
+    // Publish the strip's real visual state for the verification harness
+    // (data-sc-verify-state feeds its dead-scroll signature; the window
+    // between the last socket and the flood is the authored silence from
+    // BRIEF.md, declared with data-sc-verify-hold).
+    const stage = act.querySelector("[data-sc-stage]");
+    stage.setAttribute("data-sc-verify-state",
+      `plug:${(p / SEATS[3]).toFixed(2)}|lit:${active + 1}|flood:${f.toFixed(2)}`);
+    stage.setAttribute("data-sc-verify-hold",
+      String(p >= SEATS[3] && p < FLOOD_FROM));
+
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

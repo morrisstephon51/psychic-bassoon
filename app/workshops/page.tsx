@@ -211,7 +211,7 @@ export default function WorkshopsPage() {
             className="bg-white border border-[#EDE9FE] rounded-3xl p-8 md:p-10"
           >
             {status === 'done' ? (
-              <div className="text-center py-8">
+              <div role="status" className="text-center py-8">
                 <div className="w-16 h-16 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center mx-auto mb-4">
                   <CheckCircle size={28} className="text-green-600" />
                 </div>
@@ -328,7 +328,7 @@ export default function WorkshopsPage() {
                     <ArrowRight size={18} />
                   </button>
                   {status === 'error' && (
-                    <p className="text-center text-red-500 text-sm">
+                    <p role="alert" className="text-center text-red-500 text-sm">
                       Something went wrong — please try again, or reach us through the contact page.
                     </p>
                   )}

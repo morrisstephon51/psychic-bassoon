@@ -4,8 +4,7 @@ import { Clock, ArrowLeft, ArrowRight, CheckCircle, BookOpen } from 'lucide-reac
 import { lessons } from '@/lib/data/lessons'
 import Badge from '@/components/ui/Badge'
 import ShareButton from '@/components/ShareButton'
-
-const SITE_URL = 'https://psychic-bassoon-cam6stef.vercel.app'
+import { SITE_URL } from '@/lib/site'
 
 interface LessonPageProps {
   params: { slug: string }
