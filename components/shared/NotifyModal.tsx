@@ -19,6 +19,7 @@ export default function NotifyModal({ trigger, title, description, source }: Not
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<Status>('idle')
   const inputRef = useRef<HTMLInputElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
 
   const open = () => {
     setStatus('idle')
@@ -29,16 +30,42 @@ export default function NotifyModal({ trigger, title, description, source }: Not
 
   useEffect(() => {
     if (!isOpen) return
+    const previouslyFocused = document.activeElement as HTMLElement | null
     document.body.style.overflow = 'hidden'
     const focusTimer = setTimeout(() => inputRef.current?.focus(), 50)
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close()
+      if (e.key === 'Escape') {
+        close()
+        return
+      }
+      if (e.key !== 'Tab') return
+      // Trap focus inside the dialog so keyboard users can't tab into the
+      // page behind the overlay while the modal is open (WCAG 2.4.3 / 2.1.2).
+      const dialog = dialogRef.current
+      if (!dialog) return
+      const focusable = dialog.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      const active = document.activeElement
+      if (e.shiftKey) {
+        if (active === first || !dialog.contains(active)) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else if (active === last || !dialog.contains(active)) {
+        e.preventDefault()
+        first.focus()
+      }
     }
     window.addEventListener('keydown', onKeyDown)
     return () => {
       document.body.style.overflow = ''
       clearTimeout(focusTimer)
       window.removeEventListener('keydown', onKeyDown)
+      previouslyFocused?.focus?.()
     }
   }, [isOpen])
 
@@ -75,6 +102,10 @@ export default function NotifyModal({ trigger, title, description, source }: Not
             onClick={close}
           >
             <motion.div
+              ref={dialogRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="notify-modal-heading"
               initial={{ opacity: 0, y: 20, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.96 }}
@@ -91,11 +122,11 @@ export default function NotifyModal({ trigger, title, description, source }: Not
               </button>
 
               {status === 'success' ? (
-                <div className="flex flex-col items-center text-center gap-3 py-6">
+                <div role="status" className="flex flex-col items-center text-center gap-3 py-6">
                   <div className="w-12 h-12 rounded-full bg-green-100 border border-green-200 flex items-center justify-center">
                     <CheckCircle size={24} className="text-green-600" />
                   </div>
-                  <p className="font-heading font-bold text-lg text-[#1A0533]">You&apos;re on the list</p>
+                  <p id="notify-modal-heading" className="font-heading font-bold text-lg text-[#1A0533]">You&apos;re on the list</p>
                   <p className="text-[#6B5A8E] text-sm">We&apos;ll email you the moment this is live.</p>
                 </div>
               ) : (
@@ -103,7 +134,7 @@ export default function NotifyModal({ trigger, title, description, source }: Not
                   <div className="w-11 h-11 rounded-xl bg-green-100 border border-green-200 flex items-center justify-center mb-4">
                     <Mail size={20} className="text-green-600" />
                   </div>
-                  <h3 className="font-heading font-bold text-lg text-[#1A0533] mb-1 pr-6">{title}</h3>
+                  <h3 id="notify-modal-heading" className="font-heading font-bold text-lg text-[#1A0533] mb-1 pr-6">{title}</h3>
                   {description && <p className="text-[#6B5A8E] text-sm mb-4">{description}</p>}
 
                   <form onSubmit={handleSubmit} className="space-y-3 mt-4">
@@ -125,7 +156,7 @@ export default function NotifyModal({ trigger, title, description, source }: Not
                       {status !== 'loading' && <ArrowRight size={16} />}
                     </button>
                     {status === 'error' && (
-                      <p className="flex items-start gap-1.5 text-red-600 text-xs">
+                      <p role="alert" className="flex items-start gap-1.5 text-red-600 text-xs">
                         <AlertCircle size={14} className="flex-shrink-0 mt-0.5" />
                         <span>
                           Something went wrong. Email us directly at{' '}
