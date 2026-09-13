@@ -1,0 +1,79 @@
+{
+  "_updated": "2026-05-16",
+  "_refresh_interval_days": 7,
+  "typography": {
+    "trending": [
+      "ultra-wide tracking (letter-spacing: 0.15em+)",
+      "mixed weight within a single headline",
+      "oversized single-word headlines",
+      "editorial serif + geometric sans pairing",
+      "variable font weight animation"
+    ],
+    "overused": [
+      "centered all-caps with generic sans",
+      "impact font for every emphasis",
+      "thin script + bold sans (overdone pairing)",
+      "rainbow gradient text fills"
+    ]
+  },
+  "color_moods": {
+    "trending": [
+      "warm neutrals (beige, sand, terracotta)",
+      "digital neon on dark (electric blue, acid green on #0a0a0a)",
+      "earthy tones (burnt sienna, sage, warm taupe)",
+      "monochromatic with single pop accent",
+      "deep dark mode with high-chroma accents"
+    ],
+    "overused": [
+      "purple-to-pink gradient (generic tech look)",
+      "teal-coral split (2021-era)",
+      "flat pastel rainbow",
+      "gold-on-black luxury cliché"
+    ]
+  },
+  "layout_patterns": {
+    "trending": [
+      "bento grid asymmetry",
+      "editorial full-bleed with text overlay",
+      "split-screen with tension line",
+      "brutalist offset blocks",
+      "organic shape bleed beyond frame"
+    ],
+    "overused": [
+      "centered symmetrical with no tension",
+      "3-column equal-weight grid",
+      "top-text bottom-image with center CTA",
+      "floating card on gradient background"
+    ]
+  },
+  "motion_styles": {
+    "trending": [
+      "kinetic typography with elastic easing",
+      "subtle parallax depth on scroll",
+      "micro-interaction on every interactive element",
+      "staggered entrance with 80ms delay between elements",
+      "physics-based spring animations"
+    ],
+    "overused": [
+      "generic fade-in-up on every element",
+      "zoom-in logo sting",
+      "spinning loading animation",
+      "bounce on hover for all buttons"
+    ]
+  },
+  "content_formats": {
+    "trending": [
+      "POV narrative hooks in first 1.5 seconds",
+      "text-only reveal with dramatic pause",
+      "before/after split with swipe reveal",
+      "data visualization storytelling",
+      "testimonial with b-roll texture"
+    ],
+    "overused": [
+      "generic stock footage montage",
+      "static product shot with feature list",
+      "talking head with no visual interest",
+      "countdown timer CTA overlays"
+    ]
+  }
+}

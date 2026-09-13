@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils'
 
-type BadgeVariant = 'difficulty' | 'format' | 'cost' | 'format-tag' | 'spots' | 'default'
+type BadgeVariant = 'difficulty' | 'format' | 'cost' | 'format-tag' | 'default'
 type DifficultyValue = 'Beginner' | 'Intermediate' | 'Advanced'
 type CostValue = 'Free' | 'Free + Paid' | 'Paid'
 
@@ -43,16 +43,6 @@ export default function Badge({ label, variant = 'default', className }: BadgePr
 
   if (variant === 'format-tag') {
     return <span className={cn(base, 'bg-amber-100 text-amber-700 border-amber-200', className)}>{label}</span>
-  }
-
-  if (variant === 'spots') {
-    const num = parseInt(label)
-    const isLow = !isNaN(num) && num <= 10
-    return (
-      <span className={cn(base, isLow ? 'bg-red-100 text-red-600 border-red-200' : 'bg-gray-100 text-gray-600 border-gray-200', className)}>
-        {label} spots left
-      </span>
-    )
   }
 
   return <span className={cn(base, 'bg-[#F5F3FF] text-[#6B5A8E] border-[#EDE9FE]', className)}>{label}</span>
