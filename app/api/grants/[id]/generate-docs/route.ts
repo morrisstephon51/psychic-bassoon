@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import { requireMutationAuth } from '@/lib/mutation-auth'
+import { formatLongDate } from '@/lib/utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -48,7 +49,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
         : 'amount not specified'
 
     const deadline = grant.deadline
-      ? new Date(grant.deadline).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+      ? formatLongDate(grant.deadline)
       : 'rolling / open'
 
     const prompt = `You are a professional grant writer. Generate two documents for a grant application.

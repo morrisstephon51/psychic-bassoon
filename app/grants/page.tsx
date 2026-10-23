@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, useCallback } from 'react'
+import { daysUntil as calcDaysUntil, formatShortDate } from '@/lib/utils'
 
 type GrantDoc = {
   id: string
@@ -47,7 +48,7 @@ const ORG_LABELS: Record<string, string> = {
 
 function daysUntil(deadline: string | null): number | null {
   if (!deadline) return null
-  return Math.ceil((new Date(deadline).getTime() - Date.now()) / 86400000)
+  return calcDaysUntil(deadline)
 }
 
 function urgencyStyle(days: number | null): string {
@@ -60,8 +61,7 @@ function urgencyStyle(days: number | null): string {
 
 function formatDeadline(deadline: string | null): string {
   if (!deadline) return '—'
-  const d = new Date(deadline)
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  return formatShortDate(deadline)
 }
 
 function formatAmount(min: number | null, max: number | null): string {
