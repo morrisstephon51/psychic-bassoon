@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
+import { daysUntil } from '@/lib/utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -56,8 +57,8 @@ export async function GET(req: NextRequest) {
     const urgentGrants = (existing || []).filter((g) => {
       if (!g.deadline) return false
       if (['submitted', 'awarded', 'rejected'].includes(g.status)) return false
-      const daysUntil = Math.ceil((new Date(g.deadline).getTime() - today.getTime()) / 86400000)
-      return daysUntil >= 0 && daysUntil <= 30
+      const days = daysUntil(g.deadline, today)
+      return days >= 0 && days <= 30
     })
 
     // Update last_checked_at for all grants
@@ -68,7 +69,7 @@ export async function GET(req: NextRequest) {
     // Draft Gmail alert if there are urgent deadlines
     if (urgentGrants.length > 0) {
       const urgentList = urgentGrants.map((g) => {
-        const days = Math.ceil((new Date(g.deadline!).getTime() - today.getTime()) / 86400000)
+        const days = daysUntil(g.deadline!, today)
         const amt = g.amount_max ? ` — up to $${g.amount_max.toLocaleString()}` : ''
         return `• ${g.name} (${g.funder})${amt} — ${days} day${days !== 1 ? 's' : ''} left`
       }).join('\n')
