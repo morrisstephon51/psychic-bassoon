@@ -1,41 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
+import { computeFitScore } from '@/lib/fit-score'
 
 export const dynamic = 'force-dynamic'
-
-// Fit score: 0–100 based on org type, geography, mission alignment, stage eligibility
-function computeFitScore(grant: {
-  tags?: string[]
-  requirements?: string
-  source?: string
-}): number {
-  const text = `${(grant.tags || []).join(' ')} ${grant.requirements || ''}`.toLowerCase()
-  let score = 0
-
-  // Org type match (30 pts)
-  if (text.includes('nonprofit') || text.includes('fiscal sponsor') || text.includes('community')) score += 30
-  else if (text.includes('small business') || text.includes('for-profit')) score += 5
-  else score += 15
-
-  // Geography match (20 pts)
-  if (text.includes('illinois') || text.includes('chicago') || text.includes('cook county')) score += 20
-  else if (text.includes('midwest')) score += 12
-  else score += 8
-
-  // Mission alignment (30 pts)
-  if (text.includes('ai') || text.includes('digital equity') || text.includes('literacy') ||
-      text.includes('faith') || text.includes('workforce')) score += 30
-  else if (text.includes('education') || text.includes('technology') || text.includes('community')) score += 18
-  else score += 8
-
-  // Stage eligibility (20 pts)
-  if (text.includes('fiscal sponsor') || text.includes('pre-entity') ||
-      text.includes('emerging') || text.includes('early stage')) score += 20
-  else if (text.includes('requires 501') || text.includes('established')) score += 5
-  else score += 12
-
-  return Math.min(score, 100)
-}
 
 export async function GET(req: NextRequest) {
   const authHeader = req.headers.get('authorization')
@@ -49,11 +16,34 @@ export async function GET(req: NextRequest) {
   try {
     const db = createServiceClient()
 
-    const { data: existing } = await db.from('grants').select('deadline, status, name, funder, amount_max')
+    const { data: existing } = await db
+      .from('grants')
+      .select('id, deadline, status, name, funder, amount_max, fit_score, tags, requirements, source')
 
-    // Re-score and flag urgency for all grants, detect approaching deadlines
+    const grants = existing || []
+
+    // Backfill fit_score for grants that don't have one yet. computeFitScore is
+    // the system's scoring heuristic; before this it was defined but never
+    // called, so fit_score was only ever whatever was entered by hand and the
+    // FitBar / "priority" filter on /grants sat inert for un-scored grants. We
+    // only score rows where fit_score IS NULL so any manually-curated score is
+    // preserved (no data loss). To have the heuristic own the field outright,
+    // drop the `g.fit_score == null` guard so it re-scores every grant.
+    let scored = 0
+    for (const g of grants) {
+      if (g.fit_score != null) continue
+      const fit = computeFitScore({ tags: g.tags, requirements: g.requirements, source: g.source })
+      const { error: scoreErr } = await db.from('grants').update({ fit_score: fit }).eq('id', g.id)
+      if (scoreErr) {
+        console.error('[scan-grants] fit_score update failed for', g.id, scoreErr)
+      } else {
+        scored++
+      }
+    }
+
+    // Flag urgency and detect approaching deadlines.
     const today = new Date()
-    const urgentGrants = (existing || []).filter((g) => {
+    const urgentGrants = grants.filter((g) => {
       if (!g.deadline) return false
       if (['submitted', 'awarded', 'rejected'].includes(g.status)) return false
       const daysUntil = Math.ceil((new Date(g.deadline).getTime() - today.getTime()) / 86400000)
@@ -63,7 +53,7 @@ export async function GET(req: NextRequest) {
     // Update last_checked_at for all grants
     await db.from('grants').update({ last_checked_at: new Date().toISOString() }).neq('id', '00000000-0000-0000-0000-000000000000')
 
-    const totalGrants = existing?.length ?? 0
+    const totalGrants = grants.length
 
     // Draft Gmail alert if there are urgent deadlines
     if (urgentGrants.length > 0) {
@@ -109,6 +99,7 @@ View your full tracker: ${process.env.NEXT_PUBLIC_SITE_URL || 'https://psychic-b
     return NextResponse.json({
       ok: true,
       checked: totalGrants,
+      scored,
       urgent: urgentGrants.length,
     })
   } catch (err) {
