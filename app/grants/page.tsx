@@ -119,12 +119,26 @@ export default function GrantsPage() {
   }
 
   const updateStatus = async (id: string, status: string) => {
+    // Optimistic update — but remember the persisted value so we can roll back if
+    // the write fails. A grant *tracker* must never show a status that did not
+    // actually save (e.g. a deploy with MUTATION_SECRET unset returns 401, the
+    // exact case lib/mutation-auth.ts fails closed on). Mirrors generateDocs,
+    // which already surfaces !res.ok.
+    const previous = grants.find((g) => g.id === id)?.status
     setGrants((prev) => prev.map((g) => g.id === id ? { ...g, status } : g))
-    await fetch(`/api/grants/${id}/status`, {
-      method: 'PATCH',
-      headers: mutationHeaders(),
-      body: JSON.stringify({ status }),
-    })
+    try {
+      const res = await fetch(`/api/grants/${id}/status`, {
+        method: 'PATCH',
+        headers: mutationHeaders(),
+        body: JSON.stringify({ status }),
+      })
+      if (!res.ok) throw new Error(await res.text().catch(() => `HTTP ${res.status}`))
+    } catch (e) {
+      if (previous !== undefined) {
+        setGrants((prev) => prev.map((g) => g.id === id ? { ...g, status: previous } : g))
+      }
+      alert(`Status update failed (not saved): ${e}`)
+    }
   }
 
   const generateDocs = async (id: string) => {
