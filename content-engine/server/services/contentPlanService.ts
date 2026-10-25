@@ -93,22 +93,41 @@ export async function createWeeklyPlan(options: {
   }
 }
 
+function pad2(n: number): string {
+  return String(n).padStart(2, '0')
+}
+
+// Format a Date as a LOCAL-time YYYY-MM-DD string. Using local components
+// (not toISOString) keeps the calendar day correct for timezones behind UTC:
+// toISOString would roll an evening local time forward into the next UTC day.
+function formatLocalDate(d: Date): string {
+  return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`
+}
+
 function getWeekStart(): string {
   const now = new Date()
   const day = now.getDay()
   const diff = now.getDate() - day + (day === 0 ? -6 : 1)
-  const monday = new Date(now.setDate(diff))
-  return monday.toISOString().split('T')[0]
+  // Build local midnight of this week's Monday directly. The Date constructor
+  // normalizes day overflow/underflow across month boundaries, resets the
+  // time-of-day (so an evening run does not leak into tomorrow via toISOString),
+  // and avoids mutating `now`.
+  const monday = new Date(now.getFullYear(), now.getMonth(), diff)
+  return formatLocalDate(monday)
 }
 
 function distributeSchedule(weekStart: string, count: number): string[] {
   const dates: string[] = []
-  const start = new Date(weekStart)
+  // Parse weekStart as a LOCAL calendar date. `new Date('YYYY-MM-DD')` parses as
+  // UTC midnight; mixing that with the local getDate()/setHours() below shifted
+  // every scheduled post a day early (and off by the UTC offset) for viewers
+  // behind UTC — e.g. The Plug AI's Chicago audience. Build each slot in local
+  // time so toISOString() yields the correct UTC instant for local 9/12/3pm.
+  const [year, month, day] = weekStart.split('-').map(Number)
 
   for (let i = 0; i < count; i++) {
-    const d = new Date(start)
-    d.setDate(start.getDate() + (i % 7))
-    d.setHours(9 + Math.floor(i / 7) * 3, 0, 0, 0)
+    const hour = 9 + Math.floor(i / 7) * 3
+    const d = new Date(year, month - 1, day + (i % 7), hour, 0, 0, 0)
     dates.push(d.toISOString())
   }
 
