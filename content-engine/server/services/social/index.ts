@@ -1,4 +1,4 @@
-import { getContentItem } from '../../models/contentItem.js'
+import { getContentItem, claimForPublishing } from '../../models/contentItem.js'
 import { updateContentItem } from '../../models/contentItem.js'
 import { recordPost } from '../../models/platform.js'
 import { broadcast } from '../../lib/sse.js'
@@ -17,11 +17,15 @@ export interface PostResult {
 export async function publishContentItem(contentItemId: string): Promise<PostResult> {
   const item = getContentItem(contentItemId)
   if (!item) throw new Error(`Content item not found: ${contentItemId}`)
-  if (item.status !== 'ready' && item.status !== 'scheduled') {
-    throw new Error(`Content item not ready for publishing: status=${item.status}`)
+
+  // Atomically claim the item before posting. A duplicate scheduler enqueue or a
+  // concurrent manual /publish request loses the claim here and bails out BEFORE any
+  // network post, so the same item is never published to the platform twice.
+  if (!claimForPublishing(contentItemId)) {
+    const current = getContentItem(contentItemId)
+    throw new Error(`Content item not ready for publishing: status=${current?.status ?? 'missing'}`)
   }
 
-  updateContentItem(contentItemId, { status: 'publishing' })
   broadcast('publish:start', { contentItemId, platform: item.platform })
 
   try {
