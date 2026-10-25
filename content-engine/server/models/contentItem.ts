@@ -100,6 +100,16 @@ export function updateContentItem(id: string, updates: Partial<ContentItem>): Co
   const existing = getContentItem(id)
   if (!existing) return null
 
+  // Use `!== undefined`, not `??`: an absent key keeps the existing value, but an
+  // explicitly-passed value — including `null` — must be written. `??` conflated the
+  // two, so `error: null` could never clear a stale error. Both the /regenerate route
+  // (status:'pending', error:null) and the publish-success path (status:'published',
+  // error:null) depend on being able to clear the error.
+  const pick = <K extends keyof ContentItem>(key: K): ContentItem[K] =>
+    updates[key] !== undefined ? (updates[key] as ContentItem[K]) : existing[key]
+
+  const metadata = pick('metadata')
+
   db.prepare(`
     UPDATE content_items SET
     status=?, title=?, caption=?, hashtags=?, script=?,
@@ -107,19 +117,19 @@ export function updateContentItem(id: string, updates: Partial<ContentItem>): Co
     scheduled_at=?, published_at=?, error=?, metadata=?, updated_at=?
     WHERE id=?
   `).run(
-    updates.status ?? existing.status,
-    updates.title ?? existing.title,
-    updates.caption ?? existing.caption,
-    updates.hashtags ?? existing.hashtags,
-    updates.script ?? existing.script,
-    updates.mediaPath ?? existing.mediaPath,
-    updates.thumbnailPath ?? existing.thumbnailPath,
-    updates.postId ?? existing.postId,
-    updates.postUrl ?? existing.postUrl,
-    updates.scheduledAt ?? existing.scheduledAt,
-    updates.publishedAt ?? existing.publishedAt,
-    updates.error ?? existing.error,
-    updates.metadata ? JSON.stringify(updates.metadata) : (existing.metadata ? JSON.stringify(existing.metadata) : null),
+    pick('status'),
+    pick('title'),
+    pick('caption'),
+    pick('hashtags'),
+    pick('script'),
+    pick('mediaPath'),
+    pick('thumbnailPath'),
+    pick('postId'),
+    pick('postUrl'),
+    pick('scheduledAt'),
+    pick('publishedAt'),
+    pick('error'),
+    metadata ? JSON.stringify(metadata) : null,
     now,
     id,
   )
