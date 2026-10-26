@@ -9,7 +9,7 @@ import { postToYouTube } from './youtube.js'
 import { postToTwitter } from './twitter.js'
 import { postToLinkedIn } from './linkedin.js'
 
-export interface PostResult {
+export type PostResult = {
   postId: string
   postUrl: string
 }
