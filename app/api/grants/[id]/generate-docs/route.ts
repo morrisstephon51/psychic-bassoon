@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import { requireMutationAuth } from '@/lib/mutation-auth'
+import { parseGrantDocs, GrantDocsParseError } from '@/lib/grant-docs'
 
 export const dynamic = 'force-dynamic'
 
@@ -107,12 +108,12 @@ NARRATIVE (Full Application) rules:
     const content = groqData.choices?.[0]?.message?.content
     if (!content) throw new Error('Empty Groq response')
 
-    let docs: { loi: string; narrative: string }
-    try {
-      docs = JSON.parse(content)
-    } catch {
-      throw new Error('Groq returned invalid JSON')
-    }
+    // Validate the full {loi, narrative} pair BEFORE the destructive delete
+    // below. `grant_documents.content` is NOT NULL, so a valid-JSON-but-
+    // incomplete response (e.g. a truncated model reply missing `narrative`)
+    // would otherwise delete the grant's existing docs and then fail to insert
+    // the replacements — leaving the grant with nothing. See lib/grant-docs.ts.
+    const docs = parseGrantDocs(content)
 
     const inserts = [
       { grant_id: params.id, doc_type: 'loi', content: docs.loi },
@@ -131,6 +132,11 @@ NARRATIVE (Full Application) rules:
 
     return NextResponse.json({ ok: true, documents: saved })
   } catch (err) {
+    if (err instanceof GrantDocsParseError) {
+      // Bad upstream model response — nothing was deleted; existing docs stand.
+      console.error('[generate-docs] bad model response:', err.message)
+      return NextResponse.json({ error: err.message }, { status: 502 })
+    }
     console.error('[generate-docs]', err)
     return NextResponse.json({ error: 'Document generation failed' }, { status: 500 })
   }
