@@ -1,4 +1,4 @@
-import cron from 'node-cron'
+import cron, { type ScheduledTask } from 'node-cron'
 import { config } from '../config/index.js'
 import { logger } from '../lib/logger.js'
 import { broadcast } from '../lib/sse.js'
@@ -7,8 +7,8 @@ import { publishContentItem } from './social/index.js'
 import { getScheduledItems } from '../models/contentItem.js'
 import { enqueue } from '../lib/queue.js'
 
-let plannerTask: cron.ScheduledTask | null = null
-let publisherTask: cron.ScheduledTask | null = null
+let plannerTask: ScheduledTask | null = null
+let publisherTask: ScheduledTask | null = null
 
 export function startScheduler(): void {
   // Daily plan generation
