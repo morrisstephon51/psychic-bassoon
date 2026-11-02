@@ -5,7 +5,7 @@ import { broadcast } from '../lib/sse.js'
 import { createWeeklyPlan } from './contentPlanService.js'
 import { publishContentItem } from './social/index.js'
 import { getScheduledItems } from '../models/contentItem.js'
-import { enqueue } from '../lib/queue.js'
+import { enqueue, hasActivePublishJob } from '../lib/queue.js'
 
 let plannerTask: cron.ScheduledTask | null = null
 let publisherTask: cron.ScheduledTask | null = null
@@ -28,6 +28,16 @@ export function startScheduler(): void {
     const items = getScheduledItems(now)
 
     for (const item of items) {
+      // The item stays 'scheduled' until the worker actually starts publishing it,
+      // so without this guard every one-minute tick enqueues a fresh publish job
+      // for the same item while a prior job waits behind a backlog. Those duplicates
+      // either double-post the item or, once the publish claim is atomic, lose the
+      // claim and throw — and the publish catch then flips a post that actually went
+      // live to 'failed'. Enqueue at most one live publish job per item.
+      if (hasActivePublishJob(item.id)) {
+        logger.debug(`Scheduler: publish job already active for ${item.id}, skipping re-enqueue`)
+        continue
+      }
       logger.info(`Scheduler: enqueuing publish job for ${item.id} on ${item.platform}`)
       enqueue('publish_content', { contentItemId: item.id }, { priority: 10 })
     }
