@@ -36,6 +36,26 @@ export function enqueue(
   return getJob(id)!
 }
 
+// Is there already an active (queued or processing) publish job for this content
+// item? The publisher cron runs every minute and enqueues a publish_content job
+// for every still-'scheduled' item. The item only leaves 'scheduled' once the
+// worker actually starts the publish, so a job that waits behind a backlog (e.g.
+// a multi-minute video build) would otherwise be re-enqueued on every tick. This
+// lets the publisher enqueue at most one live publish job per item.
+export function hasActivePublishJob(contentItemId: string): boolean {
+  const rows = getDb().prepare(`
+    SELECT payload FROM jobs
+    WHERE type = 'publish_content' AND status IN ('queued', 'processing')
+  `).all() as { payload: string }[]
+  return rows.some((r) => {
+    try {
+      return (JSON.parse(r.payload) as { contentItemId?: string }).contentItemId === contentItemId
+    } catch {
+      return false
+    }
+  })
+}
+
 // Atomic dequeue — only one worker gets each job
 export function dequeue(type?: string): Job | null {
   const db = getDb()
