@@ -61,7 +61,11 @@ export function upsertBrand(data: Partial<Brand> & { id?: string }): Brand {
       data.hashtags ?? existing.hashtags,
       data.colorPrimary ?? existing.colorPrimary,
       data.colorSecondary ?? existing.colorSecondary,
-      data.logoUrl ?? existing.logoUrl,
+      // `logoUrl` is `string | null` and PUT /brand forwards req.body straight into
+      // upsertBrand, so `{ logoUrl: null }` ("remove the logo") is a valid request.
+      // Use `!== undefined`, not `??`: an omitted key keeps the existing logo, but an
+      // explicit `null` must clear it — `??` silently kept the old logo (cf. issue #36).
+      data.logoUrl !== undefined ? data.logoUrl : existing.logoUrl,
       now,
       existing.id,
     )
