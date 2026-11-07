@@ -43,9 +43,9 @@ export function enabledPlatforms(): Platform[] {
 
 export function updatePlatform(name: string, updates: {
   enabled?: boolean
-  credentials?: Record<string, string>
+  credentials?: Record<string, string> | null
   rateLimitRpm?: number
-  lastPostAt?: string
+  lastPostAt?: string | null
   totalPosts?: number
 }): Platform | null {
   const now = new Date().toISOString()
@@ -58,9 +58,11 @@ export function updatePlatform(name: string, updates: {
     WHERE name=?
   `).run(
     updates.enabled !== undefined ? (updates.enabled ? 1 : 0) : (existing.enabled ? 1 : 0),
-    updates.credentials ? JSON.stringify(updates.credentials) : (existing.credentials ? JSON.stringify(existing.credentials) : null),
+    updates.credentials !== undefined
+      ? (updates.credentials ? JSON.stringify(updates.credentials) : null)
+      : (existing.credentials ? JSON.stringify(existing.credentials) : null),
     updates.rateLimitRpm ?? existing.rateLimitRpm,
-    updates.lastPostAt ?? existing.lastPostAt,
+    updates.lastPostAt !== undefined ? updates.lastPostAt : existing.lastPostAt,
     updates.totalPosts ?? existing.totalPosts,
     now,
     name,
