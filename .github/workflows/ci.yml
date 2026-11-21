@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test-root:
+    name: root tests (lib)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  test-content-engine:
+    name: content-engine tests (server)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: content-engine
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      # content-engine has no lockfile, so npm install rather than npm ci
+      - run: npm install
+      # --if-present: main has no test script here yet; PR #35 adds the
+      # glob-wired one, and this job starts enforcing it the moment it merges
+      - run: npm run test --if-present
