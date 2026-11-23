@@ -3,27 +3,13 @@ import { getSchedule } from '../lib/api'
 import { PlatformBadge } from '../components/content/PlatformBadge'
 import { StatusBadge } from '../components/ui/Badge'
 import { formatDateTime } from '../lib/utils'
-
-function getWeekDays(): Date[] {
-  const now = new Date()
-  const day = now.getDay()
-  const monday = new Date(now)
-  monday.setDate(now.getDate() - (day === 0 ? 6 : day - 1))
-  monday.setHours(0, 0, 0, 0)
-
-  return Array.from({ length: 7 }, (_, i) => {
-    const d = new Date(monday)
-    d.setDate(monday.getDate() + i)
-    return d
-  })
-}
+import { getWeekDays, weekRange, bucketByDay } from '../lib/week'
 
 const DAY_LABELS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 export default function ScheduleCalendar() {
   const weekDays = getWeekDays()
-  const from = weekDays[0].toISOString()
-  const to = new Date(weekDays[6].getTime() + 86400000).toISOString()
+  const { from, to } = weekRange(weekDays)
 
   const { data: scheduled } = useQuery({
     queryKey: ['schedule', from, to],
@@ -31,14 +17,7 @@ export default function ScheduleCalendar() {
     refetchInterval: 30_000,
   })
 
-  const itemsByDay = weekDays.map((day) => {
-    const dayEnd = new Date(day.getTime() + 86400000)
-    return (scheduled ?? []).filter((item) => {
-      if (!item.scheduledAt) return false
-      const t = new Date(item.scheduledAt)
-      return t >= day && t < dayEnd
-    })
-  })
+  const itemsByDay = bucketByDay(weekDays, scheduled ?? [])
 
   return (
     <div className="space-y-5 max-w-7xl">
