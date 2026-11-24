@@ -8,7 +8,7 @@
     "build": "tsc -p tsconfig.server.json",
     "start": "node dist/server/index.js",
     "db:reset": "tsx server/db/reset.ts",
-    "test": "node --import tsx --test \"server/**/*.test.ts\""
+    "test": "node --import tsx --test \"{server,client/src}/**/*.test.ts\""
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.98.0",
