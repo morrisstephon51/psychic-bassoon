@@ -127,6 +127,22 @@ export function updateContentItem(id: string, updates: Partial<ContentItem>): Co
   return getContentItem(id)
 }
 
+// Atomically transition a publishable item to 'publishing'. The claim and the
+// state check happen in a single UPDATE, so exactly one caller can win: it returns
+// true for the caller that flips a 'ready'/'scheduled' row, and false for everyone
+// else (row already claimed, already published, or never publishable). This is what
+// makes publishing at-most-once even when two publish jobs race — e.g. the publisher
+// cron re-enqueues any still-'scheduled' item every minute, so a job stuck in the
+// queue past one tick would otherwise be posted twice.
+export function claimForPublishing(id: string): boolean {
+  const result = getDb().prepare(`
+    UPDATE content_items
+    SET status = 'publishing', updated_at = ?
+    WHERE id = ? AND status IN ('ready', 'scheduled')
+  `).run(new Date().toISOString(), id)
+  return result.changes > 0
+}
+
 export function listContentItems(filters: {
   planId?: string
   status?: ContentStatus
