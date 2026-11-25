@@ -56,12 +56,17 @@ export function updateContentPlan(id: string, updates: Partial<ContentPlan>): Co
   getDb().prepare(`
     UPDATE content_plans SET
     theme=COALESCE(?, theme), platforms=COALESCE(?, platforms),
-    status=COALESCE(?, status), raw_plan=COALESCE(?, raw_plan), updated_at=?
+    status=COALESCE(?, status),
+    raw_plan=CASE WHEN ? THEN ? ELSE raw_plan END, updated_at=?
     WHERE id=?
   `).run(
     updates.theme ?? null,
     updates.platforms ? JSON.stringify(updates.platforms) : null,
     updates.status ?? null,
+    // raw_plan is nullable, so COALESCE can't tell an omitted key from an explicit
+    // null. Write it whenever the key is present (including null); keep it only
+    // when the key is absent. Same clear-to-null class as #36 / #44 / #48.
+    updates.rawPlan !== undefined ? 1 : 0,
     updates.rawPlan ? JSON.stringify(updates.rawPlan) : null,
     now, id,
   )
